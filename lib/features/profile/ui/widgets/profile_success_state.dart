@@ -87,11 +87,11 @@ class profileSuccessState extends StatelessWidget {
     );
   }
 
-  void _showLogoutDialog(BuildContext context) {
+  void _showLogoutDialog(BuildContext parentContext) {
     showDialog(
-      context: context,
-      barrierDismissible: false, // prevent accidental dismiss
-      builder: (context) {
+      context: parentContext,
+      barrierDismissible: false,
+      builder: (dialogContext) {
         return AlertDialog(
           backgroundColor: Colors.grey.shade900,
           shape: RoundedRectangleBorder(
@@ -117,15 +117,13 @@ class profileSuccessState extends StatelessWidget {
           ),
           actionsPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
           actions: [
-            // Cancel
             TextButton(
-              onPressed: () => Navigator.pop(context),
+              onPressed: () => Navigator.pop(dialogContext),
               child: Text(
                 'Cancel',
                 style: TextStyle(color: Colors.grey.shade400, fontSize: 14.sp),
               ),
             ),
-            // Confirm Logout
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.red,
@@ -134,8 +132,9 @@ class profileSuccessState extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-                Navigator.pop(context); // close dialog
-                context.read<ProfileCubit>().logout(); // perform logout
+                Navigator.pop(dialogContext);
+                // 👇 Use the parentContext here
+                parentContext.read<ProfileCubit>().logout();
               },
               child: Text(
                 'Logout',
