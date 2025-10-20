@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../data/models/notification_model.dart';
 
 class NotificationDetailsScreen extends StatelessWidget {

@@ -7,10 +7,11 @@ import 'package:go_router/go_router.dart';
 import 'package:im_legends/core/router/route_paths.dart';
 import 'package:im_legends/features/notification/logic/cubit/notifications_cubit.dart';
 import 'package:im_legends/features/profile/logic/cubit/profile_cubit.dart';
-import '../utils/spacing.dart';
-import 'notification_icon.dart';
+
 import '../themes/app_texts_style.dart';
 import '../utils/app_assets.dart';
+import '../utils/spacing.dart';
+import 'notification_icon.dart';
 
 class CustomAppBar extends StatelessWidget {
   final String title;

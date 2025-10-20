@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import '../../../../core/utils/spacing.dart';
+
 import '../../../../core/router/route_paths.dart';
+import '../../../../core/utils/spacing.dart';
 
 class SuccessDialog extends StatelessWidget {
   const SuccessDialog({super.key});

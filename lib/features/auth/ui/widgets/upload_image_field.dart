@@ -1,6 +1,8 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../core/utils/functions/image_picker.dart';
 import '../../../../core/utils/spacing.dart';
 
