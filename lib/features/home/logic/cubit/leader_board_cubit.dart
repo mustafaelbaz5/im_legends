@@ -15,7 +15,7 @@ class LeaderBoardCubit extends Cubit<LeaderBoardState> {
       final leaderboard = await repo.calculateLeaderboard();
       emit(LeaderBoardSuccess(leaderboard));
     } catch (e) {
-      emit(LeaderBoardFailure(e.toString()));
+      emit(LeaderBoardFailure('Failed to load leaderboard: ${e.toString()}'));
     }
   }
 }
