@@ -32,7 +32,7 @@ class LogoTopBar extends StatelessWidget {
               ],
             ),
             child: SvgPicture.asset(
-              AppAssets.appLogo,
+              AppAssets.appSvgLogo,
               height: 32.h,
               width: 32.w,
             ),

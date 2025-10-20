@@ -69,7 +69,7 @@ class CustomAppBar extends StatelessWidget {
                         if (profile.profileImageUrl == null ||
                             profile.profileImageUrl!.isEmpty) {
                           return SvgPicture.asset(
-                            AppAssets.appLogo,
+                            AppAssets.appSvgLogo,
                             fit: BoxFit.cover,
                             width: 36,
                             height: 36,
@@ -84,7 +84,7 @@ class CustomAppBar extends StatelessWidget {
                               const CircularProgressIndicator(strokeWidth: 2),
                           errorWidget: (context, url, error) =>
                               SvgPicture.asset(
-                                AppAssets.appLogo,
+                                AppAssets.appSvgLogo,
                                 fit: BoxFit.cover,
                                 width: 36,
                                 height: 36,
@@ -92,7 +92,7 @@ class CustomAppBar extends StatelessWidget {
                         );
                       } else {
                         return SvgPicture.asset(
-                          AppAssets.appLogo,
+                          AppAssets.appSvgLogo,
                           fit: BoxFit.cover,
                           width: 36,
                           height: 36,

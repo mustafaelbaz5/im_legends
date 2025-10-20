@@ -53,7 +53,6 @@ flutter_launcher_icons:
   ios: true
   image_path: "assets/images/ImLogo.png"
   adaptive_icon_foreground: "assets/images/ImLogo.png"
-  adaptive_icon_background: "#00000000"
   remove_alpha_ios: true
 
   flutter_lints: ^5.0.0
