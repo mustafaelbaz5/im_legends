@@ -45,7 +45,7 @@ class StateCard extends StatelessWidget {
             verticalSpacing(4),
             Text(
               label,
-              style: FederantTextStyles.greyRegular14,
+              style: RobotoTextStyles.greyRegular14,
               textAlign: TextAlign.center,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
