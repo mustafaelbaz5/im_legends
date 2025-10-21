@@ -86,7 +86,7 @@ class ChampionHeader extends StatelessWidget {
           verticalSpacing(8),
           Text(
             'Champion',
-            style: FederantTextStyles.whiteBold20.copyWith(
+            style: RobotoTextStyles.whiteBold20.copyWith(
               wordSpacing: 2,
               fontSize: 26.sp,
               color: Colors.white.withAlpha((0.8 * 255).toInt()),

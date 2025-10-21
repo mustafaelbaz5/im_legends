@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+
+import '../../utils/app_assets.dart';
 import '../app_colors.dart';
 import '../app_font_weight.dart';
-import '../../utils/app_assets.dart';
 import 'text_style_factory.dart';
 
 class BorelTextStyles {

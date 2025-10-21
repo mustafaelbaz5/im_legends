@@ -7,8 +7,8 @@ class AppAssets {
   static const String championBannerjpg = 'assets/images/champion_baner.jpg';
 
   // Font family names
-  static const String fontFederant = 'Federant';
   static const String fontBebasNeue = 'BebasNeue';
   static const String fontBorel = 'Borel';
   static const String fontTajawal = 'Tajawal';
+  static const String fontRoboto = 'RobotoCondensed';
 }

@@ -76,10 +76,6 @@ flutter:
         - asset: assets/fonts/Tajawal/Tajawal-Medium.ttf
         - asset: assets/fonts/Tajawal/Tajawal-Regular.ttf
 
-    - family: Federant
-      fonts:
-        - asset: assets/fonts/Federant/Federant-Regular.ttf
-
     - family: BebasNeue
       fonts:
         - asset: assets/fonts/Bebas_Neue/BebasNeue-Regular.ttf
@@ -87,6 +83,13 @@ flutter:
     - family: Borel
       fonts:
         - asset: assets/fonts/Borel/Borel-Regular.ttf
+
+    - family: RobotoCondensed
+      fonts:
+        - asset: assets/fonts/Roboto_Condensed/RobotoCondensed-VariableFont_wght.ttf
+        - asset: assets/fonts/Roboto_Condensed/RobotoCondensed-Regular.ttf
+        - asset: assets/fonts/Roboto_Condensed/RobotoCondensed-MediumItalic.ttf
+        - asset: assets/fonts/Roboto_Condensed/RobotoCondensed-Bold.ttf
 
   #
   # For details regarding fonts from package dependencies,

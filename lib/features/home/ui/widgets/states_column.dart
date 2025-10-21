@@ -34,7 +34,7 @@ class StatesColumn extends StatelessWidget {
           ],
         ),
         verticalSpacing(2),
-        Text(label, style: FederantTextStyles.greyRegular12),
+        Text(label, style: RobotoTextStyles.greyRegular12),
       ],
     );
   }

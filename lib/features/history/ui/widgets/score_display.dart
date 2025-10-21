@@ -15,7 +15,7 @@ class ScoreDisplay extends StatelessWidget {
       children: [
         Text(
           '${match.winnerScore}',
-          style: FederantTextStyles.whiteBold24.copyWith(
+          style: RobotoTextStyles.whiteBold24.copyWith(
             color: AppColors.winColor,
           ),
         ),
@@ -29,7 +29,7 @@ class ScoreDisplay extends StatelessWidget {
         ),
         Text(
           '${match.loserScore}',
-          style: FederantTextStyles.whiteBold24.copyWith(
+          style: RobotoTextStyles.whiteBold24.copyWith(
             color: AppColors.loseColor,
           ),
         ),

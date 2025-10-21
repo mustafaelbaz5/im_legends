@@ -82,7 +82,7 @@ class OnBoardingCustomCard extends StatelessWidget {
                   flex: 5,
                   child: Text(
                     subTitle,
-                    style: FederantTextStyles.greyRegular14.copyWith(
+                    style: RobotoTextStyles.greyRegular14.copyWith(
                       fontSize: 10.sp,
                       color: const Color(0xFFB0B8C1),
                       height: 1.2,

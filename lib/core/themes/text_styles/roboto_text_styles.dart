@@ -4,8 +4,8 @@ import '../app_font_weight.dart';
 import '../../utils/app_assets.dart';
 import 'text_style_factory.dart';
 
-class FederantTextStyles {
-  static const _font = AppAssets.fontFederant;
+class RobotoTextStyles {
+  static const _font = AppAssets.fontRoboto;
 
   static final greyRegular12 = TextStyleFactory.create(
     font: _font,
