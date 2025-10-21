@@ -1,5 +1,6 @@
-import '../../features/notification/data/models/notification_model.dart';
 import 'package:intl/intl.dart';
+
+import '../../features/notification/data/models/notification_model.dart';
 
 class NotificationMessages {
   static final DateFormat _dateFormat = DateFormat('yyyy-MM-dd HH:mm');

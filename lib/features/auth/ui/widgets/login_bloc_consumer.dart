@@ -23,7 +23,6 @@ class LoginBlocConsumer extends StatelessWidget {
                     .read<NotificationsCubit>()
                     .notificationRepo
                     .initialize(user.id);
-                // Trigger login notification
                 await context.read<NotificationsCubit>().sendLoginNotification(
                   userId: user.id,
                   userName:

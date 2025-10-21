@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../themes/app_colors.dart';
 import '../themes/app_texts_style.dart';
 
@@ -64,10 +65,7 @@ class CustomTextButton extends StatelessWidget {
                 valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
               ),
             )
-          : Text(
-              buttonText,
-              style: textStyle ?? FederantTextStyles.whiteBold20,
-            ),
+          : Text(buttonText, style: textStyle ?? RobotoTextStyles.whiteBold20),
     );
   }
 }

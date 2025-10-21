@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+
 import '../router/route_paths.dart';
 import '../themes/app_colors.dart';
 import '../themes/app_texts_style.dart';
@@ -34,13 +35,13 @@ class NotFoundScreen extends StatelessWidget {
                 const SizedBox(height: 24),
                 Text(
                   'Oops! Page not found.',
-                  style: FederantTextStyles.greyBold20, // make text bigger
+                  style: RobotoTextStyles.greyBold20, // make text bigger
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 16),
                 Text(
                   'The page you are looking for does not exist.\nTry going back to home.',
-                  style: FederantTextStyles.greyBold20, // normal text style
+                  style: RobotoTextStyles.greyBold20, // normal text style
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 32),
@@ -59,10 +60,7 @@ class NotFoundScreen extends StatelessWidget {
                   onPressed: () {
                     context.go(Routes.homeScreen);
                   },
-                  child: Text(
-                    'Go to Home',
-                    style: FederantTextStyles.greyBold20,
-                  ),
+                  child: Text('Go to Home', style: RobotoTextStyles.greyBold20),
                 ),
               ],
             ),

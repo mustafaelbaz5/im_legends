@@ -24,8 +24,8 @@ class SignUpScreen extends StatelessWidget {
                   const LogoTopBar(),
                   verticalSpacing(40.h),
                   Text(
-                    'Sign Up to IM Legends',
-                    style: FederantTextStyles.greyBold20,
+                    'Welcome to IM Legends! 👋',
+                    style: RobotoTextStyles.whiteBold20,
                     semanticsLabel: 'Sign Up to IM Legends',
                   ),
                   verticalSpacing(32),
@@ -36,21 +36,23 @@ class SignUpScreen extends StatelessWidget {
                     children: [
                       Text(
                         "Already have an account?",
-                        style: TajawalTextStyles.whiteBold16,
+                        style: RobotoTextStyles.greyRegular16,
                       ),
+
                       TextButton(
                         onPressed: () => context.go(Routes.loginScreen),
                         style: TextButton.styleFrom(
-                          padding: EdgeInsets.zero,
+                          padding: EdgeInsets.symmetric(horizontal: 6.w),
+                          minimumSize: Size.zero,
                           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                          overlayColor: Colors.white24,
+                          overlayColor: Colors.white12,
                         ),
                         child: Text(
                           "Log In",
-                          style: BebasTextStyles.greyRegular16.copyWith(
+                          style: RobotoTextStyles.greyRegular16.copyWith(
                             color: Colors.blueAccent,
-                            decoration: TextDecoration.underline,
-                            decorationThickness: 1.5,
+                            fontWeight: FontWeight.bold,
+                            decorationThickness: 1.8,
                           ),
                         ),
                       ),

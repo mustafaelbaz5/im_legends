@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'widgets/champion_shimmer_loading.dart';
-import '../../../core/widgets/custom_app_bar.dart';
-import '../../../core/utils/functions/refresh_page.dart';
+
 import '../../../core/themes/app_colors.dart';
+import '../../../core/utils/functions/refresh_page.dart';
+import '../../../core/widgets/custom_app_bar.dart';
 import '../logic/cubit/champion_cubit.dart';
 import 'widgets/champion_header.dart';
+import 'widgets/champion_shimmer_loading.dart';
 import 'widgets/champion_states.dart';
 import 'widgets/champion_top_three.dart';
 

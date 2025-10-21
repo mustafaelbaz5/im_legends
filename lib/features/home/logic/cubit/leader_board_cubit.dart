@@ -1,7 +1,8 @@
 import 'package:bloc/bloc.dart';
+import 'package:meta/meta.dart';
+
 import '../../../../core/models/players_states_model.dart';
 import '../../data/repo/leader_board_repo.dart';
-import 'package:meta/meta.dart';
 
 part 'leader_board_state.dart';
 
