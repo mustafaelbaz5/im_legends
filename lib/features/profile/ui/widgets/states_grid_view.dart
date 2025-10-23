@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'state_card.dart';
 
 class StatsGridView extends StatelessWidget {
@@ -9,21 +10,27 @@ class StatsGridView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.count(
-      crossAxisCount: 2,
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-      mainAxisSpacing: 12.h,
-      crossAxisSpacing: 12.w,
-      childAspectRatio: 1.5,
-      children: stats.map((stat) {
-        return StateCard(
-          label: stat['label'] as String,
-          value: stat['value'],
-          icon: stat['icon'] as IconData,
-        );
-      }).toList(),
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 6.h),
+      child: GridView.builder(
+        itemCount: stats.length,
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          mainAxisSpacing: 12.h,
+          crossAxisSpacing: 12.w,
+          childAspectRatio: 0.9,
+        ),
+        itemBuilder: (context, index) {
+          final stat = stats[index];
+          return StateCard(
+            label: stat['label'] as String,
+            value: stat['value'],
+            icon: stat['icon'] as IconData,
+          );
+        },
+      ),
     );
   }
 }

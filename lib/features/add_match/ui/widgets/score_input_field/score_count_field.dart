@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'score_input_container.dart';
+
 import '../../../../../core/themes/app_colors.dart';
 import 'score_count_animations.dart';
+import 'score_input_container.dart';
 
 class ScoreCountField extends StatefulWidget {
   final int initialScore;

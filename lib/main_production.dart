@@ -2,12 +2,13 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:im_legends/core/router/app_router.dart' as AppRouter;
 import 'package:supabase_flutter/supabase_flutter.dart';
+
 import 'core/di/dependency_injection.dart';
+import 'core/router/app_router.dart' as AppRouter;
 import 'core/utils/shared_prefs.dart';
-import 'features/notification/data/service/local_notifications.dart';
 import 'features/notification/data/service/firebase_notifications_service.dart';
+import 'features/notification/data/service/local_notifications.dart';
 import 'firebase_options.dart';
 import 'im_legends_app.dart';
 

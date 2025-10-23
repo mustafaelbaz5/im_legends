@@ -1,5 +1,5 @@
-import 'package:im_legends/core/models/players_states_model.dart';
-import 'package:im_legends/core/models/user_data.dart';
+import '../../../../core/models/players_states_model.dart';
+import '../../../../core/models/user_data.dart';
 
 class UserProfileModel {
   final UserData user;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:im_legends/core/themes/app_colors.dart';
 
+import '../../../../core/themes/app_colors.dart';
 import '../../../../core/themes/app_texts_style.dart';
 import '../../../../core/utils/spacing.dart';
 
@@ -34,7 +34,7 @@ class StatesColumn extends StatelessWidget {
           ],
         ),
         verticalSpacing(2),
-        Text(label, style: FederantTextStyles.greyRegular12),
+        Text(label, style: RobotoTextStyles.greyRegular12),
       ],
     );
   }

@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import '../../../../core/service/supa_base_service.dart';
 import '../../../../core/utils/notification_messages.dart';
-import 'package:im_legends/core/utils/secure_storage.dart';
+import '../../../../core/utils/secure_storage.dart';
 import '../../data/repos/notification_repo.dart';
 import '../../data/models/notification_model.dart';
 import 'package:meta/meta.dart';

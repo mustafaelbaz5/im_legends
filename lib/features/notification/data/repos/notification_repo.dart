@@ -1,4 +1,4 @@
-import 'package:im_legends/core/router/route_paths.dart';
+import '../../../../core/router/route_paths.dart';
 import '../../../../core/service/supa_base_service.dart';
 import '../../../../core/utils/notification_messages.dart';
 import '../models/notification_model.dart';

@@ -1,5 +1,5 @@
-import 'package:im_legends/features/history/data/models/match_history_card_model.dart';
-import 'package:im_legends/features/history/data/service/history_service.dart';
+import '../models/match_history_card_model.dart';
+import '../service/history_service.dart';
 
 class HistoryRepo {
   final HistoryService historyService = HistoryService();

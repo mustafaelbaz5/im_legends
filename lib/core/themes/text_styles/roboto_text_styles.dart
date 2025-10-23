@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:im_legends/core/themes/app_colors.dart';
-import 'package:im_legends/core/themes/app_font_weight.dart';
-import 'package:im_legends/core/utils/app_assets.dart';
+import '../app_colors.dart';
+import '../app_font_weight.dart';
+import '../../utils/app_assets.dart';
 import 'text_style_factory.dart';
 
-class FederantTextStyles {
-  static const _font = AppAssets.fontFederant;
+class RobotoTextStyles {
+  static const _font = AppAssets.fontRoboto;
 
   static final greyRegular12 = TextStyleFactory.create(
     font: _font,

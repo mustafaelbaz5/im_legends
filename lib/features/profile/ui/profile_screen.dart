@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+
 import '../../../core/router/route_paths.dart';
-import 'widgets/profile_success_state.dart';
-import '../logic/cubit/profile_cubit.dart';
+import '../../../core/themes/app_colors.dart';
+import '../../../core/utils/functions/refresh_page.dart';
 import '../../../core/widgets/custom_app_bar.dart';
+import '../logic/cubit/profile_cubit.dart';
+import 'widgets/profile_shimmer_loading.dart';
+import 'widgets/profile_success_state.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -22,26 +26,32 @@ class ProfileScreen extends StatelessWidget {
           children: [
             const CustomAppBar(title: 'Profile'),
             Expanded(
-              child: SingleChildScrollView(
-                child: BlocBuilder<ProfileCubit, ProfileState>(
-                  builder: (context, state) {
-                    if (state is ProfileLoading) {
-                      return const Center(child: CircularProgressIndicator());
-                    } else if (state is ProfileSuccess) {
-                      final playerProfile = state.player.user;
-                      final playerStats = state.player.stats;
+              child: BlocBuilder<ProfileCubit, ProfileState>(
+                builder: (context, state) {
+                  if (state is ProfileLoading) {
+                    return const ProfileShimmerLoading();
+                  } else if (state is ProfileSuccess) {
+                    final playerProfile = state.player.user;
+                    final playerStats = state.player.stats;
 
-                      return profileSuccessState(
-                        playerProfile: playerProfile,
-                        playerStats: playerStats,
-                      );
-                    } else if (state is ProfileFailure) {
-                      return Center(child: Text(state.message));
-                    }
+                    return RefreshIndicator(
+                      onRefresh: () => onRefresh(context),
+                      backgroundColor: AppColors.lightDarkColor,
+                      color: Colors.white,
+                      child: SingleChildScrollView(
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        child: profileSuccessState(
+                          playerProfile: playerProfile,
+                          playerStats: playerStats,
+                        ),
+                      ),
+                    );
+                  } else if (state is ProfileFailure) {
+                    return Center(child: Text(state.message));
+                  }
 
-                    return const SizedBox.shrink();
-                  },
-                ),
+                  return const SizedBox.shrink();
+                },
               ),
             ),
           ],

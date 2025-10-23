@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:im_legends/core/router/route_paths.dart';
+
+import '../../../core/router/route_paths.dart';
+import '../../../core/themes/app_colors.dart';
 import '../logic/cubit/notifications_cubit.dart';
 import 'widgets/notification_app_bar.dart';
 import 'widgets/notification_card.dart';
@@ -106,7 +108,7 @@ class NotificationsScreen extends StatelessWidget {
                     onRefresh: () async {
                       context.read<NotificationsCubit>().fetchNotifications();
                     },
-                    backgroundColor: Colors.grey[800],
+                    backgroundColor: AppColors.lightDarkColor,
                     color: Colors.white,
                     child: ListView.separated(
                       physics: const AlwaysScrollableScrollPhysics(),
@@ -140,7 +142,7 @@ class NotificationsScreen extends StatelessWidget {
                               ),
                             );
                           },
-                          onUndo: () {},
+                       
                           onTap: () {
                             // Mark as read first
                             context.read<NotificationsCubit>().markAsRead(
@@ -158,7 +160,6 @@ class NotificationsScreen extends StatelessWidget {
                     ),
                   );
                 } else {
-                  // Handle initial state or any other state
                   return const NotificationEmptyState();
                 }
               },

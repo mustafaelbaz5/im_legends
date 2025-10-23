@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../models/match_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+
+import '../models/match_model.dart';
 
 class AddMatchService {
   final supabase = Supabase.instance.client;

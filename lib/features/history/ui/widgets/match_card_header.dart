@@ -1,24 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../core/themes/app_colors.dart';
+import '../../../../core/utils/functions/date_formate.dart';
 
 class MatchCardHeader extends StatelessWidget {
   final DateTime matchDate;
-  final Color primaryColor;
 
-  const MatchCardHeader({
-    super.key,
-    required this.matchDate,
-    required this.primaryColor,
-  });
+  const MatchCardHeader({super.key, required this.matchDate});
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Expanded(
           child: Text(
-            '${matchDate.day}/${matchDate.month}/${matchDate.year} | ${matchDate.hour.toString().padLeft(2, '0')}:${matchDate.minute.toString().padLeft(2, '0')}',
+            '${formatSmart(matchDate)}',
             style: TextStyle(
               fontSize: 12.sp,
               color: Colors.white,
@@ -27,7 +23,7 @@ class MatchCardHeader extends StatelessWidget {
             textAlign: TextAlign.left,
           ),
         ),
-        Icon(Icons.sports_soccer, color: primaryColor, size: 24.sp),
+        Icon(Icons.sports_soccer, color: AppColors.greyColor, size: 24.sp),
       ],
     );
   }

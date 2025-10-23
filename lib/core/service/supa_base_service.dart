@@ -1,8 +1,10 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:im_legends/core/utils/secure_storage.dart';
-import '../../features/notification/data/models/notification_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+
+import '../../features/notification/data/models/notification_model.dart';
+import '../utils/secure_storage.dart';
 
 class SupaBaseService {
   final supabase = Supabase.instance.client;

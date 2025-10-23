@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../core/models/players_states_model.dart';
 import '../../../../core/themes/app_colors.dart';
 import 'player_info.dart';
 import 'rank_and_avatar.dart';
@@ -7,23 +8,13 @@ import 'states_section.dart';
 import '../../../../core/utils/spacing.dart';
 
 class LeaderBoardCard extends StatelessWidget {
-  final String playerName;
-  final int points;
-  final int Match;
-  final int goals;
-  final String? imageUrl;
-  final int? rank;
+  final PlayerStatsModel player;
   final bool isCurrentUser;
 
   const LeaderBoardCard({
     super.key,
-    required this.playerName,
-    required this.points,
-    required this.Match,
-    required this.goals,
-    this.imageUrl,
-    this.rank,
     this.isCurrentUser = false,
+    required this.player,
   });
 
   @override
@@ -55,19 +46,23 @@ class LeaderBoardCard extends StatelessWidget {
           children: [
             RankAndAvatar(
               isCurrentUser: isCurrentUser,
-              rank: rank,
-              imageUrl: imageUrl,
+              rank: player.rank,
+              imageUrl: player.profileImage,
             ),
             horizontalSpacing(12),
-
-            // Player Info Section
             Expanded(
               flex: 2,
-              child: PlayerInfo(playerName: playerName, points: points),
+              child: PlayerInfo(
+                playerName: player.playerName,
+                points: player.points,
+              ),
             ),
 
             // Stats Section
-            StatesSection(Match: Match, goals: goals),
+            StatesSection(
+              Match: player.matchesPlayed,
+              goalDifference: player.goalDifference,
+            ),
           ],
         ),
       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../core/themes/app_colors.dart';
 import '../../data/model/champion_player_model.dart';
 import '../../../../core/themes/app_texts_style.dart';
 import '../../../../core/utils/spacing.dart';
@@ -13,15 +14,18 @@ class ChampionTopThree extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 8.h, horizontal: 12.w),
-      padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 16.w),
+      padding: EdgeInsets.only(top: 16.h, bottom: 8.h),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
             Colors.black.withAlpha((0.3 * 255).toInt()),
+            Colors.black.withAlpha((0.3 * 255).toInt()),
             Colors.black.withAlpha((0.9 * 255).toInt()),
-            const Color(0xFF020D8C).withAlpha((0.9 * 255).toInt()),
+            Colors.black.withAlpha((0.9 * 255).toInt()),
+            Colors.black.withAlpha((0.9 * 255).toInt()),
+            AppColors.darkRedColor.withAlpha((0.9 * 255).toInt()),
           ],
         ),
         borderRadius: BorderRadius.circular(16.r),
@@ -33,8 +37,8 @@ class ChampionTopThree extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Text('Top 3 Champions', style: BebasTextStyles.whiteBold24),
-          verticalSpacing(24),
+          Text('Top 3 ', style: BebasTextStyles.whiteBold24),
+          verticalSpacing(32),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [

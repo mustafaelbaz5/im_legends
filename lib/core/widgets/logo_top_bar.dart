@@ -32,7 +32,7 @@ class LogoTopBar extends StatelessWidget {
               ],
             ),
             child: SvgPicture.asset(
-              AppAssets.appLogo,
+              AppAssets.appSvgLogo,
               height: 32.h,
               width: 32.w,
             ),
@@ -45,7 +45,7 @@ class LogoTopBar extends StatelessWidget {
             shaderCallback: (bounds) => const LinearGradient(
               colors: [Colors.white, Color(0xFFE8E8E8)],
             ).createShader(bounds),
-            child: Text('IM Legends', style: FederantTextStyles.whiteBold20),
+            child: Text('IM Legends', style: RobotoTextStyles.whiteBold20),
           ),
         ],
       ),

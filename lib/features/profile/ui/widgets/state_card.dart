@@ -1,70 +1,57 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:im_legends/core/themes/app_colors.dart';
+import '../../../../core/themes/app_colors.dart';
+import '../../../../core/themes/app_texts_style.dart';
+import '../../../../core/utils/spacing.dart';
 
 class StateCard extends StatelessWidget {
   final String label;
   final dynamic value;
   final IconData icon;
 
-  StateCard({
+  const StateCard({
     super.key,
     required this.label,
-    required dynamic value, // accept anything
+    required this.value,
     required this.icon,
-  }) : value = value.toString(); //
+  });
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 300),
-      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 10.h),
+      alignment: Alignment.center,
       decoration: BoxDecoration(
         gradient: LinearGradient(
+          colors: [Colors.grey.shade900, AppColors.lightDarkColor],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [Colors.grey.shade900, AppColors.lightDarkColor],
         ),
-        borderRadius: BorderRadius.circular(16.r),
-        border: Border.all(
-          color: Colors.blue.shade700.withAlpha((0.2 * 255).toInt()),
-          width: 1.5.w,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withAlpha((0.2 * 255).toInt()),
-            blurRadius: 6.r,
-            offset: Offset(0, 3.h),
-          ),
-        ],
+        borderRadius: BorderRadius.circular(14.r),
+        border: Border.all(color: const Color(0x89DEDEDE), width: .5.w),
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          // Icon
-          Icon(icon, size: 24.sp, color: Colors.blue.shade300),
-          SizedBox(height: 8.h),
-          // Value
-          Text(
-            value,
-            style: TextStyle(
-              fontSize: 20.sp,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-              letterSpacing: 0.5,
+      child: FittedBox(
+        fit: BoxFit.scaleDown,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icon, size: 30.sp, color: AppColors.darkRedColor),
+            verticalSpacing(6),
+            Text(
+              "$value",
+              style: BebasTextStyles.whiteBold24,
+              textAlign: TextAlign.center,
             ),
-          ),
-          SizedBox(height: 4.h),
-          // Label
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 12.sp,
-              color: Colors.grey.shade300,
-              fontWeight: FontWeight.w500,
+            verticalSpacing(4),
+            Text(
+              label,
+              style: RobotoTextStyles.greyRegular14,
+              textAlign: TextAlign.center,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

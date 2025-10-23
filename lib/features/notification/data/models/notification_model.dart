@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:uuid/uuid.dart';
 
 enum NotificationType { welcome, update, security, promotion, system }

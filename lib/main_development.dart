@@ -33,6 +33,7 @@ Future<void> _initServices() async {
 
 /// === Main entry point ===
 Future<void> main() async {
+  debugProfileBuildsEnabled = true;
   WidgetsFlutterBinding.ensureInitialized();
 
   // Ensure screen util sizing

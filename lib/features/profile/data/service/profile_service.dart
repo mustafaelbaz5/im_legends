@@ -1,68 +1,102 @@
-import 'package:im_legends/core/models/players_states_model.dart';
-import 'package:im_legends/core/models/user_data.dart';
+import '../../../../core/models/players_states_model.dart';
+import '../../../../core/models/user_data.dart';
 import '../../../../core/service/supa_base_service.dart';
 
 class ProfileService {
   final SupaBaseService supabaseService = SupaBaseService();
 
-  /// ✅ Fetch player stats including rank
+  /// ✅ Fetch and calculate full player stats
   Future<PlayerStatsModel> fetchPlayerStats(String userId) async {
     try {
-      // 1. Fetch all users
-      final users = await supabaseService.supabase.from('users').select();
+      // 1️⃣ Fetch all users (id, name, profile image)
+      final users = await supabaseService.supabase
+          .from('users')
+          .select('id, name, profile_image');
 
-      // 2. Fetch all matches
-      final matches = await supabaseService.supabase.from('matches').select();
+      // 2️⃣ Fetch all matches
+      final matches = await supabaseService.supabase
+          .from('matches')
+          .select('*');
 
-      // 3. Build initial stats map
+      // 3️⃣ Initialize player stats for all users
       final Map<String, PlayerStatsModel> stats = {
         for (var u in users)
           u['id']: PlayerStatsModel(
             playerId: u['id'],
-            playerName: u['name'],
+            playerName: u['name'] ?? 'Unknown',
             profileImage: u['profile_image'],
           ),
       };
 
-      // 4. Calculate stats from matches
+      // 4️⃣ Loop through all matches and calculate
       for (var match in matches) {
-        final winnerId = match['winner_id'] as String;
-        final loserId = match['loser_id'] as String;
-        final winnerScore = match['winner_score'] as int;
-        final loserScore = match['loser_score'] as int;
+        final winnerId = match['winner_id'] as String?;
+        final loserId = match['loser_id'] as String?;
+        final winnerScore = (match['winner_score'] ?? 0) as int;
+        final loserScore = (match['loser_score'] ?? 0) as int;
 
-        // Winner
-        final winner = stats[winnerId]!;
-        stats[winnerId] = winner.copyWith(
-          matchesPlayed: winner.matchesPlayed + 1,
-          wins: winner.wins + 1,
-          goals: winner.goals + winnerScore,
-          points: winner.points + 3,
-        );
+        if (winnerId == null || loserId == null) continue;
 
-        // Loser
-        final loser = stats[loserId]!;
-        stats[loserId] = loser.copyWith(
-          matchesPlayed: loser.matchesPlayed + 1,
-          goals: loser.goals + loserScore,
-        );
+        // 🏆 Winner stats
+        final winner = stats[winnerId];
+        if (winner != null) {
+          stats[winnerId] = winner.copyWith(
+            matchesPlayed: winner.matchesPlayed + 1,
+            wins: winner.wins + 1,
+            goalsScored: winner.goalsScored + winnerScore,
+            goalsReceived: winner.goalsReceived + loserScore,
+            goalDifference:
+                (winner.goalsScored + winnerScore) -
+                (winner.goalsReceived + loserScore),
+            points: winner.points + 3,
+          );
+        }
+
+        // ❌ Loser stats
+        final loser = stats[loserId];
+        if (loser != null) {
+          stats[loserId] = loser.copyWith(
+            matchesPlayed: loser.matchesPlayed + 1,
+            losses: loser.losses + 1,
+            goalsScored: loser.goalsScored + loserScore,
+            goalsReceived: loser.goalsReceived + winnerScore,
+            goalDifference:
+                (loser.goalsScored + loserScore) -
+                (loser.goalsReceived + winnerScore),
+          );
+        }
       }
 
-      // 5. Sort leaderboard
+      // 5️⃣ Sort all players to compute ranking
       final leaderboard = stats.values.toList()
-        ..sort((a, b) => b.points.compareTo(a.points));
+        ..sort((a, b) {
+          if (b.points != a.points) {
+            return b.points.compareTo(a.points);
+          } else if (b.goalDifference != a.goalDifference) {
+            return b.goalDifference.compareTo(a.goalDifference);
+          } else {
+            return b.goalsScored.compareTo(a.goalsScored);
+          }
+        });
 
-      // 6. Assign ranks
+      // 6️⃣ Assign rank
       for (int i = 0; i < leaderboard.length; i++) {
         leaderboard[i] = leaderboard[i].copyWith(rank: i + 1);
       }
 
-      // 7. Return this user's stats with rank
-      final playerStats = leaderboard.firstWhere((p) => p.playerId == userId);
+      // 7️⃣ Return this specific user's stats
+      final playerStats = leaderboard.firstWhere(
+        (p) => p.playerId == userId,
+        orElse: () => PlayerStatsModel(
+          playerId: userId,
+          playerName: 'Unknown Player',
+          profileImage: null,
+        ),
+      );
 
       return playerStats;
     } catch (e) {
-      print("❌ Error fetching stats: $e");
+      print("❌ Error calculating player stats: $e");
       rethrow;
     }
   }
@@ -83,7 +117,7 @@ class ProfileService {
     }
   }
 
-  /// ✅ Logout the current user
+  /// ✅ Logout current user
   Future<void> logout() async {
     try {
       await supabaseService.logoutUser();

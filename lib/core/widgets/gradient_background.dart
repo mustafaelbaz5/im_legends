@@ -16,17 +16,12 @@ class GradientBackground extends StatelessWidget {
       width: MediaQuery.of(context).size.width, // full width
       height: MediaQuery.of(context).size.height,
       decoration: const BoxDecoration(
-gradient: const LinearGradient(
+        gradient: const LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [
-            Color(0xFF0D1421), // base dark
-            Color(0xFF1E293B), // slate
-            Color(0xFF0F172A), // very dark navy
-          ],
+          colors: [Color(0xFF2A3441), Color(0xFF1E2832), Color(0xFF1E2832)],
           stops: [0.0, 0.7, 1.0],
         ),
-
       ),
       child: SafeArea(
         child: Padding(padding: padding, child: child),

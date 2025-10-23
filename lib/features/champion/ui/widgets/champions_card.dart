@@ -12,7 +12,7 @@ class ChampionsCard extends StatelessWidget {
   late final bool isSecond;
 
   ChampionsCard({super.key, required this.champion}) {
-    rank = champion.rank;
+    rank = champion.stats.rank ?? 0;
     isFirst = rank == 1;
     isSecond = rank == 2;
   }

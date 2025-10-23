@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
+import 'success_dialog.dart';
 import '../../../notification/logic/cubit/notifications_cubit.dart';
 import '../../../champion/logic/cubit/champion_cubit.dart';
 import '../../../profile/logic/cubit/profile_cubit.dart';
@@ -31,7 +31,6 @@ class AddMatchBlocConsumer extends StatelessWidget {
     return BlocConsumer<AddMatchCubit, AddMatchState>(
       listener: (context, state) {
         if (state is AddMatchInsertSuccess) {
-          SuccessMessage(context);
           context.read<NotificationsCubit>().handleMatchResult(
             winnerId: winnerPlayer!,
             loserId: loserPlayer!,
@@ -40,6 +39,13 @@ class AddMatchBlocConsumer extends StatelessWidget {
           context.read<MatchHistoryCubit>().getMatchHistory();
           context.read<ProfileCubit>().fetchProfile();
           context.read<ChampionCubit>().fetchTopThree();
+
+          // Show success dialog
+          showDialog(
+            context: context,
+            barrierDismissible: false, // force user to press button
+            builder: (dialogContext) => const SuccessDialog(),
+          );
         } else if (state is AddMatchFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(state.error), backgroundColor: Colors.red),
@@ -66,38 +72,6 @@ class AddMatchBlocConsumer extends StatelessWidget {
               : null,
         );
       },
-    );
-  }
-
-  Future<dynamic> SuccessMessage(BuildContext context) {
-    return showDialog(
-      context: context,
-      builder: (_) => AlertDialog(
-        backgroundColor: Colors.grey[900],
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: const Text(
-          'Success',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-        ),
-        content: const Text(
-          'Match added successfully!',
-          style: TextStyle(color: Colors.white70),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              context.pop();
-            },
-            child: const Text(
-              'OK',
-              style: TextStyle(
-                color: Colors.redAccent,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

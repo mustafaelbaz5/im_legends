@@ -1,5 +1,5 @@
-import 'package:im_legends/core/utils/secure_storage.dart';
-import 'package:im_legends/features/profile/data/model/profile_model.dart';
+import '../../../../core/utils/secure_storage.dart';
+import '../model/profile_model.dart';
 
 import '../service/profile_service.dart';
 

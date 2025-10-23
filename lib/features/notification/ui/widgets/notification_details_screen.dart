@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:im_legends/features/notification/data/models/notification_model.dart';
+
+import '../../data/models/notification_model.dart';
 
 class NotificationDetailsScreen extends StatelessWidget {
   final NotificationModel notification;

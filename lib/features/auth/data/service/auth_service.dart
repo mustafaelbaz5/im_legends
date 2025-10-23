@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:im_legends/core/service/supa_base_service.dart';
+import '../../../../core/service/supa_base_service.dart';
 import '../../../../core/utils/secure_storage.dart';
 import '../../../notification/data/service/firebase_notifications_service.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
