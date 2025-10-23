@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:im_legends/core/themes/app_colors.dart';
-import 'package:im_legends/core/themes/app_font_weight.dart';
-import 'package:im_legends/core/utils/app_assets.dart';
+
+import '../../utils/app_assets.dart';
+import '../app_colors.dart';
+import '../app_font_weight.dart';
 import 'text_style_factory.dart';
 
 class BorelTextStyles {
   static const _font = AppAssets.fontBorel;
+  static final whiteBold20 = TextStyleFactory.create(
+    font: _font,
+    size: 20,
+    weight: FontWeightHelper.bold,
+    color: Colors.white,
+  );
 
   static final greyRegular12 = TextStyleFactory.create(
     font: _font,

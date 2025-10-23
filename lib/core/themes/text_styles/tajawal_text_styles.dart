@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:im_legends/core/themes/app_colors.dart';
-import 'package:im_legends/core/themes/app_font_weight.dart';
+
+import '../app_colors.dart';
+import '../app_font_weight.dart';
 import 'text_style_factory.dart';
 
 class TajawalTextStyles {

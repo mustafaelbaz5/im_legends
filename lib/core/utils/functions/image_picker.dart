@@ -1,9 +1,8 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ImagePickerHelper {
   static Future<File?> showImageSourceActionSheet(BuildContext context) async {

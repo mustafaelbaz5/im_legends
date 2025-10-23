@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:im_legends/core/themes/app_font_weight.dart';
-import 'package:im_legends/core/utils/app_assets.dart';
+import '../app_font_weight.dart';
+import '../../utils/app_assets.dart';
 import 'text_style_factory.dart';
 
 class BebasTextStyles {

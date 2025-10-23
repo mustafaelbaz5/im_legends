@@ -8,7 +8,7 @@ part 'match_history_state.dart';
 class MatchHistoryCubit extends Cubit<MatchHistoryState> {
   MatchHistoryCubit() : super(MatchHistoryInitial());
 
-  void getMatchHistory() async {
+  Future<void> getMatchHistory() async {
     emit(MatchHistoryLoading());
     try {
       final matches = await HistoryRepo().fetchMatches();

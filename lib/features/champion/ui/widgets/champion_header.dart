@@ -1,7 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:im_legends/core/themes/app_colors.dart';
-import 'package:im_legends/core/utils/spacing.dart';
+import '../../../../core/themes/app_colors.dart';
+import '../../../../core/utils/spacing.dart';
 import '../../../../core/themes/app_texts_style.dart';
 import '../../../../core/utils/app_assets.dart';
 
@@ -15,7 +16,7 @@ class ChampionHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 260.h,
+      height: 280.h,
       decoration: BoxDecoration(
         image: const DecorationImage(
           image: AssetImage(AppAssets.championBannerjpg),
@@ -54,13 +55,12 @@ class ChampionHeader extends StatelessWidget {
                   ],
                 ),
                 child: CircleAvatar(
-                  radius: 50.r,
+                  radius: 80.r,
                   child: CircleAvatar(
-                    radius: 100.r,
+                    radius: 150.r,
                     backgroundImage: imageUrl != null
-                        ? NetworkImage(imageUrl!)
-                        : const AssetImage(AppAssets.appLogoPng)
-                              as ImageProvider,
+                        ? CachedNetworkImageProvider(imageUrl!)
+                        : const AssetImage(AppAssets.appLogoPng),
                   ),
                 ),
               ),
@@ -79,7 +79,6 @@ class ChampionHeader extends StatelessWidget {
             ],
           ),
           verticalSpacing(8),
-          // Champion Name with Gradient
           Text(
             name,
             style: BebasTextStyles.whiteBold14.copyWith(fontSize: 32.sp),
@@ -87,10 +86,10 @@ class ChampionHeader extends StatelessWidget {
           verticalSpacing(8),
           Text(
             'Champion',
-            style: FederantTextStyles.whiteBold20.copyWith(
+            style: RobotoTextStyles.whiteBold20.copyWith(
               wordSpacing: 2,
               fontSize: 26.sp,
-              color: AppColors.goldColor,
+              color: Colors.white.withAlpha((0.8 * 255).toInt()),
             ),
           ),
         ],

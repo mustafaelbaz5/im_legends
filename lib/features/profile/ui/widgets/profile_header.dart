@@ -1,7 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../core/themes/app_colors.dart';
+import '../../../../core/utils/spacing.dart';
+import '../../../../core/themes/text_styles/bebas_text_styles.dart';
 import '../../../../core/utils/functions/get_rank_color.dart';
 
 class ProfileHeader extends StatelessWidget {
@@ -20,22 +21,26 @@ class ProfileHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 300.h, // Reduced height for compact layout
+      padding: EdgeInsets.only(top: 32.h),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
+        gradient: LinearGradient(
+          colors: [
+            getRankColor(rank).withAlpha((0.5 * 255).toInt()),
+            Colors.black.withAlpha((0.3 * 255).toInt()),
+            Colors.black,
+          ],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [AppColors.lightDarkColor, Color.fromARGB(255, 18, 13, 14)],
         ),
         borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(20.r),
-          bottomRight: Radius.circular(20.r),
+          bottomLeft: Radius.circular(24.r),
+          bottomRight: Radius.circular(24.r),
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withAlpha((0.4 * 255).toInt()),
-            blurRadius: 8.r,
-            offset: Offset(0, 4.h),
+            color: Colors.black.withAlpha((0.3 * 255).toInt()),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
           ),
         ],
       ),
@@ -43,75 +48,66 @@ class ProfileHeader extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            width: 80.w,
-            height: 80.h,
+            width: 120.w,
+            height: 120.w,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                color: Colors.white.withAlpha((0.3 * 255).toInt()),
+                color: Colors.white.withAlpha((0.4 * 255).toInt()),
+                width: 3.w,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: getRankColor(rank).withAlpha((0.5 * 255).toInt()),
+                  blurRadius: 20,
+                  spreadRadius: 2,
+                ),
+              ],
+            ),
+            child: ClipOval(
+              child: CachedNetworkImage(
+                imageUrl: imageUrl ?? '',
+                fit: BoxFit.cover,
+                placeholder: (context, url) => const Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.white,
+                    strokeWidth: 2,
+                  ),
+                ),
+                errorWidget: (context, url, error) =>
+                    const Icon(Icons.person, color: Colors.white, size: 60),
               ),
             ),
-            child: Center(
-              child: imageUrl != null
-                  ? ClipOval(
-                      child: CachedNetworkImage(
-                        imageUrl: imageUrl!,
-                        fit: BoxFit.cover,
-                        width: 80.w,
-                        height: 80.h,
-                        placeholder: (context, url) =>
-                            const CircularProgressIndicator(strokeWidth: 2),
-                        errorWidget: (context, url, error) =>
-                            const Icon(Icons.person, color: Colors.white),
-                      ),
-                    )
-                  : const Icon(Icons.person, color: Colors.white),
-            ),
           ),
-          SizedBox(height: 10.h),
-          // Username
+          SizedBox(height: 16.h),
+
+          // Name
           Text(
             name,
-            style: TextStyle(
-              fontSize: 24.sp,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
+            style: BebasTextStyles.whiteBold24.copyWith(
+              fontSize: 28.sp,
               letterSpacing: 1.2,
             ),
           ),
-          SizedBox(height: 12.h),
+          verticalSpacing(8),
           // Rank Badge
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+            padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 6.h),
             decoration: BoxDecoration(
               color: getRankColor(rank),
-              borderRadius: BorderRadius.circular(20.r),
+              borderRadius: BorderRadius.circular(30.r),
               border: Border.all(
-                color: Colors.white.withAlpha((0.3 * 255).toInt()),
-                width: 1.w,
+                color: Colors.white.withAlpha((0.4 * 255).toInt()),
               ),
-              boxShadow: rank <= 3
-                  ? [
-                      BoxShadow(
-                        color: getRankColor(rank),
-                        blurRadius: 6.r,
-                        offset: Offset(0, 2.h),
-                      ),
-                    ]
-                  : null,
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(Icons.emoji_events, size: 16.sp, color: Colors.white),
-                SizedBox(width: 8.w),
+                Icon(Icons.emoji_events, size: 18.sp, color: Colors.white),
+                SizedBox(width: 6.w),
                 Text(
-                  'Rank: #$rank',
-                  style: TextStyle(
-                    fontSize: 16.sp, // Slightly larger for emphasis
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  '#$rank',
+                  style: BebasTextStyles.whiteBold20.copyWith(fontSize: 22.sp),
                 ),
               ],
             ),

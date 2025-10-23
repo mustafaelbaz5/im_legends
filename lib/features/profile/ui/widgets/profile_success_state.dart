@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../logic/cubit/profile_cubit.dart';
 import 'states_grid_view.dart';
-import 'user_card_info.dart';
 
 import '../../../../core/models/players_states_model.dart';
 import '../../../../core/models/user_data.dart';
@@ -33,26 +32,8 @@ class profileSuccessState extends StatelessWidget {
               name: playerProfile.name,
               imageUrl: playerProfile.profileImageUrl,
             ),
-            Padding(
-              padding: EdgeInsets.all(16.w),
-              child: IconButton(
-                icon: Icon(Icons.edit, color: Colors.white, size: 24.sp),
-                onPressed: () {},
-              ),
-            ),
           ],
         ),
-        verticalSpacing(16),
-
-        // User Info
-        UserInfoCard(
-          age: playerProfile.age,
-          email: playerProfile.email,
-          phoneNumber: playerProfile.phoneNumber,
-          isOwnProfile: true,
-        ),
-        verticalSpacing(16),
-
         // Stats Grid
         StatsGridView(
           stats: [
@@ -72,27 +53,101 @@ class profileSuccessState extends StatelessWidget {
               'icon': Icons.emoji_events,
             },
             {
-              'label': 'Goals',
-              'value': playerStats.goals,
+              'label': 'Goals Scored',
+              'value': playerStats.goalsScored,
+              'icon': Icons.sports_soccer,
+            },
+            {
+              'label': 'Goals received',
+              'value': playerStats.goalsReceived,
+              'icon': Icons.sports_soccer,
+            },
+            {
+              'label': 'Goal Difference',
+              'value': playerStats.goalDifference,
               'icon': Icons.sports_soccer,
             },
           ],
         ),
         verticalSpacing(16),
 
-        // Logout Button
+        // Logout Button with Confirmation Dialog
         SizedBox(
           width: 200.w,
           child: CustomTextButton(
             buttonText: 'Logout',
-            onPressed: () {
-              context.read<ProfileCubit>().logout();
-            },
             backgroundColor: Colors.red,
+            onPressed: () {
+              _showLogoutDialog(context);
+            },
           ),
         ),
         verticalSpacing(32),
       ],
+    );
+  }
+
+  void _showLogoutDialog(BuildContext parentContext) {
+    showDialog(
+      context: parentContext,
+      barrierDismissible: false,
+      builder: (dialogContext) {
+        return AlertDialog(
+          backgroundColor: Colors.grey.shade900,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.r),
+          ),
+          title: Row(
+            children: [
+              const Icon(Icons.warning_amber_rounded, color: Colors.redAccent),
+              SizedBox(width: 8.w),
+              Text(
+                'Confirm Logout',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          content: Text(
+            'Are you sure you want to log out?',
+            style: TextStyle(color: Colors.grey.shade300, fontSize: 14.sp),
+          ),
+          actionsPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(dialogContext),
+              child: Text(
+                'Cancel',
+                style: TextStyle(color: Colors.grey.shade400, fontSize: 14.sp),
+              ),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.r),
+                ),
+              ),
+              onPressed: () {
+                Navigator.pop(dialogContext);
+                // 👇 Use the parentContext here
+                parentContext.read<ProfileCubit>().logout();
+              },
+              child: Text(
+                'Logout',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

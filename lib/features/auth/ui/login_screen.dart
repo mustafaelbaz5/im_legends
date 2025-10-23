@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import '../../../core/widgets/gradient_background.dart';
-import '../../../core/themes/app_texts_style.dart';
-import 'widgets/login_bloc_consumer.dart';
+
 import '../../../core/router/route_paths.dart';
+import '../../../core/themes/app_texts_style.dart';
 import '../../../core/utils/spacing.dart';
+import '../../../core/widgets/gradient_background.dart';
 import '../../../core/widgets/logo_top_bar.dart';
+import 'widgets/login_bloc_consumer.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -25,7 +26,7 @@ class LoginScreen extends StatelessWidget {
                   const LogoTopBar(),
                   verticalSpacing(40.h),
                   Text(
-                    'Login to IM Legends',
+                    'Welcome Back! 👋',
                     style: BebasTextStyles.whiteBold24,
                     textAlign: TextAlign.center,
                   ),
@@ -37,22 +38,23 @@ class LoginScreen extends StatelessWidget {
                     children: [
                       Text(
                         "Don't have an account?",
-                        style: TajawalTextStyles.whiteBold16,
+                        style: RobotoTextStyles.greyRegular16,
                       ),
 
                       TextButton(
                         onPressed: () => context.go(Routes.signUpScreen),
                         style: TextButton.styleFrom(
-                          padding: EdgeInsets.zero, // removes extra padding
+                          padding: EdgeInsets.symmetric(horizontal: 6.w),
+                          minimumSize: Size.zero,
                           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                          overlayColor: Colors.white24, // subtle ripple effect
+                          overlayColor: Colors.white12,
                         ),
                         child: Text(
-                          " Create an Account",
-                          style: BebasTextStyles.greyRegular16.copyWith(
+                          "Sign Up",
+                          style: RobotoTextStyles.greyRegular16.copyWith(
                             color: Colors.blueAccent,
-                            decoration: TextDecoration.underline,
-                            decorationThickness: 1.5, // makes underline bolder
+                            fontWeight: FontWeight.bold,
+                            decorationThickness: 1.8,
                           ),
                         ),
                       ),

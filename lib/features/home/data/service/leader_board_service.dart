@@ -4,10 +4,12 @@ class LeaderboardService {
   final supabase = Supabase.instance.client;
 
   Future<List<Map<String, dynamic>>> fetchMatches() async {
-    final response = await supabase.from('matches').select('*');
-
-    if (response.isEmpty) return [];
-    return response;
+  try {
+      final response = await supabase.from('matches').select('*');
+      return response;
+    } catch (e) {
+      throw Exception('Failed to fetch matches: $e');
+    }
   }
 
   Future<List<Map<String, dynamic>>> fetchUsers() async {

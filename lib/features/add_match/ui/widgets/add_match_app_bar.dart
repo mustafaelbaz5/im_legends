@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:im_legends/core/themes/text_styles/bebas_text_styles.dart';
+import '../../../../core/themes/text_styles/bebas_text_styles.dart';
 
 class AddMatchAppBar extends StatelessWidget {
   const AddMatchAppBar({super.key});

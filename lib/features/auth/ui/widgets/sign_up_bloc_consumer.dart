@@ -1,14 +1,16 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../../../core/models/user_data.dart';
 import '../../../../core/router/route_paths.dart';
 import '../../../../core/widgets/custom_text_button.dart';
-import '../../../../core/models/user_data.dart';
+import '../../../notification/logic/cubit/notifications_cubit.dart';
 import '../../logic/cubit/auth_cubit.dart';
 import 'sign_up_form.dart';
-import '../../../notification/logic/cubit/notifications_cubit.dart';
 
 class SignUpBlocConsumer extends StatelessWidget {
   const SignUpBlocConsumer({super.key});

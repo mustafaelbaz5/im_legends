@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
-import 'package:im_legends/core/router/route_paths.dart';
+
+import '../router/route_paths.dart';
+import 'animated_page.dart';
 import 'custom_bottom_navigation_bar.dart';
 
 class MainScaffold extends StatelessWidget {
@@ -34,13 +36,13 @@ class MainScaffold extends StatelessWidget {
     final currentIndex = _getCurrentIndex(context);
 
     return Scaffold(
-      body: _AnimatedPage(child: child),
+      body: AnimatedPage(child: child),
 
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.15),
+              color: Colors.black.withAlpha((0.15 * 255).toInt()),
               blurRadius: 8,
               offset: const Offset(0, -2),
             ),
@@ -51,37 +53,6 @@ class MainScaffold extends StatelessWidget {
           onTabSelected: (i) => _onTabSelected(context, i),
         ),
       ),
-    );
-  }
-}
-
-// Extracted animation wrapper for clarity
-class _AnimatedPage extends StatelessWidget {
-  final Widget child;
-  const _AnimatedPage({required this.child});
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedSwitcher(
-      duration: const Duration(milliseconds: 300),
-      switchInCurve: Curves.easeOutCubic,
-      switchOutCurve: Curves.easeInCubic,
-      transitionBuilder: (child, animation) {
-        return FadeTransition(
-          opacity: animation,
-          child: SlideTransition(
-            position: Tween<Offset>(
-              begin: const Offset(0.1, 0),
-              end: Offset.zero,
-            ).animate(animation),
-            child: ScaleTransition(
-              scale: Tween<double>(begin: 0.98, end: 1.0).animate(animation),
-              child: child,
-            ),
-          ),
-        );
-      },
-      child: child,
     );
   }
 }

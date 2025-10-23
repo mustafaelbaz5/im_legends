@@ -2,11 +2,15 @@ class PlayerStatsModel {
   final String playerId;
   final String playerName;
   final String? profileImage;
+
   final int matchesPlayed;
   final int wins;
-  final int goals;
+  final int losses;
+  final int goalsScored;
+  final int goalsReceived;
+  final int goalDifference;
   final int points;
-  final int? rank; 
+  final int? rank;
 
   PlayerStatsModel({
     required this.playerId,
@@ -14,9 +18,12 @@ class PlayerStatsModel {
     this.profileImage,
     this.matchesPlayed = 0,
     this.wins = 0,
-    this.goals = 0,
+    this.losses = 0,
+    this.goalsScored = 0,
+    this.goalsReceived = 0,
+    this.goalDifference = 0,
     this.points = 0,
-    this.rank = 0, 
+    this.rank,
   });
 
   PlayerStatsModel copyWith({
@@ -25,7 +32,10 @@ class PlayerStatsModel {
     String? profileImage,
     int? matchesPlayed,
     int? wins,
-    int? goals,
+    int? losses,
+    int? goalsScored,
+    int? goalsReceived,
+    int? goalDifference,
     int? points,
     int? rank,
   }) {
@@ -35,9 +45,12 @@ class PlayerStatsModel {
       profileImage: profileImage ?? this.profileImage,
       matchesPlayed: matchesPlayed ?? this.matchesPlayed,
       wins: wins ?? this.wins,
-      goals: goals ?? this.goals,
+      losses: losses ?? this.losses,
+      goalsScored: goalsScored ?? this.goalsScored,
+      goalsReceived: goalsReceived ?? this.goalsReceived,
+      goalDifference: goalDifference ?? this.goalDifference,
       points: points ?? this.points,
-      rank: rank ?? this.rank, 
+      rank: rank ?? this.rank,
     );
   }
 }

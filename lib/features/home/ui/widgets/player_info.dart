@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:im_legends/core/themes/app_colors.dart';
+import '../../../../core/themes/app_colors.dart';
 
 import '../../../../core/themes/app_texts_style.dart';
 import '../../../../core/utils/spacing.dart';
@@ -19,8 +19,8 @@ class PlayerInfo extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          playerName,
-          style: BebasTextStyles.whiteBold20,
+          playerName.toUpperCase(),
+          style: TajawalTextStyles.whiteBold16,
           overflow: TextOverflow.ellipsis,
         ),
         verticalSpacing(2),

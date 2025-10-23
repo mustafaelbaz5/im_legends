@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:im_legends/core/widgets/custom_text_button.dart';
-import 'package:im_legends/core/widgets/gradient_background.dart';
-import 'package:im_legends/features/onboarding/ui/widgets/on_boarding_icons.dart';
-import '../../../core/widgets/logo_top_bar.dart';
-import 'widgets/on_boarding_grid_cards.dart';
+
+import '../../../core/router/route_paths.dart';
 import '../../../core/themes/app_texts_style.dart';
 import '../../../core/utils/spacing.dart';
-import '../../../core/router/route_paths.dart';
+import '../../../core/widgets/custom_text_button.dart';
+import '../../../core/widgets/gradient_background.dart';
+import '../../../core/widgets/logo_top_bar.dart';
+import 'widgets/on_boarding_grid_cards.dart';
+import 'widgets/on_boarding_icons.dart';
 
 class OnBoardingScreen extends StatelessWidget {
   const OnBoardingScreen({super.key});
@@ -49,7 +50,7 @@ class OnBoardingScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Text(
                         'Challenge your friends, track your stats, and become the ultimate football legend in your crew',
-                        style: FederantTextStyles.greyRegular14.copyWith(
+                        style: RobotoTextStyles.greyRegular14.copyWith(
                           fontSize: 16,
                           color: const Color(0xFFB0B8C1),
                           height: 1.4,
@@ -80,13 +81,13 @@ class OnBoardingScreen extends StatelessWidget {
                     verticalSpacing(40),
                     CustomTextButton(
                       buttonText: 'Start Your Journey',
-                      textStyle: FederantTextStyles.whiteBold20,
+                      textStyle: RobotoTextStyles.whiteBold20,
                       onPressed: () => context.push(Routes.loginScreen),
                     ),
                     verticalSpacing(16),
                     Text(
                       'Join thousands of players already competing',
-                      style: FederantTextStyles.greyRegular12,
+                      style: RobotoTextStyles.greyRegular12,
                     ),
                   ],
                 ),

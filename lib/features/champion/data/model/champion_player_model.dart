@@ -4,12 +4,11 @@ import '../../../../core/models/user_data.dart';
 class ChampionPlayerModel {
   final UserData user;
   final PlayerStatsModel stats;
-  final int rank; 
+
 
   ChampionPlayerModel({
     required this.user,
     required this.stats,
-    required this.rank,
   });
 
   ChampionPlayerModel copyWith({
@@ -20,7 +19,6 @@ class ChampionPlayerModel {
     return ChampionPlayerModel(
       user: user ?? this.user,
       stats: stats ?? this.stats,
-      rank: rank ?? this.rank,
     );
   }
 }

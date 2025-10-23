@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'states_column.dart';
 import '../../../../core/utils/spacing.dart';
+import 'states_column.dart';
 
 class StatesSection extends StatelessWidget {
-  const StatesSection({super.key, required this.Match, required this.goals});
+  const StatesSection({
+    super.key,
+    required this.Match,
+    required this.goalDifference,
+  });
   final int Match;
-  final int goals;
+  final int goalDifference;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,8 +26,12 @@ class StatesSection extends StatelessWidget {
             value: Match,
             icon: Icons.sports_esports,
           ),
-          horizontalSpacing(16),
-          StatesColumn(label: 'Goals', value: goals, icon: Icons.sports_soccer),
+          horizontalSpacing(8),
+          StatesColumn(
+            label: 'Goals',
+            value: goalDifference,
+            icon: Icons.sports_soccer,
+          ),
         ],
       ),
     );

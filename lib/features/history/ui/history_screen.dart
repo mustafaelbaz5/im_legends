@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../core/themes/app_colors.dart';
+import '../../../core/utils/functions/refresh_page.dart';
 import '../../../core/widgets/custom_app_bar.dart';
 import '../logic/cubit/match_history_cubit.dart';
 import 'widgets/history_list_card.dart';
+import 'widgets/history_shimmer_loading.dart';
 
 class HistoryScreen extends StatelessWidget {
   const HistoryScreen({super.key});
@@ -13,26 +17,29 @@ class HistoryScreen extends StatelessWidget {
       body: Column(
         children: [
           const CustomAppBar(title: 'History'),
-          BlocBuilder<MatchHistoryCubit, MatchHistoryState>(
-            builder: (context, state) {
-              if (state is MatchHistoryLoading) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (state is MatchHistorySuccess) {
-                final matches = state.matches;
-                print(matches.length);
-                return Expanded(
-                  child: ListView.builder(
-                    padding: const EdgeInsets.all(16),
-                    itemBuilder: (context, index) =>
-                        HistoryListCard(match: matches[index]),
-                    itemCount: matches.length,
-                  ),
-                );
-              } else if (state is MatchHistoryError) {
-                return Center(child: Text(state.errorMessage));
-              }
-              return Container();
-            },
+          Expanded(
+            child: BlocBuilder<MatchHistoryCubit, MatchHistoryState>(
+              builder: (context, state) {
+                if (state is MatchHistoryLoading) {
+                  return const HistoryShimmerLoading();
+                } else if (state is MatchHistorySuccess) {
+                  final matches = state.matches;
+                  return RefreshIndicator(
+                    onRefresh: () => onRefresh(context),
+                    backgroundColor: AppColors.lightDarkColor,
+                    color: Colors.white,
+                    child: ListView.builder(
+                      padding: const EdgeInsets.all(16),
+                      itemCount: matches.length,
+                      itemBuilder: (context, index) =>
+                          HistoryListCard(match: matches[index]),
+                    ),
+                  );
+                } else {
+                  return const Center(child: Text('No data available'));
+                }
+              },
+            ),
           ),
         ],
       ),

@@ -1,6 +1,8 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../core/utils/functions/image_picker.dart';
 import '../../../../core/utils/spacing.dart';
 
@@ -59,9 +61,8 @@ class _UploadImageFieldState extends State<UploadImageField> {
                       ? Icon(
                           Icons.person,
                           size: 48.r,
-                          color: Theme.of(
-                            context,
-                          ).colorScheme.onSurface.withOpacity(0.6),
+                          color: Theme.of(context).colorScheme.onSurface
+                              .withAlpha((0.4 * 255).toInt()),
                         )
                       : null,
                 ),
