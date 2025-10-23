@@ -11,7 +11,8 @@ platform :android do
       android_artifact_type: "APK",
       android_artifact_path: "../build/app/outputs/flutter-apk/app-production-release.apk",
       testers: "melbaz187@gmail.com,aelbaz0189@gmail.com,islam.m.fayad@gmail.com,khalededaoudy@gmail.com,medogade2005@gmail.com",
-      release_notes: "New version - App Release v.1.0.4, [Mustafa Elbaz]FIRST COMPLETE RELEASE" 
+      release_notes: "New version - App Release v.1.0.5, [Mustafa Elbaz]
+      This PR introduces major UI/UX enhancements, performance optimizations, and codebase refactoring across multiple modules to improve the overall stability, readability, and user experience of the application." 
     ) 
   end 
 end
