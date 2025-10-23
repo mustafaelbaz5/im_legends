@@ -47,3 +47,5 @@ app.*.map.json
 # 🔐 Environment files (Secrets)
 .env
 .env.*
+
+terminalcontext.txt
