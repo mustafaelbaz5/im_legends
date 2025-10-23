@@ -1,210 +1,265 @@
-# im_legends
+# IM Legends 🏆
 
-# IM Legends — README.md
+A competitive leaderboard and match tracking application built with Flutter. Track player performance, view match history, and celebrate champions in style.
 
-> Professional, friendly README for the **IM Legends** Flutter app — generated after a deep read of the provided project sources.
+## 📋 Overview
+
+IM Legends is a comprehensive sports/gaming tournament management application that allows users to record matches, track player statistics, and maintain real-time leaderboards. The app features a modern UI with smooth animations, real-time notifications, and comprehensive player profiles.
+
+## 🚀 Tech Stack
+
+### Core Technologies
+
+* **Flutter** - Cross-platform mobile framework
+* **Dart** - Programming language
+* **BLoC/Cubit** - State management pattern
+* **GetIt** - Dependency injection
+
+### Backend & Services
+
+* **Supabase** - Backend as a Service (Authentication, Database, Storage)
+* **Firebase** - Cloud messaging and app distribution
+* **Fastlane** - Automated deployment pipeline
+
+### Key Packages
+
+* `flutter_bloc` - State management
+* `go_router` - Declarative routing
+* `flutter_secure_storage` - Secure data persistence
+* `shared_preferences` - Local storage
+* `image_picker` - Image selection and upload
+* `flutter_local_notifications` - Push notifications
+* `shimmer` - Loading animations
+* `cached_network_image` - Image caching
+
+## 🏗️ Architecture
+
+The project follows **Clean Architecture** principles with clear separation of concerns:
+
+```text
+lib/
+├── core/                      # Core utilities and shared resources
+│   ├── di/                    # Dependency injection setup
+│   ├── models/                # Shared data models
+│   ├── router/                # App navigation
+│   ├── service/               # Core services
+│   ├── themes/                # App theming and styles
+│   ├── utils/                 # Helper functions
+│   └── widgets/               # Reusable UI components
+│
+└── features/                  # Feature-based modules
+    ├── add_match/             # Match creation
+    ├── auth/                  # Authentication
+    ├── champion/              # Champions view
+    ├── history/               # Match history
+    ├── home/                  # Leaderboard
+    ├── notification/          # Notifications
+    ├── onboarding/            # User onboarding
+    └── profile/               # User profiles
+```
+
+Each feature follows a  **three-layer architecture** :
+
+* **Data Layer** : Models, repositories, and services
+* **Logic Layer** : BLoC/Cubit for state management
+* **UI Layer** : Screens and widgets
+
+## ✨ Features
+
+### 🎮 Core Features
+
+* **User Authentication** : Secure sign-up and login with profile images
+* **Match Recording** : Add and track match results between players
+* **Real-time Leaderboard** : Dynamic ranking system with win/loss statistics
+* **Match History** : Comprehensive history of all recorded matches
+* **Player Profiles** : Detailed statistics and recent match performance
+* **Champions Gallery** : Showcase top-performing players
+* **Push Notifications** : Real-time updates for matches and achievements
+
+### 🎨 UI/UX Features
+
+* **Custom Fonts** : Multiple font families (Bebas Neue, Borel, Roboto Condensed, Tajawal)
+* **Gradient Backgrounds** : Beautiful gradient designs throughout
+* **Shimmer Loading** : Smooth loading animations
+* **Animated Transitions** : Page and component animations
+* **Bottom Navigation** : Intuitive navigation system
+* **Custom App Bar** : Branded top navigation
+* **Dark Mode Support** : Theme-aware components
+
+### 📱 Platform Support
+
+* ✅ Android
+* ✅ iOS
+* ✅ Web
+* ✅ Windows
+* ✅ macOS
+* ✅ Linux
+
+## 🧪 Testing
+
+The project includes unit and widget tests:
+
+```bash
+# Run all tests
+flutter test
+
+# Run tests with coverage
+flutter test --coverage
+```
+
+Test files are located in the `test/` directory.
+
+## 📁 Folder Structure
+
+```text
+im_legends/
+├── android/                   # Android-specific code
+├── ios/                       # iOS-specific code
+├── web/                       # Web-specific code
+├── windows/                   # Windows-specific code
+├── macos/                     # macOS-specific code
+├── linux/                     # Linux-specific code
+├── assets/                    # Static assets
+│   ├── fonts/                 # Custom fonts
+│   ├── images/                # Image assets
+│   └── svgs/                  # SVG icons
+├── lib/
+│   ├── core/                  # Core functionality
+│   ├── features/              # Feature modules
+│   ├── firebase_options.dart  # Firebase configuration
+│   ├── im_legends_app.dart    # App initialization
+│   ├── main_development.dart  # Development entry point
+│   └── main_production.dart   # Production entry point
+├── test/                      # Test files
+└── pubspec.yaml               # Dependencies
+```
+
+## 🔧 Setup & Installation
+
+### Prerequisites
+
+* Flutter SDK (3.0.0 or higher)
+* Dart SDK
+* Android Studio / Xcode (for mobile development)
+* Supabase account
+* Firebase account
+
+### Installation Steps
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/m9stafa05/im_legends.git
+   cd im_legends
+   ```
+2. **Install dependencies**
+   ```bash
+   flutter pub get
+   ```
+3. **Configure Supabase**
+   * Create a project on [Supabase](https://supabase.com/)
+   * Update `lib/core/service/supa_base_service.dart` with your credentials
+4. **Configure Firebase**
+   * Create a project on [Firebase Console](https://console.firebase.google.com/)
+   * Download configuration files:
+     * `google-services.json` (Android) → `android/app/`
+     * `GoogleService-Info.plist` (iOS) → `ios/Runner/`
+   * Run: `flutterfire configure`
+5. **Run the app**
+   ```bash
+   # Development mode
+   flutter run --flavor development --target lib/main_development.dart
+
+   # Production mode
+   flutter run --flavor production --target lib/main_production.dart
+   ```
+
+## 🎯 Environment Flavors
+
+The app supports two build flavors:
+
+* **Development** : For testing with development backend
+* **Production** : For production release
+
+Each flavor has separate Firebase configurations in:
+
+* `android/app/src/development/google-services.json`
+* `android/app/src/production/google-services.json`
+
+## 🚀 Deployment
+
+### Android
+
+```bash
+cd android
+fastlane android deploy
+```
+
+### iOS
+
+```bash
+cd ios
+fastlane ios deploy
+```
+
+The project includes automated CI/CD workflows:
+
+```yaml
+.github/workflows/android_fastlane_firebase_app_distribution_workflow.yaml
+```
+
+## 🔮 Future Improvements
+
+* [ ] **Tournament Mode** : Create and manage tournaments
+* [ ] **Team Support** : Add team-based competitions
+* [ ] **Statistics Dashboard** : Advanced analytics and charts
+* [ ] **Social Features** : Follow players and share achievements
+* [ ] **Live Matches** : Real-time match updates
+* [ ] **Chat System** : In-app messaging between players
+* [ ] **Achievement System** : Badges and rewards
+* [ ] **Export Reports** : PDF/Excel export of statistics
+* [ ] **Multi-language Support** : Internationalization (i18n)
+* [ ] **Offline Mode** : Local-first with sync
+
+## 📸 Screenshots
+
+> *Add your app screenshots here*
+
+|                           Home                           |                              Add Match                              |                             Profile                             |                             History                             |
+| :-------------------------------------------------------: | :-----------------------------------------------------------------: | :-------------------------------------------------------------: | :-------------------------------------------------------------: |
+| ![Home Screen](https://claude.ai/chat/screenshots/home.png) | ![Add Match Screen](https://claude.ai/chat/screenshots/add_match.png) | ![Profile Screen](https://claude.ai/chat/screenshots/profile.png) | ![History Screen](https://claude.ai/chat/screenshots/history.png) |
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 👨‍💻 Author
+
+**Mustafa Elbaz**
+
+* GitHub: [@m9stafa05](https://github.com/m9stafa05)
+* LinkedIn: [Mustafa Elbaz](https://linkedin.com/in/mustafa-elbaz-725a6631a)
+* Portfolio: [Mustafa Portfolio](https://mustafa-portfolio-eight.vercel.app/)
+* Email: [m9stafa05@gmail.com](mailto:m9stafa05@gmail.com)
+
+## 🙏 Acknowledgments
+
+* Flutter team for the amazing framework
+* Supabase for the powerful backend
+* Firebase for cloud services
+* The open-source community for inspiration
 
 ---
 
-## Project Overview
+**Made with ❤️ and Flutter**
 
-**IM Legends** is a cross-platform Flutter application for tracking competitive matches and player leaderboards.
-
-It includes user authentication, profile & image storage, match history, push & local notifications, and a polished UI with onboarding and a bottom navigation shell. The app uses Supabase for backend database & storage and Firebase for push notifications and related services. project_code
-
- project_code
-
----
-
-## Tech Stack
-
-* **Framework:** Flutter (Dart)
-* **State management:** flutter_bloc (Cubits)
-* **Dependency injection:** GetIt. project_code
-* **Routing:** GoRouter. project_code
-* **Backend / DB / Storage:** Supabase (PostgREST + Storage). project_code
-* **Push / Messaging:** Firebase Messaging + local notifications. project_code
-* **Local storage:** SharedPreferences, flutter_secure_storage. project_code
-* **Other notable libs:** cached_network_image, image_picker, flutter_screenutil, sqflite (platform plugins), url_launcher, flutter_local_notifications (and related platform plugins). project_code
-
----
-
-## Architecture (high level)
-
-IM Legends follows a layered, feature-based architecture:
-
-* **`lib/core`**
-  * Shared utilities, theming, routing, DI, services (Supabase wrapper), widgets and app entry. project_code
-* **`lib/features/<feature>`**
-  * Each feature (auth, home, profile, add_match, champion, history, notification, onboarding, etc.) contains:
-    * `data` (services/repos/models),
-    * `logic` (Bloc/Cubit),
-    * `ui` (screens & widgets).
-* **DI & Initialization**
-  * `setupGetIt()` registers services, repositories and Cubits; app initializers create Firebase & Supabase instances, register notification handlers, and initialize shared prefs. project_code
-
-    project_code
-* **Routing**
-  * `GoRouter` with a ShellRoute for the main scaffold (bottom navigation) and guarded public routes (onboarding, login, signup). Authentication redirects are centralized in router helpers. project_code
-
-This results in a modular codebase where features are self-contained and the `core` folder hosts cross-cutting concerns.
-
----
-
-## Features
-
-* Onboarding flow and authentication (Sign up / Login). project_code
-* Home / Leaderboard showing player ranks, points and avatars. project_code
-* Add match flow and match history. project_code
-* Profile management with profile image upload to Supabase Storage. project_code
-* Notifications: Firebase push + local notifications + in-app notification center. project_code
-* Responsive UI using `flutter_screenutil`, custom theme & typography, and polished components (custom app bar, bottom nav, animated page transitions). project_code
-
----
-
-## Testing
-
-* **Current state:** No unit/widget test files were discovered in the uploaded project snapshot. (If you have test files elsewhere, include them in the repo and I can integrate / summarize them.)
-* **Recommended tests to add:**
-
-  * Unit tests for services (`SupaBaseService` wrapper, token/save/delete flows).
-  * Cubit/Bloc unit tests (leaderboard loading, auth flows, add-match validations).
-  * Widget tests for key screens: `HomeScreen`, `LoginScreen`, `ProfileScreen`.
-* **Run tests:**
-
-  <pre class="overflow-visible!" data-start="3799" data-end="3827" data--h-bstatus="0OBSERVED"><div class="contain-inline-size rounded-2xl relative bg-token-sidebar-surface-primary" data--h-bstatus="0OBSERVED"><div class="sticky top-9" data--h-bstatus="0OBSERVED"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2" data--h-bstatus="0OBSERVED"><div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs" data--h-bstatus="0OBSERVED"></div></div></div><div class="overflow-y-auto p-4" dir="ltr" data--h-bstatus="0OBSERVED"><code class="whitespace-pre! language-bash" data--h-bstatus="0OBSERVED"><span data--h-bstatus="0OBSERVED"><span data--h-bstatus="0OBSERVED">flutter </span><span data--h-bstatus="0OBSERVED">test</span><span data--h-bstatus="0OBSERVED">
-  </span></span></code></div></div></pre>
-
-  (Add `integration_test` if you plan E2E tests.)
-
----
-
-## Folder structure (summary / example)
-
-<pre class="overflow-visible!" data-start="3924" data-end="4523" data--h-bstatus="0OBSERVED"><div class="contain-inline-size rounded-2xl relative bg-token-sidebar-surface-primary" data--h-bstatus="0OBSERVED"><div class="sticky top-9" data--h-bstatus="0OBSERVED"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2" data--h-bstatus="0OBSERVED"><div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs" data--h-bstatus="0OBSERVED"></div></div></div><div class="overflow-y-auto p-4" dir="ltr" data--h-bstatus="0OBSERVED"><code class="whitespace-pre!" data--h-bstatus="0OBSERVED"><span data--h-bstatus="0OBSERVED"><span data--h-bstatus="0OBSERVED">lib/
-├─ core/
-│  ├─ di/                   </span><span data--h-bstatus="0OBSERVED"># dependency injection (GetIt)</span><span data--h-bstatus="0OBSERVED">
-│  ├─ router/               </span><span data--h-bstatus="0OBSERVED"># app routing (GoRouter)</span><span data--h-bstatus="0OBSERVED">
-│  ├─ service/              </span><span data--h-bstatus="0OBSERVED"># Supabase + helper services</span><span data--h-bstatus="0OBSERVED">
-│  ├─ themes/               </span><span data--h-bstatus="0OBSERVED"># colors, fonts, text styles</span><span data--h-bstatus="0OBSERVED">
-│  ├─ widgets/              </span><span data--h-bstatus="0OBSERVED"># shared UI widgets</span><span data--h-bstatus="0OBSERVED">
-│  └─ utils/                </span><span data--h-bstatus="0OBSERVED"># helpers, secure storage, shared prefs</span><span data--h-bstatus="0OBSERVED">
-├─ features/
-│  ├─ auth/
-│  │  ├─ data/
-│  │  ├─ logic/
-│  │  └─ ui/
-│  ├─ home/
-│  ├─ profile/
-│  ├─ add_match/
-│  ├─ champion/
-│  ├─ </span><span data--h-bstatus="0OBSERVED">history</span><span data--h-bstatus="0OBSERVED">/
-│  └─ notification/
-├─ main_development.dart
-├─ main_production.dart
-└─ im_legends_app.dart
-</span></span></code></div></div></pre>
-
-This layout is inferred from the source files and encourages separation between features and core utilities. project_code
-
- project_code
-
----
-
-## How to run the project (dev & production)
-
-> **Prerequisites** : Flutter SDK, Android/iOS toolchains, configured Firebase project for the app (google-services / plist) if you plan to test messaging, and a Supabase project configured with the same schema & anon key.
-
-1. **Install dependencies**
-
-   <pre class="overflow-visible!" data-start="5018" data-end="5051" data--h-bstatus="0OBSERVED"><div class="contain-inline-size rounded-2xl relative bg-token-sidebar-surface-primary" data--h-bstatus="0OBSERVED"><div class="sticky top-9" data--h-bstatus="0OBSERVED"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2" data--h-bstatus="0OBSERVED"><div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs" data--h-bstatus="0OBSERVED"></div></div></div><div class="overflow-y-auto p-4" dir="ltr" data--h-bstatus="0OBSERVED"><code class="whitespace-pre! language-bash" data--h-bstatus="0OBSERVED"><span data--h-bstatus="0OBSERVED"><span data--h-bstatus="0OBSERVED">flutter pub get
-   </span></span></code></div></div></pre>
-2. **Prepare native config**
-
-   * Add `google-services.json` / `GoogleService-Info.plist` or ensure `firebase_options.dart` is properly configured (project includes `firebase_options.dart`). project_code
-   * Update Supabase URL & anon key in `main_development.dart` / `main_production.dart` if you want to use a different Supabase project. project_code
-3. **Initialize (already handled in code)**
-
-   The app initializers do:
-
-   * Firebase initialize,
-   * Local notifications init,
-   * Supabase initialize,
-   * Register background message handler,
-   * `setupGetIt()` DI registration. project_code
-4. **Run in development flavor**
-
-   <pre class="overflow-visible!" data-start="5775" data-end="5860" data--h-bstatus="0OBSERVED"><div class="contain-inline-size rounded-2xl relative bg-token-sidebar-surface-primary" data--h-bstatus="0OBSERVED"><div class="sticky top-9" data--h-bstatus="0OBSERVED"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2" data--h-bstatus="0OBSERVED"><div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs" data--h-bstatus="0OBSERVED"></div></div></div><div class="overflow-y-auto p-4" dir="ltr" data--h-bstatus="0OBSERVED"><code class="whitespace-pre! language-bash" data--h-bstatus="0OBSERVED"><span data--h-bstatus="0OBSERVED"><span data--h-bstatus="0OBSERVED">flutter run --flavor development --target lib/main_development.dart
-   </span></span></code></div></div></pre>
-
-   (This exact command is included as a comment in the project entry file.) project_code
-5. **Run production flavor**
-
-   <pre class="overflow-visible!" data-start="6010" data-end="6093" data--h-bstatus="0OBSERVED"><div class="contain-inline-size rounded-2xl relative bg-token-sidebar-surface-primary" data--h-bstatus="0OBSERVED"><div class="sticky top-9" data--h-bstatus="0OBSERVED"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2" data--h-bstatus="0OBSERVED"><div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs" data--h-bstatus="0OBSERVED"></div></div></div><div class="overflow-y-auto p-4" dir="ltr" data--h-bstatus="0OBSERVED"><code class="whitespace-pre! language-bash" data--h-bstatus="0OBSERVED"><span data--h-bstatus="0OBSERVED"><span data--h-bstatus="0OBSERVED">flutter run --flavor production --target lib/main_production.dart
-   </span></span></code></div></div></pre>
-
-   (Also present as a commented command in the source.) project_code
-6. **Build APK / AppBundle**
-
-   <pre class="overflow-visible!" data-start="6223" data-end="6401" data--h-bstatus="0OBSERVED"><div class="contain-inline-size rounded-2xl relative bg-token-sidebar-surface-primary" data--h-bstatus="0OBSERVED"><div class="sticky top-9" data--h-bstatus="0OBSERVED"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2" data--h-bstatus="0OBSERVED"><div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs" data--h-bstatus="0OBSERVED"></div></div></div><div class="overflow-y-auto p-4" dir="ltr" data--h-bstatus="0OBSERVED"><code class="whitespace-pre! language-bash" data--h-bstatus="0OBSERVED"><span data--h-bstatus="0OBSERVED"><span data--h-bstatus="0OBSERVED">flutter build apk --flavor production --target lib/main_production.dart
-   </span><span data--h-bstatus="0OBSERVED"># or</span><span data--h-bstatus="0OBSERVED">
-   flutter build appbundle --flavor production --target lib/main_production.dart
-   </span></span></code></div></div></pre>
-
----
-
-## Future Improvements (suggestions)
-
-* Add automated tests (unit, widget, integration).
-* CI/CD: GitHub Actions to run `flutter analyze`, `flutter test`, and build artifacts per flavor.
-* Improve error handling & network retry policies for Supabase calls.
-* Add feature flagging / remote config for enabling/disabling features without redeploy.
-* Add offline-first caching for leaderboards & match history (e.g. sqflite/local DB + sync).
-* Expand notification types and add deep links to notification payloads (GoRouter integration). project_code
-
----
-
-## Screenshots
-
-> Place screenshot images in `/assets/screenshots/` and add markdown here. Example:
-
-<pre class="overflow-visible!" data-start="7098" data-end="7202" data--h-bstatus="0OBSERVED"><div class="contain-inline-size rounded-2xl relative bg-token-sidebar-surface-primary" data--h-bstatus="0OBSERVED"><div class="sticky top-9" data--h-bstatus="0OBSERVED"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2" data--h-bstatus="0OBSERVED"><div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs" data--h-bstatus="0OBSERVED"></div></div></div><div class="overflow-y-auto p-4" dir="ltr" data--h-bstatus="0OBSERVED"><code class="whitespace-pre! language-md" data--h-bstatus="0OBSERVED"><span data--h-bstatus="0OBSERVED"><span data--h-bstatus="0OBSERVED">![</span><span data--h-bstatus="0OBSERVED">Home screen</span><span data--h-bstatus="0OBSERVED">](</span><span data--h-bstatus="0OBSERVED">assets/screenshots/home.png</span><span data--h-bstatus="0OBSERVED">)
-![</span><span data--h-bstatus="0OBSERVED">Leaderboard</span><span data--h-bstatus="0OBSERVED">](</span><span data--h-bstatus="0OBSERVED">assets/screenshots/leaderboard.png</span><span data--h-bstatus="0OBSERVED">)
-</span></span></code></div></div></pre>
-
-**Tip:** commit optimized PNG/JPEG images and reference them here so the GitHub repo README displays them.
-
----
-
-## Social / Contact
-
-* **Author:** (Add your name here — e.g. `Mustafa Elbaz`)
-* **Project / Repo:** (Add repo URL)
-* **Twitter / LinkedIn:** (Add links)
-
----
-
-## Notes & important references (from the code)
-
-* Dependency injection and service registration live in `lib/core/di/dependency_injection.dart`. project_code
-* App initialization (Firebase, Supabase, notifications & DI) is performed in `main_development.dart` and `main_production.dart`. project_code
-* Routing and route guards (redirects for auth) are implemented with `GoRouter` in `lib/core/router/app_router.dart` and route paths are in `route_paths.dart`. project_code
-* Core Supabase wrapper and higher level services (auth, storage, tokens, notifications) are in `lib/core/service/*` with a `SupaBaseService` that centralizes common functionality. project_code
-* Example UI screens (login, signup, home) and shared widgets show the app’s polished UI approach and responsive sizing with `flutter_screenutil`. project_code
-
-  project_cod
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+⭐ Star this repo if you find it helpful!
