@@ -32,7 +32,7 @@ class LocalNotificationService {
       },
     );
 
-    // ✅ Ask for POST_NOTIFICATIONS permission on Android 13+
+    // Ask for POST_NOTIFICATIONS permission on Android 13+
     if (Platform.isAndroid) {
       final status = await Permission.notification.status;
       if (!status.isGranted) {
@@ -40,7 +40,7 @@ class LocalNotificationService {
       }
     }
 
-    // ✅ Ask for permission on iOS
+    // Ask for permission on iOS
     await _localNotifications
         .resolvePlatformSpecificImplementation<
           IOSFlutterLocalNotificationsPlugin
