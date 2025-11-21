@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../core/themes/app_colors.dart';
-import '../../data/model/champion_player_model.dart';
 import '../../../../core/themes/app_texts_style.dart';
 import '../../../../core/utils/spacing.dart';
+import '../../data/model/champion_player_model.dart';
 import 'champions_card.dart';
 
 class ChampionTopThree extends StatelessWidget {

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../core/themes/app_colors.dart';
 import '../../../../core/themes/text_styles/bebas_text_styles.dart';
 import '../../../../core/utils/spacing.dart';
-import '../../../../core/themes/app_colors.dart';
 
 class HistoryCardPlayerInfo extends StatelessWidget {
   final String playerName;
