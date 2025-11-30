@@ -1,8 +1,11 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:im_legends/core/service/image_service.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+
+import '../../../../core/error/auth_error.dart';
+import '../../../../core/error/auth_error_model.dart';
 import '../../../../core/storage/secure_storage.dart';
+import '../../../../core/service/image_service.dart';
 import '../../../notification/data/service/firebase_notifications_service.dart';
 import '../../../../core/models/user_data.dart';
 
@@ -39,7 +42,11 @@ class AuthService {
 
       final uid = response.user?.id;
       if (uid == null) {
-        throw Exception('Sign-up failed: UID not found.');
+        throw const AuthErrorModel(
+          message: 'Sign-up failed: UID not found',
+          userMessage: 'Failed to create your account. Please try again.',
+          type: AuthErrorType.unknown,
+        );
       }
 
       debugPrint('✅ User signed up successfully: $uid');
@@ -60,18 +67,10 @@ class AuthService {
 
       debugPrint('✅ Sign-up successful: $uid');
       return response;
-    } on AuthException catch (e) {
-      debugPrint("❌ Sign-up failed: ${e.message}");
-      throw Exception('Sign-up failed: ${e.message}');
-    } on StorageException catch (e) {
-      debugPrint("❌ Failed to upload profile image: ${e.message}");
-      throw Exception('Failed to upload profile image: ${e.message}');
-    } on PostgrestException catch (e) {
-      debugPrint("❌ Database error inserting user profile: ${e.message}");
-      throw Exception('Database error: ${e.message}');
     } catch (e) {
-      debugPrint('❌ Sign-up error: $e');
-      throw Exception('Sign-up failed: $e');
+      final authError = AuthErrorHandler.handle(e);
+      debugPrint("❌ Sign-up failed: ${authError.message}");
+      throw authError;
     }
   }
 
@@ -94,7 +93,11 @@ class AuthService {
       }
 
       if (response.user?.id == null) {
-        throw Exception('Login failed: user not found.');
+        throw const AuthErrorModel(
+          message: 'Login failed: user not found',
+          userMessage: 'Login failed. Please check your credentials.',
+          type: AuthErrorType.userNotFound,
+        );
       }
       final uid = response.user!.id;
 
@@ -105,12 +108,10 @@ class AuthService {
 
       debugPrint('✅ Login successful: $uid');
       return response;
-    } on AuthException catch (e) {
-      debugPrint("❌ Login failed: ${e.message}");
-      throw Exception('Login failed: ${e.message}');
     } catch (e) {
-      debugPrint('❌ Login error: $e');
-      throw Exception('Login failed: $e');
+      final authError = AuthErrorHandler.handle(e);
+      debugPrint("❌ Login failed: ${authError.message}");
+      throw authError;
     }
   }
 
@@ -129,65 +130,14 @@ class AuthService {
       // Sign out
       await _supabase.auth.signOut();
       debugPrint('✅ User logged out successfully');
-    } on PostgrestException catch (e) {
-      debugPrint("❌ Failed to remove all user tokens: ${e.message}");
-      throw Exception('Failed to remove all user tokens: ${e.message}');
     } catch (e) {
-      debugPrint('❌ Logout error: $e');
-      throw Exception('Logout failed: $e');
+      final authError = AuthErrorHandler.handle(e);
+      debugPrint('❌ Logout error: ${authError.message}');
+      throw authError;
     }
   }
 
-  /// ---------------------------
-  /// GET CURRENT USER DATA
-  /// ---------------------------
-  Future<Map<String, dynamic>?> getCurrentUserData() async {
-    final user = currentUser;
-    if (user == null) return null;
-
-    try {
-      // Fetch user profile
-      final userResponse = await _supabase
-          .from('users')
-          .select()
-          .eq('id', user.id)
-          .single();
-
-      // Fetch tokens
-      final tokensResponse = await _supabase
-          .from('user_tokens')
-          .select('token')
-          .eq('user_id', user.id);
-
-      // Fetch notifications
-      final notificationsResponse = await _supabase
-          .from('user_notifications')
-          .select()
-          .eq('user_id', user.id)
-          .order('created_at', ascending: false);
-
-      return {
-        'user': userResponse,
-        'tokens': List<String>.from(
-          tokensResponse.map((row) => row['token'] as String),
-        ),
-        'notifications': notificationsResponse.map((row) {
-          return {
-            'id': row['notification_id'],
-            'title': row['title'],
-            'message': row['message'],
-            'created_at': row['created_at'],
-            'type': row['type'],
-            'is_read': row['is_read'],
-          };
-        }).toList(),
-      };
-    } catch (e) {
-      debugPrint("❌ Error fetching current user session data: $e");
-      return null;
-    }
-  }
-
+  /// ---
   /// ---------------------------
   /// GET USER SESSION DATA BY ID
   /// ---------------------------
@@ -200,7 +150,8 @@ class AuthService {
           .single();
       return response;
     } catch (e) {
-      debugPrint("❌ Error fetching user session data: $e");
+      final authError = AuthErrorHandler.handle(e);
+      debugPrint("❌ Error fetching user session data: ${authError.message}");
       return null;
     }
   }

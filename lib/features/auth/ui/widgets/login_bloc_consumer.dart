@@ -15,34 +15,60 @@ class LoginBlocConsumer extends StatelessWidget {
       listeners: [
         BlocListener<AuthCubit, AuthState>(
           listener: (context, state) async {
-            if (state is AuthSuccess) {
+            if (state is AuthLoading) {
+              // Show loading dialog when loading starts
+              _showLoadingDialog(context);
+            } else if (state is AuthSuccess) {
+              // Close loading dialog
+              if (Navigator.canPop(context)) {
+                Navigator.pop(context);
+              }
+
               final user = state.authResponse.user;
               if (user != null) {
-                // Initialize notifications
-                await context
-                    .read<NotificationsCubit>()
-                    .notificationRepo
-                    .initialize(user.id);
-                await context.read<NotificationsCubit>().sendLoginNotification(
-                  userId: user.id,
-                  userName:
-                      state.userData?.name ??
-                      user.email?.split('@').first ??
-                      'User',
-                  email: user.email ?? '',
-                );
+                try {
+                  // Initialize notifications
+                  await context
+                      .read<NotificationsCubit>()
+                      .notificationRepo
+                      .initialize(user.id);
+                  await context
+                      .read<NotificationsCubit>()
+                      .sendLoginNotification(
+                        userId: user.id,
+                        userName:
+                            state.userData?.name ??
+                            user.email?.split('@').first ??
+                            'User',
+                        email: user.email ?? '',
+                      );
+                } catch (e) {
+                  debugPrint('❌ Notification error (non-critical): $e');
+                }
               }
-              context.go(Routes.homeScreen);
+
+              // Navigate to home screen
+              if (context.mounted) {
+                context.go(Routes.homeScreen);
+              }
             } else if (state is AuthFailure) {
-              Navigator.pop(context); // Close loading dialog
-              _showErrorDialog(context, state.errorMessage);
+              // Close loading dialog
+              if (Navigator.canPop(context)) {
+                Navigator.pop(context);
+              }
+
+              // Show error dialog
+              if (context.mounted) {
+                _showErrorDialog(context, state.errorMessage);
+              }
             }
           },
         ),
         BlocListener<NotificationsCubit, NotificationsState>(
           listener: (context, state) {
             if (state is NotificationsFailure) {
-              _showErrorDialog(context, state.errorMessage);
+              // Don't show error for notifications - it's not critical
+              debugPrint('❌ Notification error: ${state.errorMessage}');
             }
           },
         ),
@@ -63,11 +89,22 @@ class LoginBlocConsumer extends StatelessWidget {
     );
   }
 
+  void _showLoadingDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => const PopScope(
+        canPop: false,
+        child: const Center(child: CircularProgressIndicator()),
+      ),
+    );
+  }
+
   void _showErrorDialog(BuildContext context, String message) {
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        title: const Text('Error'),
+        title: const Text('Login Failed'),
         content: Text(message),
         actions: [
           TextButton(

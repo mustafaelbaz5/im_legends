@@ -1,9 +1,11 @@
 import 'dart:io';
 import 'package:bloc/bloc.dart';
+import '../../../../core/error/auth_error_model.dart';
 import 'package:meta/meta.dart';
 import '../../data/repo/auth_repo.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../../../core/models/user_data.dart';
+
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
@@ -24,8 +26,14 @@ class AuthCubit extends Cubit<AuthState> {
         profileImage: profileImage,
       );
       emit(AuthSuccess(authResponse: response, userData: userData));
+    } on AuthErrorModel catch (e) {
+      emit(AuthFailure(errorMessage: e.userMessage));
     } catch (e) {
-      emit(AuthFailure(errorMessage: e.toString()));
+      emit(
+        AuthFailure(
+          errorMessage: 'An unexpected error occurred. Please try again.',
+        ),
+      );
     }
   }
 
@@ -37,6 +45,7 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       final response = await authRepo.login(email: email, password: password);
       final userDataMap = await authRepo.getUserDataById(response.user!.id);
+
       final userData = userDataMap != null
           ? UserData(
               name: userDataMap['name'] ?? '',
@@ -46,9 +55,16 @@ class AuthCubit extends Cubit<AuthState> {
               profileImageUrl: userDataMap['profile_image'],
             )
           : null;
+
       emit(AuthSuccess(authResponse: response, userData: userData));
+    } on AuthErrorModel catch (e) {
+      emit(AuthFailure(errorMessage: e.userMessage));
     } catch (e) {
-      emit(AuthFailure(errorMessage: e.toString()));
+      emit(
+        AuthFailure(
+          errorMessage: 'An unexpected error occurred. Please try again.',
+        ),
+      );
     }
   }
 }
