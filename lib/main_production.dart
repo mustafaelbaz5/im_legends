@@ -6,7 +6,6 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'core/di/dependency_injection.dart';
 import 'core/router/app_router.dart' as AppRouter;
-import 'core/utils/shared_prefs.dart';
 import 'features/notification/data/service/firebase_notifications_service.dart';
 import 'features/notification/data/service/local_notifications.dart';
 import 'firebase_options.dart';
@@ -38,8 +37,6 @@ Future<void> main() async {
   // Ensure screen util sizing
   await ScreenUtil.ensureScreenSize();
 
-  // Shared Preferences
-  await SharedPrefStorage.instance.init();
 
   // Register background handler BEFORE runApp
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);

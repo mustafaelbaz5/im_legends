@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/router/app_router.dart';
 import '../../../../core/router/route_paths.dart';
 import '../../../../core/service/supa_base_service.dart';
-import '../../../../core/utils/secure_storage.dart';
+import '../../../../core/storage/secure_storage.dart';
 import '../models/notification_model.dart';
 
 class FirebaseNotificationsService {

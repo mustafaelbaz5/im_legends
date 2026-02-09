@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../logic/cubit/add_match_cubit.dart';
+
 import '../../../../../core/themes/app_colors.dart';
+import '../../../logic/cubit/add_match_cubit.dart';
+import 'player_field_animations.dart';
 import 'player_field_avatar.dart';
 import 'player_field_drop_down_arrow.dart';
 import 'player_field_info.dart';
-import 'player_field_animations.dart';
 import 'players_bottom_sheet.dart';
 
 class PlayerSelectField extends StatefulWidget {

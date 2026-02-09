@@ -1,20 +1,21 @@
+import 'package:supabase_flutter/supabase_flutter.dart';
+
 import '../../../../core/models/players_states_model.dart';
 import '../../../../core/models/user_data.dart';
-import '../../../../core/service/supa_base_service.dart';
 
 class ProfileService {
-  final SupaBaseService supabaseService = SupaBaseService();
+    final supabase = Supabase.instance.client;
 
   /// ✅ Fetch and calculate full player stats
   Future<PlayerStatsModel> fetchPlayerStats(String userId) async {
     try {
       // 1️⃣ Fetch all users (id, name, profile image)
-      final users = await supabaseService.supabase
+      final users = await supabase
           .from('users')
           .select('id, name, profile_image');
 
       // 2️⃣ Fetch all matches
-      final matches = await supabaseService.supabase
+      final matches = await supabase
           .from('matches')
           .select('*');
 
@@ -104,7 +105,7 @@ class ProfileService {
   /// ✅ Fetch user base info
   Future<UserData> fetchUserData(String userId) async {
     try {
-      final response = await supabaseService.supabase
+      final response = await supabase
           .from('users')
           .select()
           .eq('id', userId)
@@ -120,7 +121,7 @@ class ProfileService {
   /// ✅ Logout current user
   Future<void> logout() async {
     try {
-      await supabaseService.logoutUser();
+      await supabase.auth.signOut();
       print("✅ User logged out successfully from ProfileService");
     } catch (e) {
       print("❌ Logout failed: $e");

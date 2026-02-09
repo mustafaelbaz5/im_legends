@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
 import '../../../../core/router/route_paths.dart';
 import '../../../../core/themes/app_colors.dart';
 import '../../../../core/themes/text_styles/bebas_text_styles.dart';
-import '../../../../core/widgets/custom_text_button.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../../../core/utils/spacing.dart';
+import '../../../../core/widgets/custom_text_button.dart';
 import '../../logic/cubit/leader_board_cubit.dart';
 
 class HomeHeaderContainer extends StatelessWidget {

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../../core/utils/spacing.dart';
 import 'score_control_button.dart';
 import 'score_count_animations.dart';
-import '../../../../../core/utils/spacing.dart';
 
 class ScoreInputContainer extends StatefulWidget {
   const ScoreInputContainer({

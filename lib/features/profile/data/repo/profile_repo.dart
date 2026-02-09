@@ -1,4 +1,4 @@
-import '../../../../core/utils/secure_storage.dart';
+import '../../../../core/storage/secure_storage.dart';
 import '../model/profile_model.dart';
 
 import '../service/profile_service.dart';
