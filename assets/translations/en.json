@@ -1,0 +1,43 @@
+{
+  "app_title": "Doc Doc",
+  "welcome": "Welcome",
+  "errors": {
+    "no_internet": "You're offline. Check your WiFi or mobile data.",
+    "timeout": "Taking too long to respond. Please try again.",
+    "connection_error": "Can't connect right now. Check your internet.",
+    "bad_request": "Something's wrong with your request. Please try again.",
+    "unauthorized": "Please log in to continue.",
+    "forbidden": "You don't have access to this.",
+    "not_found": "We couldn't find what you're looking for.",
+    "conflict": "This already exists. Try something different.",
+    "server_error": "Something went wrong on our end. Try again in a moment.",
+    "invalid_credentials": "Email or password is incorrect.",
+    "user_not_found": "No account with this email exists.",
+    "email_already_exists": "This email is already registered.",
+    "weak_password": "Password is too weak. Use at least 8 characters with letters and numbers.",
+    "invalid_email": "Please enter a valid email address.",
+    "session_expired": "Your session expired. Please log in again.",
+    "email_not_verified": "Please verify your email to continue.",
+    "validation": "Please check your information and try again.",
+    "cancelled": "You cancelled this action.",
+    "unknown": "Something unexpected happened. Please try again.",
+    "too_many_requests": "Too many attempts. Wait a few minutes and try again.",
+    "permission_denied": "You don't have permission to do this.",
+    "service_unavailable": "We're having technical issues. Please try again soon.",
+    "file_too_large": "This file is too big. Try a smaller one.",
+    "user_disabled": "This account is disabled. Contact support for help.",
+    "operation_not_allowed": "You can't do this action right now."
+  },
+  "app_dialogs": {
+    "error": "Error",
+    "confirm": "Confirm",
+    "success": "Success",
+    "warning": "Warning",
+    "info": "Info",
+    "cancel": "Cancel",
+    "ok": "OK",
+    "close": "Close",
+    "yes": "Yes",
+    "no": "No"
+  }
+}
