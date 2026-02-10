@@ -8,6 +8,9 @@ class CustomIconBottom extends StatelessWidget {
   final VoidCallback onPressed;
   final String? label;
   final String? tooltip;
+  final Color? iconColor;
+  final Color? backgroundColor;
+  final TextStyle? labelStyle;
 
   const CustomIconBottom({
     super.key,
@@ -15,6 +18,9 @@ class CustomIconBottom extends StatelessWidget {
     required this.onPressed,
     this.label,
     this.tooltip,
+    this.iconColor,
+    this.backgroundColor,
+    this.labelStyle,
   });
 
   bool get _hasLabel => label != null;
@@ -22,10 +28,9 @@ class CustomIconBottom extends StatelessWidget {
   @override
   Widget build(final BuildContext context) {
     final borderRadius = BorderRadius.circular(responsiveRadius(12));
-    final backgroundColor = context.customColors.divider.withValues(alpha: 0.5);
 
     final Widget button = Material(
-      color: backgroundColor,
+      color: backgroundColor ?? Colors.transparent,
       borderRadius: borderRadius,
       elevation: 0,
       child: InkWell(
@@ -44,16 +49,11 @@ class CustomIconBottom extends StatelessWidget {
               Icon(
                 icon,
                 size: responsiveFontSize(20),
-                color: context.customColors.textSecondary,
+                color: iconColor ?? context.customColors.textSecondary,
               ),
               if (_hasLabel) ...[
                 horizontalSpacing(6),
-                Text(
-                  label!,
-                  style: AppTextStyles.font16Bold.copyWith(
-                    color: context.customColors.textPrimary,
-                  ),
-                ),
+                Text(label!, style: labelStyle ?? AppTextStyles.font16Bold),
               ],
             ],
           ),

@@ -5,7 +5,6 @@ import 'package:im_legends/core/widgets/custom_icon_bottom.dart';
 import '../../../../core/utils/extensions/context_extensions.dart';
 import '../../../../core/utils/functions/app_setting_method.dart';
 
-
 class OnBoardingTopBar extends StatelessWidget {
   const OnBoardingTopBar({super.key});
 
@@ -17,10 +16,16 @@ class OnBoardingTopBar extends StatelessWidget {
 
         children: [
           CustomIconBottom(
+            backgroundColor: context.customColors.divider.withValues(
+              alpha: 0.5,
+            ),
             icon: context.isDarkMode ? Icons.light_mode : Icons.dark_mode,
             onPressed: () => switchTheme(context),
           ),
           CustomIconBottom(
+            backgroundColor: context.customColors.divider.withValues(
+              alpha: 0.5,
+            ),
             icon: Icons.language_rounded,
             onPressed: () => switchLanguage(context),
             label: context.locale.languageCode.toUpperCase(),
