@@ -1,6 +1,7 @@
 class AppAssets {
   //Svgs
   static const String appSvgLogo = 'assets/svgs/logo.svg';
+  static const String onBoardingHereSvg = 'assets/svgs/on_boarding_hero.svg';
 
   //Images
   static const String appLogoPng = 'assets/images/ImLogo.png';
