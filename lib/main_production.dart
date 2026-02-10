@@ -3,14 +3,15 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:im_legends/core/config/constants.dart';
+import 'package:im_legends/core/config/app_config.dart';
+import 'package:im_legends/core/config/app_constants.dart';
 import 'package:im_legends/core/router/app_router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'core/di/dependency_injection.dart';
 import 'features/notification/data/service/firebase_notifications_service.dart';
 import 'features/notification/data/service/local_notifications.dart';
-import 'firebase_options.dart';
+import 'core/config/firebase_options.dart';
 import 'im_legends_app.dart';
 
 void main() async {
@@ -22,8 +23,8 @@ void main() async {
     setUpDependencies(),
   ]);
   await Supabase.initialize(
-    url: Constants.supabaseUrl,
-    anonKey: Constants.supabaseAnonKey,
+    url: AppConfig.supabaseUrl,
+    anonKey: AppConfig.supabaseAnonKey,
   );
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await ScreenUtil.ensureScreenSize();
