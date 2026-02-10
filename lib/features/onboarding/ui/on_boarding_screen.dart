@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:im_legends/core/router/route_paths.dart';
 import 'package:im_legends/core/themes/app_colors.dart';
@@ -48,7 +49,7 @@ class OnBoardingScreen extends StatelessWidget {
                       horizontal: responsiveWidth(12),
                     ),
                     child: Text(
-                      'Challenge your friends, track your stats, and become the ultimate football legend in your crew.',
+                      'onboarding.subtitle'.tr(),
                       style: AppTextStyles.font14Regular.copyWith(
                         color: context.customColors.textSecondary,
                       ),
@@ -64,7 +65,7 @@ class OnBoardingScreen extends StatelessWidget {
 
                   // CTA Button
                   CustomTextButton(
-                    text: 'Start Your Journey',
+                    text: 'onboarding.button'.tr(),
                     onPressed: () => context.pushNamed(Routes.loginScreen),
                   ),
                 ],

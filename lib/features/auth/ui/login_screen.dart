@@ -1,67 +1,66 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
+import 'package:im_legends/core/router/route_paths.dart';
+import 'package:im_legends/core/utils/extensions/context_extensions.dart';
 
-import '../../../core/router/route_paths.dart';
 import '../../../core/themes/app_texts_style.dart';
 import '../../../core/utils/spacing.dart';
-import '../../../core/widgets/gradient_background.dart';
-import '../../../core/widgets/logo_top_bar.dart';
 import 'widgets/login_bloc_consumer.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Scaffold(
-      body: GradientBackground(
-        child: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const LogoTopBar(),
-                  verticalSpacing(40.h),
-                  Text(
-                    'Welcome Back! 👋',
-                    style: BebasTextStyles.whiteBold24,
-                    textAlign: TextAlign.center,
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: responsiveWidth(16),
+            vertical: responsiveHeight(16),
+          ),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                verticalSpacing(40),
+                Text(
+                  'auth.login_title'.tr(),
+                  style: AppTextStyles.font20Bold,
+                  textAlign: TextAlign.center,
+                ),
+                verticalSpacing(12),
+                Text(
+                  'auth.login_desc'.tr(),
+                  style: AppTextStyles.font14Regular.copyWith(
+                    color: context.customColors.textSecondary,
+                    height: 1.8,
                   ),
-                  verticalSpacing(32),
-                  const LoginBlocConsumer(),
-                  verticalSpacing(24),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Don't have an account?",
-                        style: RobotoTextStyles.greyRegular16,
-                      ),
+                ),
+                verticalSpacing(80),
 
-                      TextButton(
-                        onPressed: () => context.go(Routes.signUpScreen),
-                        style: TextButton.styleFrom(
-                          padding: EdgeInsets.symmetric(horizontal: 6.w),
-                          minimumSize: Size.zero,
-                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                          overlayColor: Colors.white12,
-                        ),
-                        child: Text(
-                          "Sign Up",
-                          style: RobotoTextStyles.greyRegular16.copyWith(
-                            color: Colors.blueAccent,
-                            fontWeight: FontWeight.bold,
-                            decorationThickness: 1.8,
-                          ),
+                const LoginBlocConsumer(),
+                verticalSpacing(60),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'auth.dont_have_account'.tr(),
+                      style: AppTextStyles.font12Regular,
+                    ),
+                    GestureDetector(
+                      onTap: () =>
+                          context.pushReplacementNamed(Routes.signUpScreen),
+                      child: Text(
+                        'auth.sign_up'.tr(),
+                        style: AppTextStyles.font12SemiBold.copyWith(
+                          color: context.customColors.accentBlue,
+                          decorationThickness: 2,
                         ),
                       ),
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ),
