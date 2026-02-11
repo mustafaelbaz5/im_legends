@@ -26,22 +26,6 @@ class Validators {
       return 'auth.validation.required'.tr();
     }
 
-    if (!AppRegex.hasLowerCase(value)) {
-      return 'auth.validation.password_validation_1'.tr();
-    }
-
-    if (!AppRegex.hasUpperCase(value)) {
-      return 'auth.validation.password_validation_2'.tr();
-    }
-
-    if (!AppRegex.hasNumber(value)) {
-      return 'auth.validation.password_validation_3'.tr();
-    }
-
-    if (!AppRegex.hasSpecialCharacter(value)) {
-      return 'auth.validation.password_validation_4'.tr();
-    }
-
     if (!AppRegex.hasMinLength(value)) {
       return 'auth.validation.password_validation_5'.tr();
     }
