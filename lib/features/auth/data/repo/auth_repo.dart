@@ -1,55 +1,21 @@
 import 'dart:io';
 
-import 'package:flutter/material.dart';
+import 'package:im_legends/core/models/user_data.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../../../../core/models/user_data.dart';
-import '../service/auth_service.dart';
-
-class AuthRepo {
-  final AuthService _authService;
-
-  AuthRepo({AuthService? authService})
-    : _authService = authService ?? AuthService();
-
-  /// Sign up user and return their data
+abstract class AuthRepo {
   Future<AuthResponse> signUp({
-    required UserData userData,
-    required String password,
-    File? profileImage,
-  }) async {
-    try {
-      return await _authService.signUp(
-        userData: userData,
-        password: password,
-        profileImage: profileImage,
-      );
-    } catch (e, stackTrace) {
-      debugPrint('Sign-up error: $e\n$stackTrace');
-      rethrow;
-    }
-  }
+    required final UserData userData,
+    required final String password,
+    final File? profileImage,
+  });
 
-  /// Login and return user data or auth response
   Future<AuthResponse> login({
-    required String email,
-    required String password,
-  }) async {
-    try {
-      return await _authService.login(email: email, password: password);
-    } catch (e, stackTrace) {
-      debugPrint('Login error: $e\n$stackTrace');
-      rethrow;
-    }
-  }
+    required final String email,
+    required final String password,
+  });
 
-  /// Fetch user data by user ID
-  Future<Map<String, dynamic>?> getUserDataById(String userId) async {
-    try {
-      return await _authService.getUserDataById(userId);
-    } catch (e, stackTrace) {
-      debugPrint('Fetch user data error: $e\n$stackTrace');
-      return null;
-    }
-  }
+  Future<void> logout();
+
+  Future<UserData?> getUserDataById(final String uid);
 }
