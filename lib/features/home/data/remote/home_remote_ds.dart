@@ -1,11 +1,13 @@
-import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:im_legends/core/networking/supabase_service.dart';
 
-class LeaderboardService {
-  final supabase = Supabase.instance.client;
+class HomeRemoteDs {
+  final SupabaseService supabaseService;
+
+  HomeRemoteDs({required this.supabaseService});
 
   Future<List<Map<String, dynamic>>> fetchMatches() async {
-  try {
-      final response = await supabase.from('matches').select('*');
+    try {
+      final response = await supabaseService.client.from('matches').select('*');
       return response;
     } catch (e) {
       throw Exception('Failed to fetch matches: $e');
@@ -13,7 +15,7 @@ class LeaderboardService {
   }
 
   Future<List<Map<String, dynamic>>> fetchUsers() async {
-    final response = await supabase
+    final response = await supabaseService.client
         .from('users')
         .select('id, name, profile_image');
     return response;
