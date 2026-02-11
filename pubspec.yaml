@@ -41,6 +41,7 @@ dependencies:
   hydrated_bloc: ^10.1.1
   path_provider: ^2.1.5
   persistent_bottom_nav_bar: ^6.2.1
+  carousel_slider: ^5.1.2
 
 
 dev_dependencies:
