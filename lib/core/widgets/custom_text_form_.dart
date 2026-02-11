@@ -5,7 +5,6 @@ import 'package:im_legends/core/themes/app_texts_style.dart';
 import 'package:im_legends/core/utils/extensions/context_extensions.dart';
 
 import '../themes/app_colors.dart';
-
 import '../utils/regex.dart';
 import '../utils/spacing.dart';
 
@@ -109,8 +108,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         (widget.style == CustomTextFieldStyle.outlined
             ? Colors.transparent
             : widget.style == CustomTextFieldStyle.soft
-            ? colors.accentBlueSoft.withValues(alpha: 0.3)
-            : colors.surfaceVariant.withValues(alpha: 0.35));
+            ? colors.divider.withValues(alpha: 0.3)
+            : colors.divider.withValues(alpha: 0.35));
 
     // Resolve border colors
     final Color defaultBorderColor = widget.borderColor ?? colors.border;

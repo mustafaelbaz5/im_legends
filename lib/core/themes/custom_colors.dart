@@ -7,7 +7,7 @@ class CustomColors {
   final Color background;
   final Color surface;
   final Color surfaceVariant;
-  final Color surfaceDark; // extra layer for cards or containers
+  final Color surfaceDark;
   final Color scaffoldBackground;
 
   // Text
@@ -78,7 +78,7 @@ class CustomColors {
   /*──────────────── LIGHT THEME ────────────────*/
   factory CustomColors.light() {
     return const CustomColors._(
-      background: AppColors.primary0,
+      background: AppColors.grey0,
       surface: AppColors.primary25,
       surfaceVariant: AppColors.primary50,
       surfaceDark: AppColors.primary100,
@@ -131,8 +131,8 @@ class CustomColors {
       textDisabled: AppColors.grey500,
       textLink: AppColors.primary200,
 
-      border: AppColors.primary400,
-      divider: AppColors.primary500,
+      border: AppColors.grey600,
+      divider: AppColors.grey700,
       outline: AppColors.primary300,
 
       successContainer: AppColors.green300,
