@@ -5,6 +5,9 @@ import 'package:path_provider/path_provider.dart';
 class AppConstants {
   AppConstants._();
 
+  // Storage Keys
+  static const String userIdKey = 'user_id';
+  static const String tokenKey = 'token';
 }
 
 Future<void> setupHydratedStorage() async {
