@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:im_legends/core/utils/extensions/context_extensions.dart';
 import 'package:im_legends/features/add_match/ui/add_match_screen.dart';
 import 'package:im_legends/features/champion/ui/champion_screen.dart';
-import 'package:im_legends/features/home/logic/cubit/leader_board_cubit.dart';
+import 'package:im_legends/features/history/ui/history_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
-import '../../../../../core/di/dependency_injection.dart';
 import '../../../../../core/themes/app_colors.dart';
 import '../../../../../core/utils/spacing.dart';
 import '../../home/ui/home_screen.dart';
@@ -28,65 +26,59 @@ class _MainScaffoldState extends State<MainScaffold> {
     _controller = PersistentTabController(initialIndex: 0);
   }
 
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   List<Widget> _buildScreens() {
-    return [
-      BlocProvider.value(
-        value: getIt<LeaderBoardCubit>(),
-        child: const HomeScreen(),
-      ),
-      const AddMatchScreen(),
-      const ChampionScreen(),
-      const ProfileScreen(),
+    return const [
+      HomeScreen(),
+      HistoryScreen(),
+      AddMatchScreen(),
+      ChampionScreen(),
+      ProfileScreen(),
     ];
   }
 
   List<PersistentBottomNavBarItem> _navBarItems(final BuildContext context) {
-    final activeColor = AppColors.primary300;
-
     return [
-      PersistentBottomNavBarItem(
-        icon: Icon(Icons.home, size: responsiveRadius(24), color: activeColor),
-        inactiveIcon: Icon(
-          Icons.home,
-          size: responsiveRadius(24),
-          color: context.customColors.textSecondary,
-        ),
+      _buildNavItem(context, Icons.home_rounded, Icons.home_outlined),
+      _buildNavItem(context, Icons.history_rounded, Icons.history_outlined),
+      _buildNavItem(
+        context,
+        Icons.add_circle,
+        Icons.add_circle_outline,
+        isCenterButton: true,
       ),
-      PersistentBottomNavBarItem(
-        icon: Icon(
-          Icons.add_alert_outlined,
-          size: responsiveRadius(24),
-          color: activeColor,
-        ),
-        inactiveIcon: Icon(
-          Icons.add_alert_outlined,
-          size: responsiveRadius(24),
-          color: context.customColors.textSecondary,
-        ),
-      ),
-      PersistentBottomNavBarItem(
-        icon: Icon(
-          Icons.search,
-          size: responsiveRadius(28),
-          color: AppColors.grey0,
-        ),
-        activeColorPrimary: activeColor,
-        activeColorSecondary: Colors.white,
-      ),
-
-      PersistentBottomNavBarItem(
-        icon: Icon(
-          Icons.person,
-          color: activeColor,
-          size: responsiveRadius(24),
-        ),
-        inactiveIcon: Icon(
-          Icons.person,
-          color: context.customColors.textSecondary,
-          size: responsiveRadius(24),
-        ),
-      ),
+      _buildNavItem(context, Icons.emoji_events, Icons.emoji_events_outlined),
+      _buildNavItem(context, Icons.person, Icons.person_outline),
     ];
+  }
+
+  PersistentBottomNavBarItem _buildNavItem(
+    final BuildContext context,
+    final IconData activeIcon,
+    final IconData inactiveIcon, {
+    final bool isCenterButton = false,
+  }) {
+    return PersistentBottomNavBarItem(
+      icon: Icon(
+        activeIcon,
+        size: responsiveRadius(26),
+        color: isCenterButton ? AppColors.grey0 : AppColors.primary400,
+      ),
+      inactiveIcon: Icon(
+        inactiveIcon,
+        size: responsiveRadius(26),
+        color: isCenterButton
+            ? AppColors.grey0
+            : context.customColors.textPrimary,
+      ),
+      activeColorPrimary: AppColors.primary400,
+      inactiveColorPrimary: context.customColors.textPrimary,
+    );
   }
 
   @override
@@ -96,21 +88,25 @@ class _MainScaffoldState extends State<MainScaffold> {
       controller: _controller,
       screens: _buildScreens(),
       items: _navBarItems(context),
-      navBarStyle: NavBarStyle.style9,
+      navBarStyle: NavBarStyle.style16,
       backgroundColor: context.customColors.background,
-      navBarHeight: responsiveHeight(58),
-      padding: const EdgeInsets.only(top: 2, bottom: 8),
+      navBarHeight: responsiveHeight(70),
+      padding: EdgeInsets.symmetric(
+        vertical: responsiveHeight(4),
+        horizontal: responsiveWidth(8),
+      ),
       decoration: NavBarDecoration(
         colorBehindNavBar: context.customColors.background,
-        boxShadow: [
-          BoxShadow(
-            color: context.customColors.border.withValues(alpha: 0.3),
-            blurRadius: 10,
-            offset: const Offset(0, -4),
-          ),
-        ],
+        border: Border(
+          top: BorderSide(color: context.customColors.divider, width: 1),
+        ),
       ),
       confineToSafeArea: true,
+      handleAndroidBackButtonPress: true,
+      resizeToAvoidBottomInset: true,
+      stateManagement: true,
+      hideNavigationBarWhenKeyboardAppears: true,
+      popBehaviorOnSelectedNavBarItemPress: PopBehavior.all,
     );
   }
 }
