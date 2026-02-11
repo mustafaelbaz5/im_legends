@@ -6,21 +6,26 @@ import '../app_colors.dart';
 
 ThemeData getDarkTheme({required final BuildContext context}) {
   return ThemeData(
-    scaffoldBackgroundColor: AppColors.grey900,
+    scaffoldBackgroundColor: AppColors.primary900,
     brightness: Brightness.dark,
-    colorScheme: _buildColorScheme(),
+    primaryColor: AppColors.primary300,
+    colorScheme: const ColorScheme.dark(
+      primary: AppColors.primary300,
+      primaryContainer: AppColors.primary700,
+      secondary: AppColors.primary200,
+      surface: AppColors.grey800,
+      error: AppColors.red100,
+      onPrimary: AppColors.grey0,
+      onSecondary: AppColors.grey0,
+      onSurface: AppColors.grey0,
+      onError: AppColors.red0,
+    ),
     textTheme: _buildTextTheme(context),
     elevatedButtonTheme: _buildElevatedButtonTheme(),
     inputDecorationTheme: _buildInputDecorationTheme(),
-  );
-}
-
-ColorScheme _buildColorScheme() {
-  return const ColorScheme.dark(
-    primary: AppColors.primary300,
-    secondary: AppColors.primary200,
-    surface: AppColors.grey800,
-    error: AppColors.red100,
+    dividerColor: AppColors.grey700,
+    disabledColor: AppColors.grey600,
+    iconTheme: const IconThemeData(color: AppColors.grey0),
   );
 }
 
@@ -54,13 +59,15 @@ InputDecorationTheme _buildInputDecorationTheme() {
     focusedErrorBorder: _buildOutlineBorder(AppColors.red100),
     fillColor: AppColors.grey800,
     filled: true,
-    hintStyle: AppTextStyles.font16Regular.copyWith(color: AppColors.grey500),
+    hintStyle: AppTextStyles.font16Regular.copyWith(color: AppColors.grey400),
+    labelStyle: AppTextStyles.font14Regular.copyWith(color: AppColors.grey300),
+    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
   );
 }
 
 OutlineInputBorder _buildOutlineBorder(final Color color) {
   return OutlineInputBorder(
-    borderRadius: BorderRadius.circular(10),
-    borderSide: BorderSide(color: color),
+    borderRadius: BorderRadius.circular(12),
+    borderSide: BorderSide(color: color, width: 1.5),
   );
 }

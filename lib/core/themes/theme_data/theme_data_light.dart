@@ -8,19 +8,24 @@ ThemeData getLightTheme({required final BuildContext context}) {
   return ThemeData(
     scaffoldBackgroundColor: AppColors.grey0,
     brightness: Brightness.light,
-    colorScheme: _buildColorScheme(),
+    primaryColor: AppColors.primary300,
+    colorScheme: const ColorScheme.light(
+      primary: AppColors.primary300,
+      primaryContainer: AppColors.primary50,
+      secondary: AppColors.primary200,
+      surface: AppColors.grey0,
+      error: AppColors.red100,
+      onPrimary: AppColors.grey0,
+      onSecondary: AppColors.grey0,
+      onSurface: AppColors.grey900,
+      onError: AppColors.red0,
+    ),
     textTheme: _buildTextTheme(context),
     elevatedButtonTheme: _buildElevatedButtonTheme(),
     inputDecorationTheme: _buildInputDecorationTheme(),
-  );
-}
-
-ColorScheme _buildColorScheme() {
-  return const ColorScheme.light(
-    primary: AppColors.primary300,
-    secondary: AppColors.primary200,
-    surface: AppColors.grey0,
-    error: AppColors.red100,
+    dividerColor: AppColors.grey200,
+    disabledColor: AppColors.grey200,
+    iconTheme: const IconThemeData(color: AppColors.grey900),
   );
 }
 
@@ -55,12 +60,14 @@ InputDecorationTheme _buildInputDecorationTheme() {
     fillColor: AppColors.grey0,
     filled: true,
     hintStyle: AppTextStyles.font16Regular.copyWith(color: AppColors.grey400),
+    labelStyle: AppTextStyles.font14Regular.copyWith(color: AppColors.grey600),
+    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
   );
 }
 
 OutlineInputBorder _buildOutlineBorder(final Color color) {
   return OutlineInputBorder(
-    borderRadius: BorderRadius.circular(10),
-    borderSide: BorderSide(color: color),
+    borderRadius: BorderRadius.circular(12),
+    borderSide: BorderSide(color: color, width: 1.5),
   );
 }
