@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:im_legends/core/utils/extensions/context_extensions.dart';
 
-import '../../../core/router/route_paths.dart';
+import '../../../core/router/routes.dart';
 import '../../../core/themes/app_texts_style.dart';
 import '../../../core/utils/spacing.dart';
 import 'widgets/sign_up_bloc_consumer.dart';

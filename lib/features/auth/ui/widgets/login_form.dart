@@ -1,16 +1,15 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:im_legends/core/utils/validators.dart';
 import 'package:im_legends/core/widgets/custom_text_form_.dart';
+import 'package:im_legends/features/auth/logic/cubit/auth_cubit.dart';
 
 import '../../../../core/utils/spacing.dart';
 import '../../../../core/widgets/custom_text_button.dart';
 
 class LoginForm extends StatefulWidget {
-  final void Function(String email, String password) onLogin;
-  final bool isLoading;
-
-  const LoginForm({super.key, required this.onLogin, this.isLoading = false});
+  const LoginForm({super.key});
 
   @override
   State<LoginForm> createState() => _LoginFormState();
@@ -32,9 +31,9 @@ class _LoginFormState extends State<LoginForm> {
 
   void _submit() {
     if (_formKey.currentState?.validate() ?? false) {
-      widget.onLogin(
-        _emailController.text.trim(),
-        _passwordController.text.trim(),
+      context.read<AuthCubit>().login(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
       );
     }
   }
@@ -74,11 +73,7 @@ class _LoginFormState extends State<LoginForm> {
           verticalSpacing(60),
 
           /// --- Login Button ---
-          CustomTextButton(
-            text: 'auth.login'.tr(),
-            onPressed: widget.isLoading ? null : _submit,
-            isLoading: widget.isLoading,
-          ),
+          CustomTextButton(text: 'auth.login'.tr(), onPressed: _submit),
         ],
       ),
     );

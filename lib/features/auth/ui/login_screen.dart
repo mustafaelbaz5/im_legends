@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:im_legends/core/router/route_paths.dart';
+import 'package:im_legends/core/router/routes.dart';
 import 'package:im_legends/core/utils/extensions/context_extensions.dart';
 
 import '../../../core/themes/app_texts_style.dart';

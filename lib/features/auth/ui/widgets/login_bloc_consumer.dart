@@ -1,81 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import '../../../notification/logic/cubit/notifications_cubit.dart';
+import 'package:im_legends/core/router/routes.dart';
+import 'package:im_legends/core/ui/dialogs/app_dialogs.dart';
+import 'package:im_legends/core/ui/loaders/overlay_loader.dart';
+import 'package:im_legends/core/utils/extensions/context_extensions.dart';
+
 import '../../logic/cubit/auth_cubit.dart';
 import 'login_form.dart';
-import '../../../../core/router/route_paths.dart';
 
 class LoginBlocConsumer extends StatelessWidget {
   const LoginBlocConsumer({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MultiBlocListener(
-      listeners: [
-        BlocListener<AuthCubit, AuthState>(
-          listener: (context, state) async {
-            if (state is AuthSuccess) {
-              final user = state.authResponse.user;
-              if (user != null) {
-                // Initialize notifications
-                await context
-                    .read<NotificationsCubit>()
-                    .notificationRepo
-                    .initialize(user.id);
-                await context.read<NotificationsCubit>().sendLoginNotification(
-                  userId: user.id,
-                  userName:
-                      state.userData?.name ??
-                      user.email?.split('@').first ??
-                      'User',
-                  email: user.email ?? '',
-                );
-              }
-              context.go(Routes.homeScreen);
-            } else if (state is AuthFailure) {
-              Navigator.pop(context); // Close loading dialog
-              _showErrorDialog(context, state.errorMessage);
-            }
-          },
-        ),
-        BlocListener<NotificationsCubit, NotificationsState>(
-          listener: (context, state) {
-            if (state is NotificationsFailure) {
-              _showErrorDialog(context, state.errorMessage);
-            }
-          },
-        ),
-      ],
-      child: BlocBuilder<AuthCubit, AuthState>(
-        builder: (context, state) {
-          return LoginForm(
-            onLogin: (email, password) {
-              context.read<AuthCubit>().emitLogin(
-                email: email,
-                password: password,
-              );
-            },
-            isLoading: state is AuthLoading,
-          );
-        },
-      ),
-    );
-  }
-
-  void _showErrorDialog(BuildContext context, String message) {
-    showDialog(
-      context: context,
-      builder: (_) => AlertDialog(
-        title: const Text('Error'),
-        content: Text(message),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('OK'),
-          ),
-        ],
-      ),
+  Widget build(final BuildContext context) {
+    return BlocConsumer<AuthCubit, AuthState>(
+      listener: (final context, final state) {
+        if (state is AuthSuccess) {
+          context.pushNamedAndRemoveAll(Routes.mainScaffold);
+        } else if (state is AuthFailure) {
+          AppDialogs.showError(context, message: state.error.messageKey);
+        }
+      },
+      builder: (final context, final state) {
+        return OverlayLoader(
+          child: const LoginForm(),
+          isLoading: state is AuthLoading,
+        );
+      },
     );
   }
 }

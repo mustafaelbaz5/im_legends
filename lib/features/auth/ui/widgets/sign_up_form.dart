@@ -2,10 +2,12 @@ import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:im_legends/core/utils/extensions/context_extensions.dart';
 import 'package:im_legends/core/utils/validators.dart';
 import 'package:im_legends/core/widgets/custom_text_button.dart';
 import 'package:im_legends/core/widgets/custom_text_form_.dart';
+import 'package:im_legends/features/auth/logic/cubit/auth_cubit.dart';
 
 import '../../../../core/models/user_data.dart';
 import '../../../../core/themes/app_texts_style.dart';
@@ -13,11 +15,7 @@ import '../../../../core/utils/spacing.dart';
 import 'upload_image_field.dart';
 
 class SignUpForm extends StatefulWidget {
-  final void Function(UserData userData, String password, File? profileImage)
-  onSignUp;
-  final bool isLoading;
-
-  const SignUpForm({super.key, required this.onSignUp, this.isLoading = false});
+  const SignUpForm({super.key});
 
   @override
   State<SignUpForm> createState() => _SignUpFormState();
@@ -53,16 +51,6 @@ class _SignUpFormState extends State<SignUpForm> {
   void _submit() {
     if (!_formKey.currentState!.validate()) return;
 
-    final password = _passwordController.text.trim();
-    final confirmPassword = _confirmPasswordController.text.trim();
-
-    if (password != confirmPassword) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text('auth.password_not_match'.tr())));
-      return;
-    }
-
     final userData = UserData(
       name: _nameController.text.trim(),
       email: _emailController.text.trim(),
@@ -71,7 +59,11 @@ class _SignUpFormState extends State<SignUpForm> {
       profileImageUrl: null,
     );
 
-    widget.onSignUp(userData, password, _profileImage);
+    context.read<AuthCubit>().signUp(
+      userData: userData,
+      password: _passwordController.text.trim(),
+      profileImage: _profileImage,
+    );
   }
 
   bool _isPasswordVisible = false;
@@ -202,7 +194,7 @@ class _SignUpFormState extends State<SignUpForm> {
             width: double.infinity,
             child: CustomTextButton(
               text: 'auth.sign_up'.tr(),
-              onPressed: widget.isLoading ? null : _submit,
+              onPressed: _submit,
             ),
           ),
 
