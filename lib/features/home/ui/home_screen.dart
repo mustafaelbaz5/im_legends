@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:im_legends/core/themes/app_texts_style.dart';
 import 'package:im_legends/core/utils/extensions/context_extensions.dart';
+import 'widgets/home_app_bar.dart';
 
 import '../../../core/utils/functions/refresh_page.dart';
 import '../../../core/utils/spacing.dart';
-import '../../../core/widgets/custom_app_bar.dart';
 import 'widgets/home_header_container.dart';
 import 'widgets/leader_board_list_view.dart';
 
@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
     return SafeArea(
       child: Column(
         children: [
-          const CustomAppBar(title: 'Mustafa'),
+          const HomeAppBar(title: 'Mustafa'),
           verticalSpacing(8),
           Expanded(
             child: RefreshIndicator(
