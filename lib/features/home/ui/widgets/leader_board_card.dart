@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:im_legends/core/utils/extensions/context_extensions.dart';
+import 'package:im_legends/features/home/ui/widgets/rank_and_avatar.dart';
+
 import '../../../../core/models/players_states_model.dart';
 import '../../../../core/themes/app_colors.dart';
-import 'player_info.dart';
-import 'rank_and_avatar.dart';
-import 'states_section.dart';
+import '../../../../core/themes/app_texts_style.dart';
 import '../../../../core/utils/spacing.dart';
 
 class LeaderBoardCard extends StatelessWidget {
@@ -18,54 +18,137 @@ class LeaderBoardCard extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 16.w),
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 300),
-        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 12.h),
-        height: 80.h,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16.r),
+  Widget build(final BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: responsiveHeight(4)),
+      padding: EdgeInsets.symmetric(
+        horizontal: responsiveWidth(12),
+        vertical: responsiveHeight(8),
+      ),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(responsiveRadius(12)),
+        color: isCurrentUser
+            ? context.customColors.divider
+            : context.customColors.background,
+        border: Border.all(
           color: isCurrentUser
-              ? AppColors.lightDarkColor
-              : const Color(0xFF1E2128),
-          border: isCurrentUser
-              ? Border.all(color: AppColors.darkRedColor, width: 1)
-              : null,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withAlpha((0.2 * 255).toInt()),
-              blurRadius: 8,
-              offset: const Offset(0, 2),
-            ),
-          ],
-        ),
-        child: Row(
-          children: [
-            RankAndAvatar(
-              isCurrentUser: isCurrentUser,
-              rank: player.rank,
-              imageUrl: player.profileImage,
-            ),
-            horizontalSpacing(12),
-            Expanded(
-              flex: 2,
-              child: PlayerInfo(
-                playerName: player.playerName,
-                points: player.points,
-              ),
-            ),
-
-            // Stats Section
-            StatesSection(
-              Match: player.matchesPlayed,
-              goalDifference: player.goalDifference,
-            ),
-          ],
+              ? AppColors.primary300
+              : context.customColors.divider.withValues(alpha: 0.5),
+          width: isCurrentUser ? 1.5 : .5,
         ),
       ),
+      child: Row(
+        children: [
+          RankAndAvatar(
+            isCurrentUser: isCurrentUser,
+            rank: player.rank,
+            imageUrl: player.profileImage,
+          ),
+          horizontalSpacing(10),
+          Expanded(child: _buildPlayerInfo(context)),
+          horizontalSpacing(8),
+          _buildStatsRow(context),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPlayerInfo(final BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          player.playerName,
+          style: AppTextStyles.font14SemiBold.copyWith(
+            color: context.customColors.textPrimary,
+          ),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+        verticalSpacing(4),
+        Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: responsiveWidth(6),
+            vertical: responsiveHeight(2),
+          ),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(responsiveRadius(4)),
+            color: AppColors.yellow100.withValues(alpha: 0.1),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                Icons.star,
+                size: responsiveFontSize(12),
+                color: AppColors.yellow100,
+              ),
+              horizontalSpacing(3),
+              Text(
+                '${player.points}',
+                style: AppTextStyles.font12Regular.copyWith(
+                  color: context.customColors.textPrimary,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildStatsRow(final BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        _buildStatItem(
+          context,
+          player.matchesPlayed.toString(),
+          Icons.sports_esports,
+        ),
+        horizontalSpacing(14),
+        _buildStatItem(
+          context,
+          player.wins.toString(),
+          Icons.emoji_events,
+          AppColors.green100,
+        ),
+        horizontalSpacing(14),
+        _buildStatItem(
+          context,
+          player.goalDifference >= 0
+              ? '+${player.goalDifference}'
+              : '${player.goalDifference}',
+          Icons.sports_soccer,
+          player.goalDifference >= 0 ? AppColors.green100 : AppColors.red100,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildStatItem(
+    final BuildContext context,
+    final String value,
+    final IconData icon, [
+    final Color? color,
+  ]) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(
+          icon,
+          size: responsiveFontSize(16),
+          color: color ?? context.customColors.textSecondary,
+        ),
+        verticalSpacing(4),
+        Text(
+          value,
+          style: AppTextStyles.font12SemiBold.copyWith(
+            color: context.customColors.textPrimary,
+          ),
+        ),
+      ],
     );
   }
 }

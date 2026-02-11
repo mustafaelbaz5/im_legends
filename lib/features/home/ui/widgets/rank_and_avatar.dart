@@ -1,6 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:im_legends/core/utils/extensions/context_extensions.dart';
+import 'package:im_legends/core/utils/spacing.dart';
+
 import '../../../../core/utils/app_assets.dart';
 import '../../../../core/utils/functions/get_rank_color.dart';
 
@@ -17,10 +20,12 @@ class RankAndAvatar extends StatelessWidget {
   final bool isCurrentUser;
 
   @override
-  Widget build(BuildContext context) {
-    final avatarSize = isCurrentUser ? 55.w : 50.w;
+  Widget build(final BuildContext context) {
+    final avatarSize = isCurrentUser
+        ? responsiveWidth(55)
+        : responsiveWidth(50);
     return SizedBox(
-      width: isCurrentUser ? 70.w : 60.w,
+      width: isCurrentUser ? responsiveWidth(70) : responsiveWidth(60),
       child: Stack(
         clipBehavior: Clip.none,
         children: [
@@ -29,19 +34,10 @@ class RankAndAvatar extends StatelessWidget {
             child: Container(
               width: avatarSize,
               height: avatarSize,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withAlpha((0.2 * 255).toInt()),
-                    blurRadius: 4,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
-              ),
+              decoration: const BoxDecoration(shape: BoxShape.circle),
               child: CircleAvatar(
                 radius: avatarSize / 2,
-                backgroundColor: Colors.white,
+                backgroundColor: context.customColors.background,
                 child: ClipOval(
                   child: SizedBox(
                     width: avatarSize,
@@ -53,14 +49,17 @@ class RankAndAvatar extends StatelessWidget {
                             fit: BoxFit.cover,
                             width: avatarSize,
                             height: avatarSize,
-                            placeholder: (context, url) => Image.asset(
-                              AppAssets.appLogoPng,
-                              fit: BoxFit.cover,
-                            ),
-                            errorWidget: (context, url, error) => Image.asset(
-                              AppAssets.appLogoPng,
-                              fit: BoxFit.cover,
-                            ),
+                            placeholder: (final context, final url) =>
+                                Image.asset(
+                                  AppAssets.appLogoPng,
+                                  fit: BoxFit.cover,
+                                ),
+                            errorWidget:
+                                (final context, final url, final error) =>
+                                    Image.asset(
+                                      AppAssets.appLogoPng,
+                                      fit: BoxFit.cover,
+                                    ),
                           ),
                   ),
                 ),

@@ -1,104 +1,127 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:im_legends/core/utils/extensions/context_extensions.dart';
+import 'package:im_legends/core/utils/spacing.dart';
 import 'package:shimmer/shimmer.dart';
 
 class LeaderBoardShimmerLoading extends StatelessWidget {
   const LeaderBoardShimmerLoading({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return ListView.builder(
-      padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
+      padding: EdgeInsets.symmetric(
+        horizontal: responsiveWidth(16),
+        vertical: responsiveHeight(8),
+      ),
       itemCount: 8,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      itemBuilder: (context, index) {
+      itemBuilder: (final context, final index) {
         return Padding(
-          padding: EdgeInsets.symmetric(vertical: 4.h),
+          padding: EdgeInsets.symmetric(vertical: responsiveHeight(6)),
           child: Shimmer.fromColors(
-            baseColor: Colors.grey[850]!,
-            highlightColor: Colors.grey[700]!,
+            baseColor: context.customColors.divider.withValues(alpha: 0.1),
+            highlightColor: context.customColors.divider.withValues(alpha: 0.2),
             child: Container(
-              height: 80.h,
-              decoration: BoxDecoration(
-                color: const Color(0xFF1E2128),
-                borderRadius: BorderRadius.circular(16.r),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withAlpha((0.2 * 255).toInt()),
-                    blurRadius: 6,
-                    offset: const Offset(0, 3),
-                  ),
-                ],
+              padding: EdgeInsets.symmetric(
+                horizontal: responsiveWidth(12),
+                vertical: responsiveHeight(10),
               ),
-              padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+              decoration: BoxDecoration(
+                color: context.customColors.divider.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(responsiveRadius(12)),
+              ),
               child: Row(
                 children: [
                   // Rank Circle
                   Container(
-                    width: 36.w,
-                    height: 36.w,
+                    width: responsiveWidth(36),
+                    height: responsiveHeight(36),
                     decoration: BoxDecoration(
-                      color: Colors.grey[800],
+                      color: context.customColors.divider.withValues(
+                        alpha: 0.1,
+                      ),
                       shape: BoxShape.circle,
                     ),
                   ),
-                  SizedBox(width: 12.w),
+                  horizontalSpacing(10),
 
                   // Avatar Circle
                   Container(
-                    width: 50.w,
-                    height: 50.w,
+                    width: responsiveWidth(50),
+                    height: responsiveHeight(50),
                     decoration: BoxDecoration(
-                      color: Colors.grey[800],
+                      color: Colors.grey[700],
                       shape: BoxShape.circle,
                     ),
                   ),
-                  SizedBox(width: 12.w),
+                  horizontalSpacing(12),
 
-                  // Player Name & Points
+                  // Player Info (Name + Points)
                   Expanded(
-                    flex: 2,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
-                          width: 120.w,
-                          height: 14.h,
+                          width: responsiveWidth(120),
+                          height: responsiveHeight(14),
                           decoration: BoxDecoration(
-                            color: Colors.grey[800],
-                            borderRadius: BorderRadius.circular(6.r),
+                            color: context.customColors.divider.withValues(
+                              alpha: 0.1,
+                            ),
+                            borderRadius: BorderRadius.circular(
+                              responsiveRadius(6),
+                            ),
                           ),
                         ),
-                        SizedBox(height: 8.h),
+                        verticalSpacing(6),
                         Container(
-                          width: 60.w,
-                          height: 10.h,
+                          width: responsiveWidth(60),
+                          height: responsiveHeight(12),
                           decoration: BoxDecoration(
-                            color: Colors.grey[800],
-                            borderRadius: BorderRadius.circular(6.r),
+                            color: context.customColors.divider.withValues(
+                              alpha: 0.1,
+                            ),
+                            borderRadius: BorderRadius.circular(
+                              responsiveRadius(6),
+                            ),
                           ),
                         ),
                       ],
                     ),
                   ),
 
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        width: 40.w,
-                        height: 10.h,
-                        color: Colors.grey[800],
-                      ),
-                      SizedBox(height: 8.h),
-                      Container(
-                        width: 30.w,
-                        height: 10.h,
-                        color: Colors.grey[800],
-                      ),
-                    ],
+                  horizontalSpacing(8),
+
+                  // Stats Row (3 stats)
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: List.generate(3, (_) {
+                      return Padding(
+                        padding: EdgeInsets.only(left: responsiveWidth(8)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: responsiveWidth(20),
+                              height: responsiveHeight(12),
+                              color: context.customColors.divider.withValues(
+                                alpha: 0.1,
+                              ),
+                            ),
+                            verticalSpacing(4),
+                            Container(
+                              width: responsiveWidth(20),
+                              height: responsiveHeight(10),
+                              color: context.customColors.divider.withValues(
+                                alpha: 0.1,
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    }),
                   ),
                 ],
               ),
