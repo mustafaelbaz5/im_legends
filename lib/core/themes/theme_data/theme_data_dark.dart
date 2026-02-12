@@ -13,7 +13,7 @@ ThemeData getDarkTheme({required final BuildContext context}) {
       primary: AppColors.primary300,
       primaryContainer: AppColors.primary700,
       secondary: AppColors.primary200,
-      surface: AppColors.grey800,
+      surface: AppColors.primary900,
       error: AppColors.red100,
       onPrimary: AppColors.grey0,
       onSecondary: AppColors.grey0,
