@@ -1,18 +1,20 @@
 part of 'add_match_cubit.dart';
-
 @immutable
 class AddMatchState {
   final int winnerScore;
   final int loserScore;
   final List players;
 
-  // Add selected players
   final String? winnerId;
   final String? winnerName;
   final String? winnerImage;
   final String? loserId;
   final String? loserName;
   final String? loserImage;
+
+  final bool isLoading;
+  final bool isSuccess;
+  final AppError? error;
 
   const AddMatchState({
     this.players = const [],
@@ -24,6 +26,9 @@ class AddMatchState {
     this.loserId,
     this.loserName,
     this.loserImage,
+    this.isLoading = false,
+    this.isSuccess = false,
+    this.error,
   });
 
   AddMatchState copyWith({
@@ -36,6 +41,9 @@ class AddMatchState {
     final String? loserId,
     final String? loserName,
     final String? loserImage,
+    final bool? isLoading,
+    final bool? isSuccess,
+    final AppError? error,
   }) {
     return AddMatchState(
       winnerScore: winnerScore ?? this.winnerScore,
@@ -47,6 +55,9 @@ class AddMatchState {
       loserId: loserId ?? this.loserId,
       loserName: loserName ?? this.loserName,
       loserImage: loserImage ?? this.loserImage,
+      isLoading: isLoading ?? this.isLoading,
+      isSuccess: isSuccess ?? this.isSuccess,
+      error: error,
     );
   }
 }

@@ -32,7 +32,7 @@ class AddMatchCubit extends Cubit<AddMatchState> {
     emit(state.copyWith(loserScore: newScore));
   }
 
-  bool canIncrementLoser() => state.loserScore - 1 < state.winnerScore;
+  bool canIncrementLoser() => state.loserScore <= state.winnerScore;
 
   // --- Selected Players ---
   void updateWinner(
@@ -67,35 +67,37 @@ class AddMatchCubit extends Cubit<AddMatchState> {
         state.winnerScore >= state.loserScore;
   }
 
-  // --- Reset ---
-  void reset() {
-    emit(const AddMatchState());
-  }
-
-  // --- Add match ---
   Future<void> addMatch(final MatchModel match) async {
-    emit(AddMatchLoading());
+    emit(state.copyWith(isLoading: true, isSuccess: false, error: null));
+
     try {
-      final success = await addMatchRepo.insertMatch(match);
-      if (success) {
-        emit(AddMatchInsertSuccess());
-      } else {
-        emit(
-          const AddMatchFailure(
-            error: AppError(
-              messageKey: "Failed to insert match",
-              type: ErrorType.unknown,
-            ),
-          ),
-        );
-      }
+      await addMatchRepo.insertMatch(match);
+
+      // Keep players list intact
+      emit(state.copyWith(isLoading: false, isSuccess: true));
     } catch (e) {
       emit(
-        AddMatchFailure(
+        state.copyWith(
+          isLoading: false,
           error: AppError(messageKey: e.toString(), type: ErrorType.unknown),
         ),
       );
     }
+  }
+
+  void resetMatchData() {
+    emit(
+      const AddMatchState(
+        winnerScore: 0,
+        loserScore: 0,
+        winnerId: null,
+        winnerName: null,
+        winnerImage: null,
+        loserId: null,
+        loserName: null,
+        loserImage: null,
+      ),
+    );
   }
 
   Future<void> getPlayersList() async {
