@@ -1,150 +1,101 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../logic/cubit/add_match_cubit.dart';
-import '../../../../../core/themes/app_colors.dart';
+
+import '../../../../../core/utils/extensions/context_extensions.dart';
+import '../../../../../core/utils/spacing.dart';
 import 'player_field_avatar.dart';
-import 'player_field_drop_down_arrow.dart';
 import 'player_field_info.dart';
-import 'player_field_animations.dart';
 import 'players_bottom_sheet.dart';
 
-class PlayerSelectField extends StatefulWidget {
-  final void Function(String id)? onSelected;
+class PlayerSelectField extends StatelessWidget {
+  final void Function(String id, String name, String imageUrl) onSelected;
   final String hint;
+  final String? selectedPlayerId;
+  final String? selectedName;
+  final String? selectedImageUrl;
   final String? excludedPlayer;
-
+  final Color? accentColor;
+  final bool isWinnerField;
   const PlayerSelectField({
     super.key,
-    this.onSelected,
+    required this.onSelected,
     this.hint = 'Select Player',
+    this.selectedPlayerId,
+    this.selectedName,
+    this.selectedImageUrl,
     this.excludedPlayer,
+    this.accentColor,
+    required this.isWinnerField,
   });
 
-  @override
-  State<PlayerSelectField> createState() => _PlayerSelectFieldState();
-}
-
-class _PlayerSelectFieldState extends State<PlayerSelectField>
-    with TickerProviderStateMixin {
-  String? selectedPlayerId;
-  String? selectedPlayerName;
-  String? selectedPlayerImage;
-  bool isPressed = false;
-
-  late PlayerFieldAnimations animations;
-
-  @override
-  void initState() {
-    super.initState();
-    animations = PlayerFieldAnimations(vsync: this);
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) animations.startGlow();
-    });
-  }
-
-  @override
-  void dispose() {
-    animations.dispose();
-    super.dispose();
-  }
-
-  void _onTapDown() {
-    setState(() => isPressed = true);
-    animations.scaleController.forward();
-  }
-
-  void _onTapUp() {
-    setState(() => isPressed = false);
-    animations.scaleController.reverse();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
-      child: GestureDetector(
-        onTapDown: (_) => _onTapDown(),
-        onTapUp: (_) => _onTapUp(),
-        onTapCancel: _onTapUp,
-        onTap: () => _showPlayerDialog(context),
-        child: AnimatedBuilder(
-          animation: Listenable.merge([
-            animations.scaleAnimation,
-            animations.glowAnimation,
-          ]),
-          builder: (context, child) => Transform.scale(
-            scale: animations.scaleAnimation.value,
-            child: _buildFieldContainer(),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildFieldContainer() {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
-      height: 56.h,
-      decoration: BoxDecoration(
-        color: AppColors.darkColor,
-        borderRadius: BorderRadius.circular(16.r),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withAlpha((0.2 * 255).toInt()),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Row(
-        children: [
-          PlayerFieldAvatar(
-            isSelected: selectedPlayerId != null,
-            imageUrl: selectedPlayerImage,
-          ),
-          SizedBox(width: 16.w),
-          PlayerFieldInfo(
-            selectedPlayer: selectedPlayerName,
-            hint: widget.hint,
-          ),
-          PlayerFieldDropdownArrow(
-            rotationAnimation: animations.rotationAnimation,
-            isSelected: selectedPlayerId != null,
-          ),
-        ],
-      ),
-    );
-  }
-
-  void _showPlayerDialog(BuildContext context) {
-    animations.rotationController.forward();
+  void _showPlayerDialog(final BuildContext context) {
     showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
       isScrollControlled: true,
-      builder: (dialogContext) => BlocProvider.value(
-        value: context.read<AddMatchCubit>(),
-        child: PlayerBottomSheet(
-          selectedPlayer: selectedPlayerId,
-          excludedPlayer: widget.excludedPlayer,
-          onSelect: (id, name, imageUrl) => _selectPlayer(id, name, imageUrl),
-        ),
+      builder: (_) => PlayerBottomSheet(
+        excludedPlayer: excludedPlayer,
+        isWinnerField: isWinnerField,
+        onSelect: (final id, final name, final imageUrl) =>
+            onSelected(id, name, imageUrl),
       ),
-    ).then((_) => animations.rotationController.reverse());
+    );
   }
 
-  void _selectPlayer(String id, String name, String imageUrl) {
-    setState(() {
-      selectedPlayerId = id;
-      selectedPlayerName = name;
-      selectedPlayerImage = imageUrl;
-    });
+  @override
+  Widget build(final BuildContext context) {
+    final bool isSelected = selectedPlayerId != null;
 
-    widget.onSelected?.call(id);
+    return GestureDetector(
+      onTap: () => _showPlayerDialog(context),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        margin: EdgeInsets.symmetric(vertical: responsiveHeight(8)),
+        padding: EdgeInsets.symmetric(
+          horizontal: responsiveWidth(16),
+          vertical: responsiveHeight(10),
+        ),
+        height: responsiveHeight(64),
+        decoration: BoxDecoration(
+          color: isSelected
+              ? context.customColors.background.withAlpha(20)
+              : context.customColors.background,
+          borderRadius: BorderRadius.circular(responsiveRadius(16)),
+          border: Border.all(
+            color: isSelected
+                ? accentColor ?? context.customColors.textPrimary
+                : context.customColors.border,
+            width: 1,
+          ),
+        ),
+        child: Row(
+          children: [
+            // Player avatar
+            PlayerFieldAvatar(
+              isSelected: isSelected,
+              imageUrl: selectedImageUrl,
+            ),
+            horizontalSpacing(12),
 
-    animations.glowController.forward().then(
-      (_) => animations.glowController.reverse(),
+            // Player info
+            Expanded(
+              child: PlayerFieldInfo(selectedPlayer: selectedName, hint: hint),
+            ),
+
+            // Arrow indicator
+            AnimatedRotation(
+              turns: isSelected ? 0.5 : 0.0,
+              duration: const Duration(milliseconds: 200),
+              child: Icon(
+                Icons.keyboard_arrow_down_rounded,
+                color: isSelected
+                    ? context.customColors.textPrimary
+                    : context.customColors.textSecondary,
+                size: responsiveFontSize(24),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
