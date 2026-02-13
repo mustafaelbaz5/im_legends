@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:im_legends/core/utils/extensions/context_extensions.dart';
+import 'package:im_legends/core/utils/spacing.dart';
 
 class PlayerFieldAvatar extends StatelessWidget {
   final bool isSelected;
@@ -8,34 +10,54 @@ class PlayerFieldAvatar extends StatelessWidget {
   const PlayerFieldAvatar({super.key, required this.isSelected, this.imageUrl});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
+    final accentColor = context.customColors.accentBlue;
+
     return AnimatedContainer(
-      duration: const Duration(milliseconds: 300),
-      width: 40.w,
-      height: 40.h,
+      duration: const Duration(milliseconds: 250),
+      curve: Curves.easeOut,
+      width: responsiveWidth(44),
+      height: responsiveHeight(44),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
+        color: context.customColors.surface,
+        border: isSelected ? Border.all(color: accentColor, width: 2) : null,
+        boxShadow: isSelected
+            ? [
+                BoxShadow(
+                  color: accentColor.withValues(alpha: 0.4),
+                  blurRadius: 8,
+                  spreadRadius: 1,
+                ),
+              ]
+            : null,
         gradient: !isSelected || imageUrl == null
             ? LinearGradient(
                 colors: [
-                  Colors.grey.withAlpha((0.4 * 255).toInt()),
-                  Colors.grey.withAlpha((0.2 * 255).toInt()),
+                  context.customColors.divider,
+                  context.customColors.divider.withValues(alpha: 0.5),
                 ],
               )
             : null,
       ),
       child: ClipOval(
         child: isSelected && imageUrl != null && imageUrl!.isNotEmpty
-            ? Image.network(
-                imageUrl!,
+            ? CachedNetworkImage(
+                imageUrl: imageUrl!,
                 fit: BoxFit.cover,
-                errorBuilder: (_, __, ___) =>
-                    Icon(Icons.person, color: Colors.white, size: 20.sp),
+                placeholder: (_, _) => Center(
+                  child: SizedBox(
+                    width: responsiveWidth(16),
+                    height: responsiveHeight(16),
+                    child: const CircularProgressIndicator(strokeWidth: 2),
+                  ),
+                ),
+                errorWidget: (_, final __, final ___) =>
+                    Icon(Icons.person, color: context.customColors.textPrimary),
               )
             : Icon(
                 isSelected ? Icons.person : Icons.person_outline,
-                color: Colors.white,
-                size: 20.sp,
+                color: context.customColors.textSecondary,
               ),
       ),
     );
