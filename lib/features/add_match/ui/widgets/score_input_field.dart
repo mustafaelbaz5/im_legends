@@ -6,32 +6,27 @@ import 'package:im_legends/core/utils/spacing.dart';
 import 'package:im_legends/features/add_match/logic/cubit/add_match_cubit.dart';
 
 class ScoreInputField extends StatelessWidget {
+  final Color accentColor;
+  final bool isWinner;
+
   const ScoreInputField({
     super.key,
     required this.accentColor,
     required this.isWinner,
   });
 
-  final Color accentColor;
-  final bool isWinner;
-
   @override
   Widget build(final BuildContext context) {
     return BlocBuilder<AddMatchCubit, AddMatchState>(
-      buildWhen: (final previous, final current) {
-        if (isWinner) {
-          return previous.winnerScore != current.winnerScore;
-        } else {
-          return previous.loserScore != current.loserScore ||
-              previous.winnerScore != current.winnerScore;
-        }
-      },
+      buildWhen: (final prev, final curr) => isWinner
+          ? prev.winnerScore != curr.winnerScore
+          : prev.loserScore != curr.loserScore,
       builder: (final context, final state) {
         final score = isWinner ? state.winnerScore : state.loserScore;
+        final cubit = context.read<AddMatchCubit>();
+
         final isDecrementEnabled = score > 0;
-        final isIncrementEnabled = isWinner
-            ? true
-            : (state.loserScore + 1) < state.winnerScore;
+        final isIncrementEnabled = isWinner ? true : cubit.canIncrementLoser();
 
         return AnimatedContainer(
           duration: const Duration(milliseconds: 200),
@@ -44,17 +39,18 @@ class ScoreInputField extends StatelessWidget {
             border: Border.all(color: accentColor.withValues(alpha: 0.3)),
           ),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             mainAxisSize: MainAxisSize.min,
             children: [
               _buildControlButton(
-                context: context,
+                context,
                 icon: Icons.remove_rounded,
                 isEnabled: isDecrementEnabled,
                 onTap: () {
                   if (isWinner) {
-                    context.read<AddMatchCubit>().updateWinnerScore(-1);
+                    cubit.updateWinnerScore(-1);
                   } else {
-                    context.read<AddMatchCubit>().updateLoserScore(-1);
+                    cubit.updateLoserScore(-1);
                   }
                 },
               ),
@@ -66,6 +62,7 @@ class ScoreInputField extends StatelessWidget {
                     score.toString(),
                     key: ValueKey(score),
                     style: AppTextStyles.font20Bold.copyWith(
+                      fontWeight: FontWeight.bold,
                       color: context.customColors.textPrimary,
                     ),
                   ),
@@ -73,14 +70,14 @@ class ScoreInputField extends StatelessWidget {
               ),
               const Spacer(),
               _buildControlButton(
-                context: context,
+                context,
                 icon: Icons.add_rounded,
                 isEnabled: isIncrementEnabled,
                 onTap: () {
                   if (isWinner) {
-                    context.read<AddMatchCubit>().updateWinnerScore(1);
+                    cubit.updateWinnerScore(1);
                   } else {
-                    context.read<AddMatchCubit>().updateLoserScore(1);
+                    cubit.updateLoserScore(1);
                   }
                 },
               ),
@@ -91,8 +88,8 @@ class ScoreInputField extends StatelessWidget {
     );
   }
 
-  Widget _buildControlButton({
-    required final BuildContext context,
+  Widget _buildControlButton(
+    final BuildContext context, {
     required final IconData icon,
     required final bool isEnabled,
     required final VoidCallback onTap,
@@ -100,25 +97,22 @@ class ScoreInputField extends StatelessWidget {
     return InkWell(
       borderRadius: BorderRadius.circular(12),
       onTap: isEnabled ? onTap : null,
-      child: AnimatedScale(
-        scale: isEnabled ? 1.0 : 0.95,
+      child: AnimatedContainer(
         duration: const Duration(milliseconds: 150),
-        child: Container(
-          height: responsiveHeight(36),
-          width: responsiveWidth(36),
-          decoration: BoxDecoration(
-            color: isEnabled
-                ? accentColor.withValues(alpha: 0.3)
-                : accentColor.withValues(alpha: 0.1),
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Icon(
-            icon,
-            size: responsiveFontSize(24),
-            color: isEnabled
-                ? context.customColors.textPrimary
-                : context.customColors.textSecondary.withValues(alpha: 0.4),
-          ),
+        height: responsiveHeight(36),
+        width: responsiveWidth(36),
+        decoration: BoxDecoration(
+          color: isEnabled
+              ? accentColor.withValues(alpha: 0.3)
+              : accentColor.withValues(alpha: 0.1),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Icon(
+          icon,
+          size: responsiveFontSize(20),
+          color: isEnabled
+              ? context.customColors.textPrimary
+              : context.customColors.textSecondary.withValues(alpha: 0.4),
         ),
       ),
     );
