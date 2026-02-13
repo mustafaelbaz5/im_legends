@@ -1,110 +1,96 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../../core/themes/app_texts_style.dart';
+import '../../../../../core/utils/extensions/context_extensions.dart';
+import '../../../../../core/utils/spacing.dart';
 import '../../../logic/cubit/add_match_cubit.dart';
 import 'player_tile.dart';
-import '../../../../../core/themes/app_texts_style.dart';
 
-class PlayerBottomSheet extends StatefulWidget {
-  final String? selectedPlayer;
+class PlayerBottomSheet extends StatelessWidget {
   final void Function(String id, String name, String imageUrl) onSelect;
   final String? excludedPlayer;
+  final bool isWinnerField;
 
   const PlayerBottomSheet({
     super.key,
-    required this.selectedPlayer,
     required this.onSelect,
     this.excludedPlayer,
+    required this.isWinnerField, // true for winner field, false for loser field
   });
 
   @override
-  State<PlayerBottomSheet> createState() => _PlayerBottomSheetState();
-}
-
-class _PlayerBottomSheetState extends State<PlayerBottomSheet> {
-  @override
-  void initState() {
-    super.initState();
-    context.read<AddMatchCubit>().getPlayersList();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.6,
+      height: MediaQuery.of(context).size.height * 0.5,
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
+        gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [Color(0xFF1A1D26), Color(0xFF141620)],
+          colors: [
+            context.customColors.background,
+            context.customColors.background.withAlpha(200),
+          ],
         ),
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withAlpha((0.6 * 255).toInt()),
-            blurRadius: 24,
-            offset: const Offset(0, -8),
-          ),
-        ],
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(responsiveRadius(24)),
+        ),
       ),
       child: Column(
         children: [
-          _buildHandleBar(),
-          _buildHeader(),
+          // Drag handle
+          Container(
+            margin: EdgeInsets.only(top: responsiveHeight(12)),
+            width: responsiveWidth(40),
+            height: responsiveHeight(4),
+            decoration: BoxDecoration(
+              color: context.customColors.textPrimary.withAlpha(38),
+              borderRadius: BorderRadius.circular(responsiveRadius(2)),
+            ),
+          ),
+          _buildHeader(context),
           Expanded(
             child: BlocBuilder<AddMatchCubit, AddMatchState>(
-              builder: (context, state) {
-                if (state is AddMatchLoading) {
+              builder: (final context, final state) {
+                if (state.players.isEmpty) {
                   return const Center(child: CircularProgressIndicator());
-                } else if (state is AddMatchFailure) {
-                  return _buildError(state.error);
-                } else if (state is AddMatchPlayersSuccess) {
-                  final filteredPlayers = state.players
-                      .where((p) => p['id'] != widget.excludedPlayer)
-                      .map(
-                        (p) => {
-                          'id': p['id'] as String,
-                          'name': p['name'] as String,
-                          'profile_image': p['profile_image'] as String? ?? '',
-                        },
-                      )
-                      .toList();
-
-                  if (filteredPlayers.isEmpty) {
-                    return _buildEmpty();
-                  }
-
-                  return ListView.builder(
-                    padding: EdgeInsets.symmetric(horizontal: 16.w),
-                    itemCount: filteredPlayers.length,
-                    itemBuilder: (context, index) {
-                      final player = filteredPlayers[index];
-                      final isSelected = widget.selectedPlayer == player['id'];
-
-                      return PlayerTile(
-                        playerName: player['name'] as String,
-                        isSelected: isSelected,
-                        index: index,
-                        playerImage: player['profile_image'] ?? '',
-                        playerId: player['id'] as String,
-                        onSelect: (selectedId, selectedName, selectedImage) {
-                          widget.onSelect(
-                            selectedId,
-                            selectedName,
-                            selectedImage,
-                          );
-                          Navigator.pop(context);
-                        },
-                      );
-                    },
-                  );
                 }
-                return const SizedBox.shrink();
+
+                final filteredPlayers = state.players
+                    .where(
+                      (final p) => p['id'] != excludedPlayer,
+                    ) 
+                    .toList();
+
+                if (filteredPlayers.isEmpty) return _buildEmpty(context);
+
+                return ListView.builder(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: responsiveWidth(16),
+                  ),
+                  itemCount: filteredPlayers.length,
+                  itemBuilder: (final context, final index) {
+                    final player = filteredPlayers[index];
+
+                    // Determine selected player from Cubit
+                    final selectedId = isWinnerField
+                        ? state.winnerId
+                        : state.loserId;
+                    final isSelected = selectedId == player['id'];
+
+                    return PlayerTile(
+                      playerId: player['id'],
+                      playerName: player['name'],
+                      playerImage: player['profile_image'] ?? '',
+                      isSelected: isSelected,
+                      index: index,
+                      onSelect: (final id, final name, final image) {
+                        onSelect(id, name, image);
+                        Navigator.pop(context);
+                      },
+                    );
+                  },
+                );
               },
             ),
           ),
@@ -113,83 +99,46 @@ class _PlayerBottomSheetState extends State<PlayerBottomSheet> {
     );
   }
 
-  Widget _buildHandleBar() => Container(
-    margin: EdgeInsets.only(top: 12.h),
-    width: 40.w,
-    height: 4.h,
-    decoration: BoxDecoration(
-      color: Colors.white.withAlpha((0.15 * 255).toInt()),
-      borderRadius: BorderRadius.circular(2.r),
-    ),
-  );
-
-  Widget _buildHeader() => Padding(
-    padding: EdgeInsets.all(20.w),
+  Widget _buildHeader(final BuildContext context) => Padding(
+    padding: EdgeInsets.all(responsiveRadius(20)),
     child: Row(
       children: [
-        Icon(Icons.sports_esports_rounded, color: Colors.blue, size: 24.sp),
-        SizedBox(width: 12.w),
-        Text('Choose Player', style: BebasTextStyles.whiteBold20),
+        Icon(
+          Icons.sports_esports_rounded,
+          color: context.customColors.textPrimary,
+          size: responsiveFontSize(24),
+        ),
+        horizontalSpacing(12),
+        Text('Choose Player', style: AppTextStyles.font16Bold),
         const Spacer(),
         BlocBuilder<AddMatchCubit, AddMatchState>(
-          builder: (context, state) {
-            if (state is AddMatchPlayersSuccess) {
-              final filteredCount = state.players
-                  .map((p) => p['id'] as String)
-                  .where((id) => id != widget.excludedPlayer)
-                  .length;
-              return Text(
-                '$filteredCount players',
-                style: TextStyle(
-                  color: Colors.white.withAlpha((0.6 * 255).toInt()),
-                  fontSize: 12.sp,
-                ),
-              );
-            }
-            return const SizedBox.shrink();
+          builder: (final context, final state) {
+            final count = state.players
+                .where((final p) => p['id'] != excludedPlayer)
+                .length;
+            return Text(
+              '$count players',
+              style: AppTextStyles.font12Regular.copyWith(
+                color: context.customColors.textPrimary.withAlpha(153),
+              ),
+            );
           },
         ),
       ],
     ),
   );
 
-  Widget _buildError(String error) => Center(
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(Icons.error_outline, color: Colors.red, size: 48.sp),
-        SizedBox(height: 16.h),
-        Text(
-          'Error loading players',
-          style: TextStyle(color: Colors.red, fontSize: 16.sp),
-        ),
-        SizedBox(height: 8.h),
-        Text(
-          error,
-          style: TextStyle(color: Colors.white, fontSize: 14.sp),
-          textAlign: TextAlign.center,
-        ),
-      ],
-    ),
-  );
-
-  Widget _buildEmpty() => Center(
+  Widget _buildEmpty(final BuildContext context) => Center(
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Icon(
           Icons.person_off_outlined,
-          color: Colors.white.withAlpha((0.4 * 255).toInt()),
-          size: 48.sp,
+          color: context.customColors.textPrimary.withAlpha(102),
+          size: responsiveFontSize(48),
         ),
-        SizedBox(height: 16.h),
-        Text(
-          'No players available',
-          style: TextStyle(
-            color: Colors.white.withAlpha((0.6 * 255).toInt()),
-            fontSize: 16.sp,
-          ),
-        ),
+        verticalSpacing(16),
+        Text('No players available', style: AppTextStyles.font16Bold),
       ],
     ),
   );
