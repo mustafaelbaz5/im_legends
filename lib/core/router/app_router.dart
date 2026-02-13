@@ -7,7 +7,7 @@ import 'package:im_legends/features/auth/ui/login_screen.dart';
 import 'package:im_legends/features/auth/ui/sign_up_screen.dart';
 import 'package:im_legends/features/champion/logic/cubit/champion_cubit.dart';
 import 'package:im_legends/features/history/logic/cubit/match_history_cubit.dart';
-import 'package:im_legends/features/home/logic/cubit/leader_board_cubit.dart';
+import 'package:im_legends/features/home/logic/cubit/home_cubit.dart';
 import 'package:im_legends/features/main_navigation/ui/main_scaffold.dart';
 import 'package:im_legends/features/profile/logic/cubit/profile_cubit.dart';
 
@@ -53,11 +53,11 @@ Widget _withAuthProviders(final Widget child) {
 Widget _withMainProviders(final Widget child) {
   return MultiBlocProvider(
     providers: [
-      BlocProvider(create: (_) => getIt<LeaderBoardCubit>()..loadLeaderboard()),
+      BlocProvider(create: (_) => getIt<HomeCubit>()..loadLeaderboard()),
       BlocProvider(
         create: (_) => getIt<MatchHistoryCubit>()..getMatchHistory(),
       ),
-      BlocProvider(create: (_) => getIt<AddMatchCubit>()),
+      BlocProvider(create: (_) => getIt<AddMatchCubit>()..getPlayersList()),
       BlocProvider(create: (_) => getIt<ProfileCubit>()..fetchProfile()),
       BlocProvider(create: (_) => getIt<ChampionCubit>()..fetchTopThree()),
     ],
