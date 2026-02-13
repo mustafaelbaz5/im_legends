@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:im_legends/core/themes/app_colors.dart';
 import 'package:im_legends/core/themes/app_texts_style.dart';
 import 'package:im_legends/core/utils/extensions/context_extensions.dart';
-
-import '../themes/app_colors.dart';
 
 import '../utils/spacing.dart';
 
@@ -51,15 +50,15 @@ class CustomTextButton extends StatelessWidget {
   Widget build(final BuildContext context) {
     final colors = context.customColors;
 
-    // Resolve base colors based on style
-    late Color baseBackground;
-    late Color baseForeground;
-    late Color baseBorder;
+    /// --- Resolve base colors for the button based on style ---
+    final Color baseBackground;
+    final Color baseForeground;
+    final Color baseBorder;
 
     switch (style) {
       case CustomButtonStyle.filled:
         baseBackground = backgroundColor ?? AppColors.primary300;
-        baseForeground = foregroundColor ?? Colors.white;
+        baseForeground = foregroundColor ?? AppColors.grey0;
         baseBorder = Colors.transparent;
         break;
       case CustomButtonStyle.outlined:
@@ -74,126 +73,113 @@ class CustomTextButton extends StatelessWidget {
         break;
     }
 
-    // Apply disabled opacity
+    /// --- Adjust colors if disabled ---
     final Color resolvedBackground = _enabled
         ? baseBackground
-        : baseBackground.withValues(alpha: 0.3);
-
+        : baseBackground.withValues(alpha: .1);
     final Color resolvedForeground = _enabled
         ? baseForeground
-        : baseForeground.withValues(alpha: 0.6);
-
+        : baseForeground.withValues(alpha: .6);
     final Color resolvedBorder = _enabled
         ? baseBorder
-        : baseBorder.withValues(alpha: 0.4);
+        : baseBorder.withValues(alpha: .4);
 
-    // Button height by size
-    final double height = switch (size) {
-      CustomButtonSize.large => responsiveHeight(56),
-      CustomButtonSize.small => responsiveHeight(40),
-      CustomButtonSize.medium => responsiveHeight(52),
-    };
-
-    // Base text style (from app theme)
+    /// --- Determine base text style ---
     final TextStyle baseTextStyle =
         textStyle ??
         (size == CustomButtonSize.small
             ? AppTextStyles.font14Bold
-            : AppTextStyles.font16Bold);
+            : size == CustomButtonSize.medium
+            ? AppTextStyles.font16Bold
+            : AppTextStyles.font18Bold);
 
-    // Only override color if user didn't explicitly set one
-    final TextStyle effectiveTextStyle = baseTextStyle.color == null
-        ? baseTextStyle.copyWith(color: resolvedForeground)
-        : baseTextStyle;
+    final TextStyle effectiveTextStyle = baseTextStyle.copyWith(
+      color: resolvedForeground,
+    );
 
-    // Icon size
     final double iconSize = size == CustomButtonSize.small
         ? responsiveRadius(18)
-        : responsiveRadius(20);
+        : size == CustomButtonSize.medium
+        ? responsiveRadius(20)
+        : responsiveRadius(22);
 
-    return SizedBox(
-      height: height,
-      width: double.infinity,
-      child: ElevatedButton(
-        onPressed: _enabled ? onPressed : null,
-        style:
-            ElevatedButton.styleFrom(
-              backgroundColor: resolvedBackground,
-              foregroundColor: resolvedForeground,
-              disabledBackgroundColor: colors.surfaceVariant,
-              disabledForegroundColor: colors.textSecondary,
-              elevation: 0,
-              shadowColor: Colors.transparent,
-              surfaceTintColor: Colors.transparent,
-              padding:
-                  contentPadding ??
-                  EdgeInsets.symmetric(
-                    horizontal: responsiveWidth(24),
-                    vertical: responsiveHeight(12),
-                  ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(
-                  borderRadius ?? responsiveRadius(12),
-                ),
-                side: style == CustomButtonStyle.outlined
-                    ? BorderSide(
-                        color: resolvedBorder,
-                        width: responsiveWidth(1.5),
-                      )
-                    : BorderSide.none,
-              ),
-            ).copyWith(
-              overlayColor: WidgetStateProperty.all(
-                resolvedForeground.withValues(alpha: 0.12),
-              ),
+    return ElevatedButton(
+      onPressed: _enabled ? onPressed : null,
+      style: ElevatedButton.styleFrom(
+        backgroundColor: resolvedBackground,
+        foregroundColor: resolvedForeground,
+        disabledBackgroundColor: resolvedBackground,
+        disabledForegroundColor: resolvedForeground,
+        elevation: 0,
+        shadowColor: Colors.transparent,
+        surfaceTintColor: Colors.transparent,
+        padding:
+            contentPadding ??
+            EdgeInsets.symmetric(
+              horizontal: size == CustomButtonSize.small
+                  ? responsiveWidth(24)
+                  : size == CustomButtonSize.medium
+                  ? responsiveWidth(28)
+                  : responsiveWidth(32),
+              vertical: size == CustomButtonSize.small
+                  ? responsiveHeight(12)
+                  : size == CustomButtonSize.medium
+                  ? responsiveHeight(14)
+                  : responsiveHeight(16),
             ),
-        child: isLoading
-            ? SizedBox(
-                width: responsiveWidth(24),
-                height: responsiveHeight(24),
-                child: CircularProgressIndicator(
-                  strokeWidth: 2.5,
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                    effectiveTextStyle.color ?? resolvedForeground,
-                  ),
-                ),
-              )
-            : Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  if (prefixIcon != null) ...[
-                    IconTheme(
-                      data: IconThemeData(
-                        size: iconSize,
-                        color: effectiveTextStyle.color ?? resolvedForeground,
-                      ),
-                      child: prefixIcon!,
-                    ),
-                    horizontalSpacing(8),
-                  ],
-                  Flexible(
-                    child: Text(
-                      text,
-                      style: effectiveTextStyle,
-                      textAlign: TextAlign.center,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
-                    ),
-                  ),
-                  if (suffixIcon != null) ...[
-                    horizontalSpacing(8),
-                    IconTheme(
-                      data: IconThemeData(
-                        size: iconSize,
-                        color: effectiveTextStyle.color ?? resolvedForeground,
-                      ),
-                      child: suffixIcon!,
-                    ),
-                  ],
-                ],
-              ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(
+            borderRadius ?? responsiveRadius(12),
+          ),
+          side: style == CustomButtonStyle.outlined
+              ? BorderSide(color: resolvedBorder, width: responsiveWidth(1.5))
+              : BorderSide.none,
+        ),
       ),
+      child: _buildChild(effectiveTextStyle, iconSize),
+    );
+  }
+
+  Widget _buildChild(final TextStyle textStyle, final double iconSize) {
+    if (isLoading) {
+      return SizedBox(
+        width: responsiveHeight(16),
+        height: responsiveHeight(16),
+        child: const CircularProgressIndicator(
+          strokeWidth: 2.5,
+          valueColor: AlwaysStoppedAnimation<Color>(AppColors.grey0),
+        ),
+      );
+    }
+
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        if (prefixIcon != null) ...[
+          IconTheme(
+            data: IconThemeData(size: iconSize, color: textStyle.color),
+            child: prefixIcon!,
+          ),
+          horizontalSpacing(8),
+        ],
+        Flexible(
+          child: Text(
+            text,
+            style: textStyle,
+            textAlign: TextAlign.center,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
+          ),
+        ),
+        if (suffixIcon != null) ...[
+          horizontalSpacing(8),
+          IconTheme(
+            data: IconThemeData(size: iconSize, color: textStyle.color),
+            child: suffixIcon!,
+          ),
+        ],
+      ],
     );
   }
 }
