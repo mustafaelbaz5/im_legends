@@ -14,7 +14,7 @@ class UserData {
   });
 
   /// Factory for creating a UserData object from a Supabase map
-  factory UserData.fromMap(Map<String, dynamic> map) {
+  factory UserData.fromMap(final Map<String, dynamic> map) {
     return UserData(
       name: map['name'] ?? '',
       email: map['email'] ?? '',
@@ -25,7 +25,7 @@ class UserData {
   }
 
   /// Converts UserData into a map for inserting/updating Supabase
-  Map<String, dynamic> toMap(String uid) {
+  Map<String, dynamic> toMap(final String uid) {
     return {
       'id': uid,
       'name': name,
@@ -37,7 +37,7 @@ class UserData {
     };
   }
 
-  UserData copyWith({String? profileImageUrl}) {
+  UserData copyWith({final String? profileImageUrl}) {
     return UserData(
       name: name,
       email: email,
