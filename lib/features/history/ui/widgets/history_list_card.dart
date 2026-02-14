@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:im_legends/core/utils/extensions/context_extensions.dart';
 
-import '../../../../core/themes/app_colors.dart';
 import '../../../../core/utils/spacing.dart';
 import '../../data/models/match_history_card_model.dart';
 import 'history_card_player_info.dart';
@@ -14,29 +13,28 @@ class HistoryListCard extends StatelessWidget {
   const HistoryListCard({super.key, required this.match});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Container(
       width: double.infinity,
-      margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-      padding: EdgeInsets.all(16.w),
+      margin: EdgeInsets.symmetric(
+        horizontal: responsiveWidth(16),
+        vertical: responsiveHeight(8),
+      ),
+      padding: EdgeInsets.symmetric(
+        horizontal: responsiveWidth(16),
+        vertical: responsiveHeight(8),
+      ),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16.r),
-        color: AppColors.darkColor,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withAlpha((0.5 * 255).toInt()),
-            blurRadius: 12.r,
-            offset: Offset(0, 6.h),
-          ),
-        ],
-        border: Border.all(color: Colors.white.withAlpha((0.5 * 255).toInt())),
+        borderRadius: BorderRadius.circular(responsiveRadius(16)),
+        color: context.customColors.background.withValues(alpha: 0.1),
+        border: Border.all(color: context.customColors.border, width: 1),
       ),
       child: Column(
         children: [
           MatchCardHeader(matchDate: match.matchDate),
           verticalSpacing(20),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               HistoryCardPlayerInfo(
                 playerName: match.winnerName,

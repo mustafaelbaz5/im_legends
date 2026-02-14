@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../data/model/champion_player_model.dart';
+
 import '../../../../core/themes/app_texts_style.dart';
 import '../../../../core/utils/app_assets.dart';
 import '../../../../core/utils/functions/get_rank_color.dart';
+import '../../data/model/champion_player_model.dart';
 
 class ChampionsCard extends StatelessWidget {
   final ChampionPlayerModel champion;
@@ -66,7 +67,7 @@ class ChampionsCard extends StatelessWidget {
                   width: 1.w,
                 ),
               ),
-              child: Text('#$rank', style: BebasTextStyles.whiteBold14),
+              child: Text('#$rank', style: AppTextStyles.font14Regular),
             ),
           ],
         ),

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:im_legends/core/themes/app_texts_style.dart';
+import 'package:im_legends/core/utils/extensions/context_extensions.dart';
+
 import '../../../../core/themes/app_colors.dart';
 import '../../../../core/utils/functions/date_formate.dart';
 
@@ -9,21 +12,19 @@ class MatchCardHeader extends StatelessWidget {
   const MatchCardHeader({super.key, required this.matchDate});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Row(
       children: [
         Expanded(
           child: Text(
-            '${formatSmart(matchDate)}',
-            style: TextStyle(
-              fontSize: 12.sp,
-              color: Colors.white,
-              fontStyle: FontStyle.italic,
+            '${dateDetailedFormat(matchDate)}',
+            style: AppTextStyles.font12Regular.copyWith(
+              color: context.customColors.textSecondary,
             ),
             textAlign: TextAlign.left,
           ),
         ),
-        Icon(Icons.sports_soccer, color: AppColors.greyColor, size: 24.sp),
+        Icon(Icons.sports_soccer, color: AppColors.primary300, size: 24.sp),
       ],
     );
   }
