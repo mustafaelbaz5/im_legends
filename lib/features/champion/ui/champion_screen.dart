@@ -1,62 +1,95 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:im_legends/core/utils/spacing.dart';
+import 'package:im_legends/features/champion/data/model/champion_player_model.dart';
+import 'package:im_legends/features/champion/ui/widgets/champion_podium.dart';
 
-import '../../../core/themes/app_colors.dart';
 import '../../../core/utils/functions/refresh_page.dart';
 import '../../../core/widgets/custom_app_bar.dart';
 import '../logic/cubit/champion_cubit.dart';
-import 'widgets/champion_header.dart';
+import 'widgets/champion_category_tabs.dart';
+import 'widgets/champion_leaderboard.dart';
 import 'widgets/champion_shimmer_loading.dart';
-import 'widgets/champion_states.dart';
-import 'widgets/champion_top_three.dart';
 
-class ChampionScreen extends StatelessWidget {
+class ChampionScreen extends StatefulWidget {
   const ChampionScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
+  State<ChampionScreen> createState() => _ChampionScreenState();
+}
+
+class _ChampionScreenState extends State<ChampionScreen> {
+  StatCategory _selectedCategory = StatCategory.topScorers;
+
+  void _onCategoryChanged(final StatCategory category) {
+    setState(() => _selectedCategory = category);
+  }
+
+  @override
+  Widget build(final BuildContext context) {
+    return SafeArea(
+      child: Column(
         children: [
           const CustomAppBar(title: 'Champions'),
+
+          ChampionCategoryTabs(
+            selected: _selectedCategory,
+            onSelected: _onCategoryChanged,
+          ),
+
           Expanded(
             child: BlocBuilder<ChampionCubit, ChampionState>(
-              builder: (context, state) {
+              builder: (final context, final state) {
                 if (state is ChampionLoading) {
                   return const ChampionShimmer();
-                } else if (state is ChampionSuccess) {
-                  final champion = state.players[0];
-                  final topThree = state.players;
-                  return RefreshIndicator(
-                    onRefresh: () => onRefresh(context),
-                    backgroundColor: AppColors.lightDarkColor,
-                    color: Colors.white,
-                    child: SingleChildScrollView(
-                      physics: const AlwaysScrollableScrollPhysics(),
-                      child: Column(
-                        children: [
-                          ChampionHeader(
-                            name: champion.user.name,
-                            imageUrl: champion.user.profileImageUrl,
-                          ),
-                          ChampionStats(
-                            goals: champion.stats.goalDifference,
-                            points: champion.stats.points,
-                            wins: champion.stats.wins,
-                            matches: champion.stats.matchesPlayed,
-                          ),
-                          ChampionTopThree(topThree: topThree),
-                        ],
-                      ),
-                    ),
-                  );
-                } else if (state is ChampionFailure) {
-                  return Center(child: Text(state.errorMessage));
                 }
+
+                if (state is ChampionFailure) {
+                  return Center(child: Text(state.message));
+                }
+
+                if (state is ChampionSuccess) {
+                  return _buildContent(context, state.players);
+                }
+
                 return const SizedBox.shrink();
               },
             ),
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildContent(
+    final BuildContext context,
+    final List<ChampionPlayerModel> allPlayers,
+  ) {
+    final sorted = _selectedCategory.sorted(allPlayers);
+    final topThree = sorted.take(3).toList();
+
+    return RefreshIndicator(
+      onRefresh: () => refreshData(context),
+      child: CustomScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        slivers: [
+          SliverToBoxAdapter(
+            child: ChampionPodium(
+              topThree: topThree,
+              category: _selectedCategory,
+            ),
+          ),
+
+          const SliverToBoxAdapter(child: Divider()),
+
+          SliverToBoxAdapter(
+            child: ChampionLeaderboard(
+              players: sorted,
+              category: _selectedCategory,
+            ),
+          ),
+
+          SliverToBoxAdapter(child: verticalSpacing(24)),
         ],
       ),
     );
