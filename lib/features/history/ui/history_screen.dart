@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:im_legends/core/themes/app_texts_style.dart';
+import 'package:im_legends/core/utils/extensions/context_extensions.dart';
 
-import '../../../core/themes/app_colors.dart';
 import '../../../core/utils/functions/refresh_page.dart';
 import '../../../core/widgets/custom_app_bar.dart';
 import '../logic/cubit/match_history_cubit.dart';
@@ -12,31 +13,37 @@ class HistoryScreen extends StatelessWidget {
   const HistoryScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
+  Widget build(final BuildContext context) {
+    return SafeArea(
+      child: Column(
         children: [
           const CustomAppBar(title: 'History'),
           Expanded(
             child: BlocBuilder<MatchHistoryCubit, MatchHistoryState>(
-              builder: (context, state) {
+              builder: (final context, final state) {
                 if (state is MatchHistoryLoading) {
                   return const HistoryShimmerLoading();
                 } else if (state is MatchHistorySuccess) {
                   final matches = state.matches;
                   return RefreshIndicator(
-                    onRefresh: () => onRefresh(context),
-                    backgroundColor: AppColors.lightDarkColor,
-                    color: Colors.white,
+                    onRefresh: () => refreshData(context),
+                    backgroundColor: context.customColors.background,
+                    color: context.customColors.textPrimary,
                     child: ListView.builder(
-                      padding: const EdgeInsets.all(16),
                       itemCount: matches.length,
-                      itemBuilder: (context, index) =>
+                      itemBuilder: (final context, final index) =>
                           HistoryListCard(match: matches[index]),
                     ),
                   );
+                } else if (state is MatchHistoryFailed) {
+                  return Center(
+                    child: Text(
+                      state.error.messageKey,
+                      style: AppTextStyles.font16Bold,
+                    ),
+                  );
                 } else {
-                  return const Center(child: Text('No data available'));
+                  return const SizedBox.shrink();
                 }
               },
             ),
