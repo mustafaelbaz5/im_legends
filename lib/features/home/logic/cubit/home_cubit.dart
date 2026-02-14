@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:im_legends/core/error/models/app_error.dart';
-import 'package:im_legends/core/error/types/error_type.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../core/models/players_states_model.dart';
@@ -17,12 +16,8 @@ class HomeCubit extends Cubit<HomeState> {
     try {
       final leaderboard = await repo.calculateLeaderboard();
       emit(HomeSuccess(leaderboard));
-    } catch (e) {
-      emit(
-        HomeFailure(
-          error: AppError(messageKey: e.toString(), type: ErrorType.unknown),
-        ),
-      );
+    } catch (error) {
+      emit(HomeFailure(error: error is AppError ? error : AppError.unknown()));
     }
   }
 }
