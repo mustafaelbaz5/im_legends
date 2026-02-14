@@ -10,7 +10,7 @@ class MatchModel {
     required this.loserId,
     required this.winnerScore,
     required this.loserScore,
-    DateTime? createdAt,
+    final DateTime? createdAt,
   }) : createdAt = createdAt ?? DateTime.now();
 
   // Convert to JSON for Supabase insert
@@ -25,7 +25,7 @@ class MatchModel {
   }
 
   // Factory to parse from Supabase
-  factory MatchModel.fromJson(Map<String, dynamic> json) {
+  factory MatchModel.fromJson(final Map<String, dynamic> json) {
     return MatchModel(
       winnerId: json['winner_id'] as String,
       loserId: json['loser_id'] as String,
