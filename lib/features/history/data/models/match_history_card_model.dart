@@ -19,7 +19,7 @@ class MatchHistoryCardModel {
     required this.matchDate,
   });
 
-  factory MatchHistoryCardModel.fromJson(Map<String, dynamic> json) {
+  factory MatchHistoryCardModel.fromJson(final Map<String, dynamic> json) {
     return MatchHistoryCardModel(
       matchId: json['id'] as String,
       winnerName: json['winner']['name'] as String,
@@ -46,14 +46,14 @@ class MatchHistoryCardModel {
   }
 
   MatchHistoryCardModel copyWith({
-    String? matchId,
-    String? winnerName,
-    String? loserName,
-    String? winnerImage,
-    String? loserImage,
-    int? winnerScore,
-    int? loserScore,
-    DateTime? matchDate,
+    final String? matchId,
+    final String? winnerName,
+    final String? loserName,
+    final String? winnerImage,
+    final String? loserImage,
+    final int? winnerScore,
+    final int? loserScore,
+    final DateTime? matchDate,
   }) {
     return MatchHistoryCardModel(
       matchId: matchId ?? this.matchId,
