@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:im_legends/core/utils/extensions/context_extensions.dart';
 
 import '../../../../../core/themes/app_texts_style.dart';
 
@@ -16,9 +17,9 @@ class PlayerFieldInfo extends StatelessWidget {
       children: [
         AnimatedDefaultTextStyle(
           duration: const Duration(milliseconds: 300),
-          style: selectedPlayer != null
-              ? AppTextStyles.font14SemiBold
-              : AppTextStyles.font14Regular,
+          style: AppTextStyles.font14Regular.copyWith(
+            color: context.customColors.textPrimary,
+          ),
           child: Text(
             selectedPlayer ?? hint,
             maxLines: 1,
