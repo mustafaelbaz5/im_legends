@@ -2,13 +2,14 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:im_legends/core/router/routes.dart';
 import 'package:im_legends/core/themes/app_colors.dart';
 import 'package:im_legends/core/themes/app_texts_style.dart';
 import 'package:im_legends/core/ui/dialogs/app_dialogs.dart';
 import 'package:im_legends/core/utils/extensions/context_extensions.dart';
 import 'package:im_legends/core/utils/functions/app_setting_method.dart';
 import 'package:im_legends/core/utils/spacing.dart';
-import 'package:im_legends/features/auth/logic/cubit/auth_cubit.dart';
+import 'package:im_legends/features/profile/logic/cubit/profile_cubit.dart';
 import 'package:im_legends/features/profile/ui/widgets/profile_menu_item.dart';
 import 'package:im_legends/features/profile/ui/widgets/profile_section_body.dart';
 
@@ -59,7 +60,8 @@ class ProfileSettings extends StatelessWidget {
               title: 'profile.settings.logout'.tr(),
               message: 'profile.settings.logout_message'.tr(),
               onConfirm: () {
-                context.read<AuthCubit>().logout();
+                context.read<ProfileCubit>().logout();
+                context.pushNamedAndRemoveAll(Routes.onBoardingScreen);
               },
             );
           },

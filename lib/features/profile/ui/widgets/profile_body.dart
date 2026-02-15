@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:im_legends/core/models/players_states_model.dart';
-import 'package:im_legends/core/models/user_data.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:im_legends/core/utils/spacing.dart';
+import 'package:im_legends/features/profile/logic/cubit/profile_cubit.dart';
+import 'package:im_legends/features/profile/ui/widgets/profile_shimmer_loading.dart';
 
 import 'profile_header.dart';
 import 'profile_info_section.dart';
@@ -13,41 +14,40 @@ class ProfileBody extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        const SliverToBoxAdapter(child: ProfileHeader(name: 'Mustafa Elbaz')),
-        SliverToBoxAdapter(child: verticalSpacing(16)),
-        SliverToBoxAdapter(
-          child: ProfileStatsSection(
-            stats: PlayerStatsModel(
-              playerId: '1',
-              playerName: 'Mustafa Elbaz',
-              matchesPlayed: 12,
-              wins: 8,
-              losses: 4,
-              goalsScored: 20,
-              goalsReceived: 10,
-              points: 24,
-              rank: 1,
-            ),
-          ),
-        ),
-        SliverToBoxAdapter(child: verticalSpacing(16)),
-        SliverToBoxAdapter(
-          child: ProfileInfoSection(
-            userDataModel: UserData(
-              name: 'Mustafa Elbaz',
-              email: '[EMAIL_ADDRESS]',
-              phoneNumber: '01010101010',
-              age: 25,
-            ),
-          ),
-        ),
-        SliverToBoxAdapter(child: verticalSpacing(16)),
+    return BlocBuilder<ProfileCubit, ProfileState>(
+      builder: (final context, final state) {
+        if (state is ProfileLoading) {
+          return const ProfileShimmerLoading();
+        }
+        if (state is ProfileFailure) {
+          return Center(child: Text(state.error.messageKey));
+        }
+        if (state is ProfileSuccess) {
+          return CustomScrollView(
+            slivers: [
+              SliverToBoxAdapter(
+                child: ProfileHeader(
+                  name: state.profile.user.name,
+                  imageUrl: state.profile.user.profileImageUrl,
+                ),
+              ),
 
-        const SliverToBoxAdapter(child: ProfileSettings()),
-        SliverToBoxAdapter(child: verticalSpacing(16)),
-      ],
+              SliverToBoxAdapter(
+                child: ProfileStatsSection(stats: state.profile.stats),
+              ),
+              SliverToBoxAdapter(child: verticalSpacing(16)),
+              SliverToBoxAdapter(
+                child: ProfileInfoSection(userDataModel: state.profile.user),
+              ),
+              SliverToBoxAdapter(child: verticalSpacing(16)),
+
+              const SliverToBoxAdapter(child: ProfileSettings()),
+              SliverToBoxAdapter(child: verticalSpacing(16)),
+            ],
+          );
+        }
+        return const SizedBox.shrink();
+      },
     );
   }
 }

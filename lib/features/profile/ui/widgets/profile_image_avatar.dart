@@ -2,10 +2,12 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:im_legends/core/themes/app_colors.dart';
 import 'package:im_legends/core/utils/extensions/context_extensions.dart';
 import 'package:im_legends/core/utils/functions/image_picker.dart';
 import 'package:im_legends/core/utils/spacing.dart';
+import 'package:im_legends/features/profile/logic/cubit/profile_cubit.dart';
 
 class ProfileImageAvatar extends StatefulWidget {
   const ProfileImageAvatar({
@@ -23,28 +25,34 @@ class ProfileImageAvatar extends StatefulWidget {
 
 class _ProfileImageAvatarState extends State<ProfileImageAvatar> {
   File? _profileImage;
-
   Future<void> _pickImage() async {
     try {
       final pickedImage = await ImagePickerHelper.showImageSourceActionSheet(
         context,
       );
 
+      if (!mounted || pickedImage == null) return;
+
+      // Optional: show a loading indicator
+      setState(() => _profileImage = pickedImage);
+
+      // Upload and update DB
+      await context.read<ProfileCubit>().uploadProfileImage(pickedImage);
+
       if (!mounted) return;
 
-      if (pickedImage != null) {
-        setState(() {
-          _profileImage = pickedImage;
-        });
+      // Call callback with new image if needed
+      widget.onEditTap();
 
-        widget.onEditTap();
-      }
+      // Optionally update the UI immediately
+      setState(() {
+        _profileImage = pickedImage;
+      });
     } catch (_) {
       if (!mounted) return;
-
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Failed to pick image. Please try again.'),
+          content: Text('Failed to pick or upload image. Please try again.'),
         ),
       );
     }
