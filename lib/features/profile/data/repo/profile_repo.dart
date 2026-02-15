@@ -1,36 +1,18 @@
-import '../../../../core/utils/secure_storage.dart';
-import '../model/profile_model.dart';
+import 'dart:io';
 
-import '../service/profile_service.dart';
+import 'package:im_legends/core/models/user_data.dart';
+import 'package:im_legends/features/profile/data/model/profile_model.dart';
 
-class ProfileRepo {
-  final ProfileService profileService;
-  final SecureStorage secureStorage = SecureStorage();
+abstract class ProfileRepo {
+  /// Fetch current user data
+  Future<UserData?> getCurrentUserData();
 
-  ProfileRepo({required this.profileService});
+  /// Fetch user profile with calculated stats
+  Future<UserProfileModel?> getProfileWithStats();
 
-  /// Get full profile data + stats
-  Future<UserProfileModel?> getProfileWithStats() async {
-    final userId = await secureStorage.getUserId();
+  /// Uploads a profile image and updates the user's record in one step
+  Future<String?> uploadAndSetProfileImage(final File imageFile);
 
-    if (userId == null || userId.isEmpty) {
-      throw Exception("User ID not found in secure storage");
-    }
-
-    try {
-      final user = await profileService.fetchUserData(userId);
-      final stats = await profileService.fetchPlayerStats(userId);
-
-      return UserProfileModel(user: user, stats: stats);
-    } catch (e) {
-      print("❌ Error fetching profile with stats: $e");
-      return null;
-    }
-  }
-
-  /// Logout user: clears secure storage + Supabase session
-  Future<void> logout() async {
-    await secureStorage.clearToken();
-    await profileService.logout();
-  }
+  /// Logout user
+  Future<void> logout();
 }
