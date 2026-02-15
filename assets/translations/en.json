@@ -84,6 +84,18 @@
   },
   "profile": {
     "profile": "Profile",
+    "stats": {
+      "title": "Statistics",
+      "rank": "Rank",
+      "matches_played": "Matches Played",
+      "wins": "Wins",
+      "losses": "Losses",
+      "goals_scored": "Goals Scored",
+      "goals_received": "Goals Received",
+      "goal_difference": "Goal Difference",
+      "points": "Points",
+      "winRate": "Win Rate"
+    },
     "info": {
       "title": "Profile Information",
       "name": "Name",
