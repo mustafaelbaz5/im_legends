@@ -13,9 +13,7 @@ class NotificationIcon extends StatelessWidget {
   @override
   Widget build(final BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        context.pushNamed(Routes.notificationsScreen);
-      },
+      onTap: () => context.pushNamed(Routes.notificationsScreen),
       child: Stack(
         clipBehavior: Clip.none,
         children: [
@@ -29,18 +27,20 @@ class NotificationIcon extends StatelessWidget {
           if (unreadCount > 0)
             Positioned(
               right: 6,
-              top: 6,
+              bottom: 8,
               child: Container(
                 padding: const EdgeInsets.all(4),
-                decoration: BoxDecoration(
-                  color: context.customColors.errorContainer,
+                decoration: const BoxDecoration(
+                  color: AppColors.red100,
                   shape: BoxShape.circle,
                 ),
                 constraints: const BoxConstraints(minWidth: 18, minHeight: 18),
                 child: Center(
                   child: Text(
                     unreadCount > 9 ? '9+' : unreadCount.toString(),
-                    style: AppTextStyles.font12SemiBold,
+                    style: AppTextStyles.font12SemiBold.copyWith(
+                      color: AppColors.grey0,
+                    ),
                   ),
                 ),
               ),
