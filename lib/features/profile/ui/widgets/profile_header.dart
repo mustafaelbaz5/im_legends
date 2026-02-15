@@ -14,7 +14,7 @@ class ProfileHeader extends StatelessWidget {
   @override
   Widget build(final BuildContext context) {
     return SizedBox(
-      height: responsiveHeight(350),
+      height: responsiveHeight(320),
       child: Stack(
         clipBehavior: Clip.none,
         children: [
@@ -47,8 +47,6 @@ class ProfileHeader extends StatelessWidget {
                         color: context.customColors.textPrimary,
                       ),
                     ),
-
-                    verticalSpacing(16),
                   ],
                 ),
               ),

@@ -69,7 +69,7 @@ class WinRateCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'profile.stats.winRate'.tr(),
+                  'profile.stats.win_rate'.tr(),
                   style: AppTextStyles.font14Bold.copyWith(
                     color: context.customColors.textPrimary,
                   ),
