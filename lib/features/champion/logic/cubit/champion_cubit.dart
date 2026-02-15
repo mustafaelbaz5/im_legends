@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:im_legends/core/error/models/app_error.dart';
 import 'package:im_legends/features/champion/data/model/champion_player_model.dart';
 import 'package:im_legends/features/champion/data/repo/champion_repo.dart';
 
@@ -19,8 +20,10 @@ class ChampionCubit extends Cubit<ChampionState> {
       } else {
         emit(ChampionSuccess(players));
       }
-    } catch (e) {
-      emit(ChampionFailure(e.toString()));
+    } catch (error) {
+      emit(
+        ChampionFailure(error: error is AppError ? error : AppError.unknown()),
+      );
     }
   }
 }
