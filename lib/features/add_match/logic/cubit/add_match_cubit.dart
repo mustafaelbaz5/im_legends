@@ -3,7 +3,7 @@ import 'package:im_legends/core/error/models/app_error.dart';
 import 'package:im_legends/core/error/types/error_type.dart';
 import 'package:meta/meta.dart';
 
-import '../../data/models/match_model.dart';
+import '../../../../core/models/match_model.dart';
 import '../../data/repo/add_match_repo.dart';
 
 part 'add_match_state.dart';
@@ -104,10 +104,12 @@ class AddMatchCubit extends Cubit<AddMatchState> {
     try {
       final players = await addMatchRepo.getAllUsers();
       emit(state.copyWith(players: players));
-    } catch (e) {
+    } catch (error) {
       emit(
         AddMatchFailure(
-          error: AppError(messageKey: e.toString(), type: ErrorType.unknown),
+          error: error is AppError
+              ? error
+              : AppError(messageKey: error.toString(), type: ErrorType.unknown),
         ),
       );
     }

@@ -1,4 +1,4 @@
-import 'package:im_legends/features/add_match/data/models/match_model.dart';
+import 'package:im_legends/core/models/match_model.dart';
 import 'package:im_legends/features/add_match/data/remote/add_match_remote_ds.dart';
 import 'package:im_legends/features/add_match/data/repo/add_match_repo.dart';
 
