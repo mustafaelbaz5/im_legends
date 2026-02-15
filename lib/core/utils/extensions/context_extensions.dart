@@ -67,9 +67,12 @@ extension NavigationExt on BuildContext {
   Future<T?> pushNamedAndRemoveAll<T extends Object?>(
     final String routeName, {
     final Object? arguments,
+    final bool rootNavigator = true,
   }) {
-    return Navigator.pushNamedAndRemoveUntil(
+    return Navigator.of(
       this,
+      rootNavigator: rootNavigator,
+    ).pushNamedAndRemoveUntil(
       routeName,
       (_) => false,
       arguments: arguments,
