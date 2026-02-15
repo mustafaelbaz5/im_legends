@@ -9,6 +9,7 @@ import 'package:im_legends/features/champion/logic/cubit/champion_cubit.dart';
 import 'package:im_legends/features/history/logic/cubit/match_history_cubit.dart';
 import 'package:im_legends/features/home/logic/cubit/home_cubit.dart';
 import 'package:im_legends/features/main_navigation/ui/main_scaffold.dart';
+import 'package:im_legends/features/notification/ui/notifications_screen.dart';
 import 'package:im_legends/features/profile/logic/cubit/profile_cubit.dart';
 
 import '../../features/onboarding/ui/on_boarding_screen.dart';
@@ -39,6 +40,10 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => _withMainProviders(const MainScaffold()),
         );
+      case Routes.notificationsScreen:
+        return MaterialPageRoute(
+          builder: (_) => _withMainProviders(const NotificationsScreen()),
+        );
 
       default:
         return null;
@@ -55,11 +60,11 @@ Widget _withMainProviders(final Widget child) {
     providers: [
       BlocProvider(create: (_) => getIt<HomeCubit>()..loadLeaderboard()),
       BlocProvider(
-        create: (_) => getIt<MatchHistoryCubit>()..getMatchHistory(),
+        create: (_) => getIt<MatchHistoryCubit>()..fetchMatches(),
       ),
       BlocProvider(create: (_) => getIt<AddMatchCubit>()..getPlayersList()),
       BlocProvider(create: (_) => getIt<ProfileCubit>()..fetchProfile()),
-      BlocProvider(create: (_) => getIt<ChampionCubit>()..fetchTopThree()),
+      BlocProvider(create: (_) => getIt<ChampionCubit>()..fetchLeaderboard()),
     ],
     child: child,
   );

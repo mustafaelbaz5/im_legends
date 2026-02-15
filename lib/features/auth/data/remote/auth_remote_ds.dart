@@ -7,13 +7,13 @@ import 'package:im_legends/core/networking/supabase_service.dart';
 import 'package:im_legends/core/service/secure_storage.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import 'storage_remote_ds.dart';
-import 'user_remote_ds.dart';
+import '../../../../core/networking/storage_remote_ds.dart';
+import '../../../../core/networking/user_remote_ds.dart';
 
 class AuthRemoteDS {
   final SupabaseService supabaseService;
   final SecureStorage secureStorage;
-  final StorageRemoteDS storageRemoteDS;
+  final StorageRemoteDs storageRemoteDS;
   final UserRemoteDS userRemoteDS;
 
   AuthRemoteDS({
