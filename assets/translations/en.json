@@ -41,16 +41,15 @@
     "no": "No"
   },
   "image_picker": {
-    "upload_image":"Upload Image",
+    "upload_image": "Upload Image",
     "profile_image_selected": "Profile Image Selected",
     "profile_image_not_selected": "Profile Image Not Selected",
     "take_photo": "Take Photo",
     "choose_from_gallery": "Choose From Gallery"
   },
   "onboarding": {
-    "subtitle":"Challenge your friends, track your stats, and become the ultimate football legend in your crew",
-    "button":"Get Started"
-
+    "subtitle": "Challenge your friends, track your stats, and become the ultimate football legend in your crew",
+    "button": "Get Started"
   },
   "auth": {
     "login_title": "Welcome Back",
@@ -81,6 +80,29 @@
       "password_validation_3": " at least one number",
       "password_validation_4": "at one special character",
       "password_validation_5": "at least 8 characters long"
+    }
+  },
+  "profile": {
+    "profile": "Profile",
+    "info": {
+      "title": "Profile Information",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone Number",
+      "age": "Age"
+    },
+    "settings": {
+      "title": "Settings",
+      "language": "Language",
+      "theme": "Theme",
+      "select_language": "Select Language",
+      "select_theme": "Select Theme",
+      "light": "Light",
+      "dark": "Dark",
+      "english": "English",
+      "arabic": "Arabic",
+      "logout": "Logout",
+      "logout_message": "Are you sure you want to logout?"
     }
   }
 }
