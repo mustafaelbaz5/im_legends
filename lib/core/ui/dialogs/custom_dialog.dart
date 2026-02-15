@@ -100,7 +100,7 @@ class CustomDialog extends StatelessWidget {
                     size: CustomButtonSize.small,
                     onPressed: () {
                       context.pop();
-                      onSecondaryPressed?.call();
+                      onPrimaryPressed?.call();
                     },
                   ),
                 ),
