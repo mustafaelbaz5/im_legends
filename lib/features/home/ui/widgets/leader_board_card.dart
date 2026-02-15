@@ -117,11 +117,13 @@ class LeaderBoardCard extends StatelessWidget {
         horizontalSpacing(14),
         _buildStatItem(
           context,
-          player.goalDifference >= 0
-              ? '+${player.goalDifference}'
-              : '${player.goalDifference}',
+          player.goalsScored - player.goalsReceived >= 0
+              ? '+${player.goalsScored - player.goalsReceived}'
+              : '${player.goalsScored - player.goalsReceived}',
           Icons.sports_soccer,
-          player.goalDifference >= 0 ? AppColors.green100 : AppColors.red100,
+          player.goalsScored - player.goalsReceived >= 0
+              ? AppColors.green100
+              : AppColors.red100,
         ),
       ],
     );

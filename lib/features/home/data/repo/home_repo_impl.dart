@@ -35,9 +35,6 @@ class HomeRepoImpl implements HomeRepo {
         wins: winner.wins + 1,
         goalsScored: winner.goalsScored + winnerScore,
         goalsReceived: winner.goalsReceived + loserScore,
-        goalDifference:
-            (winner.goalsScored + winnerScore) -
-            (winner.goalsReceived + loserScore),
         points: winner.points + 3,
       );
 
@@ -46,9 +43,6 @@ class HomeRepoImpl implements HomeRepo {
         losses: loser.losses + 1,
         goalsScored: loser.goalsScored + loserScore,
         goalsReceived: loser.goalsReceived + winnerScore,
-        goalDifference:
-            (loser.goalsScored + loserScore) -
-            (loser.goalsReceived + winnerScore),
       );
     }
 
@@ -56,8 +50,11 @@ class HomeRepoImpl implements HomeRepo {
       ..sort((final a, final b) {
         if (b.points != a.points) {
           return b.points.compareTo(a.points);
-        } else if (b.goalDifference != a.goalDifference) {
-          return b.goalDifference.compareTo(a.goalDifference);
+        } else if (b.goalsScored - b.goalsReceived !=
+            a.goalsScored - a.goalsReceived) {
+          return (b.goalsScored - b.goalsReceived).compareTo(
+            a.goalsScored - a.goalsReceived,
+          );
         } else {
           return b.goalsScored.compareTo(a.goalsScored);
         }
