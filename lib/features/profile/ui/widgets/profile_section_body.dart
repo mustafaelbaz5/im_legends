@@ -22,18 +22,10 @@ class ProfileSectionBody extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Padding(
-            padding: EdgeInsets.fromLTRB(
-              responsiveWidth(20),
-              responsiveHeight(20),
-              responsiveWidth(20),
-              responsiveHeight(12),
-            ),
-            child: Text(
-              title,
-              style: AppTextStyles.font16Bold.copyWith(
-                color: context.customColors.textPrimary,
-              ),
+          Text(
+            title,
+            style: AppTextStyles.font16Bold.copyWith(
+              color: context.customColors.textPrimary,
             ),
           ),
           ...items,
