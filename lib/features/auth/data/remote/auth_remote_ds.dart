@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:im_legends/core/config/app_constants.dart';
 import 'package:im_legends/core/error/types/error_handler.dart';
 import 'package:im_legends/core/models/user_data.dart';
 import 'package:im_legends/core/networking/supabase_service.dart';
@@ -37,7 +38,7 @@ class AuthRemoteDS {
       final uid = response.user?.id;
       if (uid == null) throw Exception('Sign-up failed: UID not found.');
 
-      await secureStorage.write(key: 'userId', value: uid);
+      await secureStorage.write(key: AppConstants.userIdKey, value: uid);
 
       String? imageUrl;
       if (profileImage != null) {
@@ -49,7 +50,6 @@ class AuthRemoteDS {
 
       final updatedUserData = userData.copyWith(profileImageUrl: imageUrl);
       await userRemoteDS.insertUserProfile(updatedUserData, uid);
-
 
       return response;
     } catch (e) {
@@ -71,7 +71,7 @@ class AuthRemoteDS {
       final uid = response.user?.id;
       if (uid == null) throw Exception('Login failed: user not found.');
 
-      await secureStorage.write(key: 'userId', value: uid);
+      await secureStorage.write(key: AppConstants.userIdKey, value: uid);
 
       return response;
     } catch (e) {
@@ -86,7 +86,7 @@ class AuthRemoteDS {
       if (uid != null) await removeAllTokens(uid);
 
       await supabaseService.signOut();
-      await secureStorage.delete(key: 'userId');
+      await secureStorage.delete(key: AppConstants.userIdKey);
     } catch (e) {
       ErrorHandler.handle(e);
     }
