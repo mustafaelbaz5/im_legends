@@ -90,11 +90,11 @@
       "matches_played": "Matches Played",
       "wins": "Wins",
       "losses": "Losses",
+      "win_rate": "Win Rate",
       "goals_scored": "Goals Scored",
       "goals_received": "Goals Received",
       "goal_difference": "Goal Difference",
-      "points": "Points",
-      "winRate": "Win Rate"
+      "points": "Points"
     },
     "info": {
       "title": "Profile Information",
