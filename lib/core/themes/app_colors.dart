@@ -53,4 +53,9 @@ class AppColors {
   static const Color green50 = Color(0xFF9EE19F);
   static const Color green25 = Color(0xFFDDF3DD);
   static const Color green0 = Color(0xFFEFFEFA);
+
+  // Additional colors
+  static const Color gold = Color(0xFFFFD700);
+  static const Color silver = Color(0xFFC0C0C0);
+  static const Color bronze = Color(0xFFCD7F32);
 }
