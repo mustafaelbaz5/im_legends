@@ -1,115 +1,70 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../core/utils/spacing.dart';
-import '../../../../core/themes/text_styles/bebas_text_styles.dart';
-import '../../../../core/utils/functions/get_rank_color.dart';
+import 'package:im_legends/core/themes/app_texts_style.dart';
+import 'package:im_legends/core/utils/extensions/context_extensions.dart';
+import 'package:im_legends/core/utils/spacing.dart';
+import 'package:im_legends/features/profile/ui/widgets/profile_image_avatar.dart';
+import 'package:im_legends/features/profile/ui/widgets/profile_top_bar.dart';
 
 class ProfileHeader extends StatelessWidget {
-  final int rank;
+  const ProfileHeader({super.key, required this.name, this.imageUrl});
+
   final String name;
   final String? imageUrl;
 
-  const ProfileHeader({
-    super.key,
-    required this.rank,
-    required this.name,
-    required this.imageUrl,
-  });
-
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.only(top: 32.h),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            getRankColor(rank).withAlpha((0.5 * 255).toInt()),
-            Colors.black.withAlpha((0.3 * 255).toInt()),
-            Colors.black,
-          ],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(24.r),
-          bottomRight: Radius.circular(24.r),
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withAlpha((0.3 * 255).toInt()),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+  Widget build(final BuildContext context) {
+    return SizedBox(
+      height: responsiveHeight(350),
+      child: Stack(
+        clipBehavior: Clip.none,
         children: [
-          Container(
-            width: 120.w,
-            height: 120.w,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: Colors.white.withAlpha((0.4 * 255).toInt()),
-                width: 3.w,
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: getRankColor(rank).withAlpha((0.5 * 255).toInt()),
-                  blurRadius: 20,
-                  spreadRadius: 2,
+          const ProfileTopBar(),
+          Positioned(
+            top: responsiveHeight(190),
+            left: 0,
+            right: 0,
+            child: Container(
+              decoration: BoxDecoration(
+                color: context.customColors.background,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(responsiveRadius(24)),
+                  topRight: Radius.circular(responsiveRadius(24)),
                 ),
-              ],
-            ),
-            child: ClipOval(
-              child: CachedNetworkImage(
-                imageUrl: imageUrl ?? '',
-                fit: BoxFit.cover,
-                placeholder: (context, url) => const Center(
-                  child: CircularProgressIndicator(
-                    color: Colors.white,
-                    strokeWidth: 2,
-                  ),
-                ),
-                errorWidget: (context, url, error) =>
-                    const Icon(Icons.person, color: Colors.white, size: 60),
               ),
-            ),
-          ),
-          SizedBox(height: 16.h),
+              child: Padding(
+                padding: EdgeInsets.only(
+                  top: responsiveHeight(90),
+                  left: responsiveWidth(24),
+                  right: responsiveWidth(24),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    verticalSpacing(16),
+                    Text(
+                      name,
+                      style: AppTextStyles.font20Bold.copyWith(
+                        color: context.customColors.textPrimary,
+                      ),
+                    ),
 
-          // Name
-          Text(
-            name,
-            style: BebasTextStyles.whiteBold24.copyWith(
-              fontSize: 28.sp,
-              letterSpacing: 1.2,
-            ),
-          ),
-          verticalSpacing(8),
-          // Rank Badge
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 6.h),
-            decoration: BoxDecoration(
-              color: getRankColor(rank),
-              borderRadius: BorderRadius.circular(30.r),
-              border: Border.all(
-                color: Colors.white.withAlpha((0.4 * 255).toInt()),
+                    verticalSpacing(16),
+                  ],
+                ),
               ),
             ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(Icons.emoji_events, size: 18.sp, color: Colors.white),
-                SizedBox(width: 6.w),
-                Text(
-                  '#$rank',
-                  style: BebasTextStyles.whiteBold20.copyWith(fontSize: 22.sp),
-                ),
-              ],
+          ),
+
+          /// Floating Avatar
+          Positioned(
+            top: responsiveHeight(140),
+            left: 0,
+            right: 0,
+            child: Center(
+              child: ProfileImageAvatar(
+                profileImageUrl: imageUrl ?? '',
+                onEditTap: () {},
+              ),
             ),
           ),
         ],
