@@ -64,9 +64,12 @@ class OnBoardingScreen extends StatelessWidget {
                   verticalSpacing(60),
 
                   // CTA Button
-                  CustomTextButton(
-                    text: 'onboarding.button'.tr(),
-                    onPressed: () => context.pushNamed(Routes.loginScreen),
+                  SizedBox(
+                    width: responsiveWidth(300),
+                    child: CustomTextButton(
+                      text: 'onboarding.button'.tr(),
+                      onPressed: () => context.pushNamed(Routes.loginScreen),
+                    ),
                   ),
                 ],
               ),
