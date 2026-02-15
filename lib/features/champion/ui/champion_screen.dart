@@ -45,7 +45,7 @@ class _ChampionScreenState extends State<ChampionScreen> {
                 }
 
                 if (state is ChampionFailure) {
-                  return Center(child: Text(state.message));
+                  return Center(child: Text(state.error.messageKey));
                 }
 
                 if (state is ChampionSuccess) {
