@@ -20,15 +20,13 @@ class ProfileSettings extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
-    final bool isArabic = context.isArabic;
-
     return ProfileSectionBody(
       title: 'profile.settings.title'.tr(),
       items: <Widget>[
         ProfileMenuItem(
           icon: Icons.language_outlined,
           title: 'profile.settings.language'.tr(),
-          subtitle: isArabic
+          subtitle: context.isArabic
               ? 'profile.settings.arabic'.tr()
               : 'profile.settings.english'.tr(),
           onTap: () => _showLanguageDialog(context),
