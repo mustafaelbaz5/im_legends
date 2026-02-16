@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:im_legends/core/themes/app_texts_style.dart';
 import 'package:im_legends/core/utils/extensions/context_extensions.dart';
 
-
 import '../../themes/app_colors.dart';
 import '../../utils/spacing.dart';
 
@@ -24,28 +23,30 @@ class OverlayLoader extends StatelessWidget {
       children: [
         child,
         if (isLoading)
-          Positioned.fill(
-            child: AbsorbPointer(
-              absorbing: true,
-              child: Container(
-                color: context.customColors.background.withValues(alpha: 0.8),
-                child: Center(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const CircularProgressIndicator(
-                        color: AppColors.primary300,
-                      ),
-                      if (message != null) ...[
-                        verticalSpacing(16),
-                        Text(
-                          message!,
-                          style: AppTextStyles.font16Regular.copyWith(
-                            color: context.customColors.textSecondary,
-                          ),
+          Center(
+            child: Positioned.fill(
+              child: AbsorbPointer(
+                absorbing: true,
+                child: Container(
+                  color: context.customColors.background.withValues(alpha: 0.8),
+                  child: Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const CircularProgressIndicator(
+                          color: AppColors.primary300,
                         ),
+                        if (message != null) ...[
+                          verticalSpacing(16),
+                          Text(
+                            message!,
+                            style: AppTextStyles.font16Regular.copyWith(
+                              color: context.customColors.textSecondary,
+                            ),
+                          ),
+                        ],
                       ],
-                    ],
+                    ),
                   ),
                 ),
               ),
