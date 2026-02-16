@@ -61,7 +61,7 @@ class OnBoardingScreen extends StatelessWidget {
                   // Hero Image with overlay
                   const OnBoardingHeroImage(),
 
-                  verticalSpacing(60),
+                  verticalSpacing(20),
 
                   // CTA Button
                   SizedBox(
