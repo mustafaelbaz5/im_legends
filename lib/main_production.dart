@@ -20,6 +20,7 @@ void main() async {
     setupHydratedStorage(),
     setUpDependencies(),
   ]);
+  
   await Supabase.initialize(
     url: AppConfig.supabaseUrl,
     anonKey: AppConfig.supabaseAnonKey,
