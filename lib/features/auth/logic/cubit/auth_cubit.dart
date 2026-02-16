@@ -10,6 +10,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../../../core/error/models/app_error.dart';
 import '../../../../core/models/user_data.dart';
 
+
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {

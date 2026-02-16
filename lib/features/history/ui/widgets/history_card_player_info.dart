@@ -1,8 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import '../../../../core/themes/app_texts_style.dart';
 import '../../../../core/utils/extensions/context_extensions.dart';
 
+=======
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../core/themes/app_colors.dart';
+import '../../../../core/themes/text_styles/bebas_text_styles.dart';
+>>>>>>> 2fa39781c29902b318aa4aca4eb042af1f00eebd
 import '../../../../core/utils/spacing.dart';
 
 class HistoryCardPlayerInfo extends StatelessWidget {
