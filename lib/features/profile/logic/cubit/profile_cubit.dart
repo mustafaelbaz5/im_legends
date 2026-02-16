@@ -66,21 +66,8 @@ class ProfileCubit extends Cubit<ProfileState> {
     }
   }
 
-  /// Logout the current user
-  Future<void> logout() async {
-    try {
-      await profileRepo.logout();
-      emit(ProfileLoggedOut());
-    } catch (error) {
-      emit(
-        ProfileFailure(error: error is AppError ? error : AppError.unknown()),
-      );
-    }
-  }
-
   /// Refresh profile data
   Future<void> refreshProfile() async {
-    // Don't emit loading state for refresh to avoid UI flicker
     try {
       final profile = await profileRepo.getProfileWithStats();
 
