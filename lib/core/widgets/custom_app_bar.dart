@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:im_legends/core/utils/extensions/context_extensions.dart';
-import 'package:im_legends/core/utils/functions/app_setting_method.dart';
 import 'package:im_legends/core/widgets/notification_icon.dart';
 
 import '../themes/app_texts_style.dart';
@@ -27,17 +26,12 @@ class CustomAppBar extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           const Spacer(),
-          GestureDetector(
-            onTap: () {
-              switchTheme(context);
-            },
-            child: CircleAvatar(
-              radius: responsiveRadius(20),
-              backgroundColor: context.customColors.divider.withValues(
-                alpha: 0.5,
-              ),
-              child: const NotificationIcon(unreadCount: 3),
+          CircleAvatar(
+            radius: responsiveRadius(20),
+            backgroundColor: context.customColors.divider.withValues(
+              alpha: 0.5,
             ),
+            child: const NotificationIcon(unreadCount: 3),
           ),
         ],
       ),
