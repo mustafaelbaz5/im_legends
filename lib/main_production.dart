@@ -5,15 +5,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:im_legends/core/config/app_config.dart';
 import 'package:im_legends/core/config/app_constants.dart';
 import 'package:im_legends/core/router/app_router.dart';
+import 'package:im_legends/core/widgets/error_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import 'core/di/dependency_injection.dart';
 import 'core/config/firebase_options.dart';
+import 'core/di/dependency_injection.dart';
 import 'im_legends_app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  ErrorWidget.builder = (final details) => const ErrorScreen();
   await Future.wait([
     EasyLocalization.ensureInitialized(),
     setupHydratedStorage(),

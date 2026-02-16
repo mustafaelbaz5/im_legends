@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:im_legends/core/config/app_config.dart';
-import 'package:im_legends/core/service/secure_storage.dart';
+import 'package:im_legends/core/widgets/error_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'core/config/app_constants.dart';
@@ -14,13 +14,13 @@ import 'im_legends_app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  ErrorWidget.builder = (final details) => const ErrorScreen();
 
   await Future.wait([
     EasyLocalization.ensureInitialized(),
     setupHydratedStorage(),
     setUpDependencies(),
   ]);
-
   await Supabase.initialize(
     url: AppConfig.supabaseUrl,
     anonKey: AppConfig.supabaseAnonKey,
@@ -38,15 +38,4 @@ void main() async {
       child: IMLegendsApp(appRouter: AppRouter()),
     ),
   );
-}
-
-checkLoggedInUser() async {
-  final String? userToken = await getIt<SecureStorage>().read(
-    key: AppConstants.userIdKey,
-  );
-  if (userToken == null || userToken.isEmpty) {
-    isLoggedInUser = false;
-  } else {
-    isLoggedInUser = true;
-  }
 }

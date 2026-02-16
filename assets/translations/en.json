@@ -2,6 +2,9 @@
   "app_title": "IM Legends",
   "welcome": "Welcome",
   "errors": {
+    "error_screen_title": "Oops! Something went wrong",
+    "error_screen_desc": "We encountered an unexpected error.Don't worry, we're working on it.",
+    "error_screen_button": "Try Again ",
     "no_internet": "You're offline. Check your WiFi or mobile data.",
     "timeout": "Taking too long to respond. Please try again.",
     "connection_error": "Can't connect right now. Check your internet.",
