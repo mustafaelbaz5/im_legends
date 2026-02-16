@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
+import 'package:im_legends/core/di/dependency_injection.dart';
+import 'package:im_legends/core/networking/supabase_service.dart';
 import 'package:im_legends/features/auth/data/repo/auth_repo.dart';
 import 'package:meta/meta.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -15,6 +17,17 @@ class AuthCubit extends Cubit<AuthState> {
 
   final AuthRepo authRepo;
 
+  Future<void> checkAuthStatus() async {
+    final user = getIt<SupabaseService>().currentUser;
+
+    if (user != null) {
+      final userData = await _fetchUserData(user.id);
+      emit(AuthAuthenticated(userData));
+    } else {
+      emit(AuthUnauthenticated());
+    }
+  }
+
   Future<void> signUp({
     required final UserData userData,
     required final String password,
@@ -28,10 +41,12 @@ class AuthCubit extends Cubit<AuthState> {
         profileImage: profileImage,
       );
 
-      // Emit success with user data
-      emit(AuthSuccess(authResponse: response, userData: userData));
+      final UserData? fetchedUser = await _fetchUserData(response.user?.id);
+
+      emit(AuthAuthenticated(fetchedUser ?? userData));
     } catch (error) {
-      emit(AuthFailure(error: error is AppError ? error : AppError.unknown()));
+      emit(AuthError(error is AppError ? error : AppError.unknown()));
+      emit(AuthUnauthenticated());
     }
   }
 
@@ -48,9 +63,10 @@ class AuthCubit extends Cubit<AuthState> {
 
       final UserData? userData = await _fetchUserData(response.user?.id);
 
-      emit(AuthSuccess(authResponse: response, userData: userData));
+      emit(AuthAuthenticated(userData));
     } catch (error) {
-      emit(AuthFailure(error: error is AppError ? error : AppError.unknown()));
+      emit(AuthError(error is AppError ? error : AppError.unknown()));
+      emit(AuthUnauthenticated());
     }
   }
 
@@ -58,9 +74,9 @@ class AuthCubit extends Cubit<AuthState> {
     emit(AuthLoading());
     try {
       await authRepo.logout();
-      emit(AuthLoggedOut());
+      emit(AuthUnauthenticated());
     } catch (error) {
-      emit(AuthFailure(error: error is AppError ? error : AppError.unknown()));
+      emit(AuthError(error is AppError ? error : AppError.unknown()));
     }
   }
 
