@@ -85,6 +85,32 @@
       "password_validation_5": "يجب ألا تقل عن 8 أحرف"
     }
   },
+  "home": {
+    "welcome_message": "مرحباً",
+    "welcome_description": "هل أنت مستعد للمنافسة؟",
+    "leaderboard": "قائمة المتصدرين"
+  },
+  "history": {
+    "history": "التاريخ"
+  },
+  "add_match": {
+    "add_match": "إضافة مباراة",
+    "add_match_desc": "أضف مباراة جديدة إلى قائمة المتصدرين",
+    "select_winner": "اختر الفائز",
+    "select_loser": "اختر الخاسر",
+    "choose_player": "اختر اللاعب",
+    "players": "اللاعبين",
+    "score": "النتيجة",
+    "add": "إضافة",
+    "add_match_success": "تم إضافة المباراة بنجاح",
+    "add_match_error": "فشل إضافة المباراة"
+  },
+  "championship": {
+    "champions": "الأبطال",
+    "top_scores": "أعلى النتائج",
+    "top_wins": "أعلى الانتصارات",
+    "best_defense": "أفضل دفاع"
+  },
   "profile": {
     "profile": "الملف الشخصي",
     "stats": {

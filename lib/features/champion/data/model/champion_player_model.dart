@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 class ChampionPlayerModel {
   final String id;
   final String name;
@@ -76,11 +78,11 @@ extension StatCategoryExt on StatCategory {
   String get label {
     switch (this) {
       case StatCategory.topScorers:
-        return 'Top Scorers';
+        return 'championship.top_scores'.tr();
       case StatCategory.topWins:
-        return 'Top Wins';
+        return 'championship.top_wins'.tr();
       case StatCategory.bestDefense:
-        return 'Best Defense';
+        return 'championship.best_defense'.tr();
     }
   }
 

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:im_legends/core/themes/app_texts_style.dart';
 import 'package:im_legends/core/utils/spacing.dart';
@@ -21,9 +22,12 @@ class HomeAppBar extends StatelessWidget {
         children: [
           Column(
             children: [
-              Text("${'Hi'} $title", style: AppTextStyles.font18Bold),
               Text(
-                'Are you ready to play?',
+                "${'home.welcome_message'.tr()} $title",
+                style: AppTextStyles.font18Bold,
+              ),
+              Text(
+                'home.welcome_description'.tr(),
                 style: AppTextStyles.font12Regular,
               ),
             ],

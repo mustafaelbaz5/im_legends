@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:im_legends/core/themes/app_texts_style.dart';
@@ -17,7 +18,7 @@ class HistoryScreen extends StatelessWidget {
     return SafeArea(
       child: Column(
         children: [
-          const CustomAppBar(title: 'History'),
+          CustomAppBar(title: 'history.history'.tr()),
           Expanded(
             child: BlocBuilder<MatchHistoryCubit, MatchHistoryState>(
               builder: (final context, final state) {

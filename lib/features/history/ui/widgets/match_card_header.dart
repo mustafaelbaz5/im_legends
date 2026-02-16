@@ -17,11 +17,11 @@ class MatchCardHeader extends StatelessWidget {
       children: [
         Expanded(
           child: Text(
-            '${dateDetailedFormat(matchDate)}',
+            dateDetailedFormat(matchDate),
             style: AppTextStyles.font12Regular.copyWith(
               color: context.customColors.textSecondary,
             ),
-            textAlign: TextAlign.left,
+            textAlign: TextAlign.center,
           ),
         ),
         Icon(Icons.sports_soccer, color: AppColors.primary300, size: 24.sp),

@@ -85,6 +85,32 @@
       "password_validation_5": "at least 8 characters long"
     }
   },
+  "home": {
+    "welcome_message": "Welcome",
+    "welcome_description": "Are you ready to compete?",
+    "leaderboard": "Leaderboard"
+  },
+  "history": {
+    "history": "History"
+  },
+  "add_match": {
+    "add_match": "Add Match",
+    "add_match_desc": "Add a new match to the leaderboard",
+    "select_winner": "Select Winner",
+    "select_loser": "Select Loser",
+    "score": "Score",
+    "add": "Add",
+    "choose_player": "Choose Player",
+    "players": "Players",
+    "add_match_success": "Match added successfully",
+    "add_match_error": "Failed to add match"
+  },
+  "championship": {
+    "champions": "Champions",
+    "top_scores": "Top Scores",
+    "top_wins": "Top Wins",
+    "best_defense": "Best Defense"
+  },
   "profile": {
     "profile": "Profile",
     "stats": {

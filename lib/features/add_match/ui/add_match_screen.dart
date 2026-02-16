@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:im_legends/core/themes/app_colors.dart';
@@ -24,7 +25,7 @@ class AddMatchScreen extends StatelessWidget {
     return SafeArea(
       child: Column(
         children: [
-          const CustomAppBar(title: 'Add Match'),
+          CustomAppBar(title: 'add_match.add_match'.tr()),
           Expanded(
             child: RefreshIndicator(
               onRefresh: () => onRefresh(context),
@@ -41,7 +42,7 @@ class AddMatchScreen extends StatelessWidget {
 
                         // Winner
                         PlayerSelectField(
-                          hint: 'Select Winner',
+                          hint: 'add_match.select_winner'.tr(),
                           accentColor: AppColors.green100,
                           selectedPlayerId: state.winnerId,
                           selectedName: state.winnerName,
@@ -67,7 +68,7 @@ class AddMatchScreen extends StatelessWidget {
 
                         /// Loser field
                         PlayerSelectField(
-                          hint: 'Select Loser',
+                          hint: 'add_match.select_loser'.tr(),
                           accentColor: AppColors.red100,
                           selectedPlayerId: state.loserId,
                           selectedName: state.loserName,

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:im_legends/core/utils/spacing.dart';
@@ -30,7 +31,7 @@ class _ChampionScreenState extends State<ChampionScreen> {
     return SafeArea(
       child: Column(
         children: [
-          const CustomAppBar(title: 'Champions'),
+          CustomAppBar(title: 'championship.champions'.tr()),
 
           ChampionCategoryTabs(
             selected: _selectedCategory,
@@ -43,15 +44,12 @@ class _ChampionScreenState extends State<ChampionScreen> {
                 if (state is ChampionLoading) {
                   return const ChampionShimmer();
                 }
-
                 if (state is ChampionFailure) {
                   return Center(child: Text(state.error.messageKey));
                 }
-
                 if (state is ChampionSuccess) {
                   return _buildContent(context, state.players);
                 }
-
                 return const SizedBox.shrink();
               },
             ),
@@ -67,7 +65,6 @@ class _ChampionScreenState extends State<ChampionScreen> {
   ) {
     final sorted = _selectedCategory.sorted(allPlayers);
     final topThree = sorted.take(3).toList();
-
     return RefreshIndicator(
       onRefresh: () => refreshData(context),
       child: CustomScrollView(
@@ -79,16 +76,13 @@ class _ChampionScreenState extends State<ChampionScreen> {
               category: _selectedCategory,
             ),
           ),
-
           const SliverToBoxAdapter(child: Divider()),
-
           SliverToBoxAdapter(
             child: ChampionLeaderboard(
               players: sorted,
               category: _selectedCategory,
             ),
           ),
-
           SliverToBoxAdapter(child: verticalSpacing(24)),
         ],
       ),

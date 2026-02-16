@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -57,9 +58,7 @@ class PlayerBottomSheet extends StatelessWidget {
                 }
 
                 final filteredPlayers = state.players
-                    .where(
-                      (final p) => p['id'] != excludedPlayer,
-                    ) 
+                    .where((final p) => p['id'] != excludedPlayer)
                     .toList();
 
                 if (filteredPlayers.isEmpty) return _buildEmpty(context);
@@ -109,7 +108,7 @@ class PlayerBottomSheet extends StatelessWidget {
           size: responsiveFontSize(24),
         ),
         horizontalSpacing(12),
-        Text('Choose Player', style: AppTextStyles.font16Bold),
+        Text('add_match.choose_player'.tr(), style: AppTextStyles.font16Bold),
         const Spacer(),
         BlocBuilder<AddMatchCubit, AddMatchState>(
           builder: (final context, final state) {
@@ -117,7 +116,7 @@ class PlayerBottomSheet extends StatelessWidget {
                 .where((final p) => p['id'] != excludedPlayer)
                 .length;
             return Text(
-              '$count players',
+              '$count ${"add_match.players".tr()}',
               style: AppTextStyles.font12Regular.copyWith(
                 color: context.customColors.textPrimary.withAlpha(153),
               ),
