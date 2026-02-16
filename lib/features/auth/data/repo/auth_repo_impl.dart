@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:im_legends/features/auth/data/remote/auth_remote_ds.dart';
-import 'package:im_legends/features/auth/data/repo/auth_repo.dart';
+import '../remote/auth_remote_ds.dart';
+import 'auth_repo.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../../core/models/user_data.dart';

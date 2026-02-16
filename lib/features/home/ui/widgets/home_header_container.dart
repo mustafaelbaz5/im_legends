@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:im_legends/core/utils/app_assets.dart';
-import 'package:im_legends/core/utils/spacing.dart';
+import '../../../../core/utils/app_assets.dart';
+import '../../../../core/utils/spacing.dart';
 
 class HomeHeaderContainer extends StatefulWidget {
   const HomeHeaderContainer({super.key});

@@ -1,5 +1,4 @@
-
-import 'package:im_legends/core/error/handlers/supabase_error_handler.dart';
+import '../handlers/supabase_error_handler.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../models/app_error.dart';

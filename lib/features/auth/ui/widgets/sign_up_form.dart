@@ -3,11 +3,11 @@ import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:im_legends/core/utils/extensions/context_extensions.dart';
-import 'package:im_legends/core/utils/validators.dart';
-import 'package:im_legends/core/widgets/custom_text_button.dart';
-import 'package:im_legends/core/widgets/custom_text_form_.dart';
-import 'package:im_legends/features/auth/logic/cubit/auth_cubit.dart';
+import '../../../../core/utils/extensions/context_extensions.dart';
+import '../../../../core/utils/validators.dart';
+import '../../../../core/widgets/custom_text_button.dart';
+import '../../../../core/widgets/custom_text_form_.dart';
+import '../../logic/cubit/auth_cubit.dart';
 
 import '../../../../core/models/user_data.dart';
 import '../../../../core/themes/app_texts_style.dart';

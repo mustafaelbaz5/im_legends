@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:im_legends/core/themes/app_texts_style.dart';
-import 'package:im_legends/core/utils/extensions/context_extensions.dart';
+import '../../../../core/themes/app_texts_style.dart';
+import '../../../../core/utils/extensions/context_extensions.dart';
 
 import '../../../../core/utils/spacing.dart';
 

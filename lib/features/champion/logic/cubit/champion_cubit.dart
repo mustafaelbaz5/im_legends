@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:im_legends/core/error/models/app_error.dart';
-import 'package:im_legends/features/champion/data/model/champion_player_model.dart';
-import 'package:im_legends/features/champion/data/repo/champion_repo.dart';
+import '../../../../core/error/models/app_error.dart';
+import '../../data/model/champion_player_model.dart';
+import '../../data/repo/champion_repo.dart';
 
 part 'champion_state.dart';
 

@@ -1,6 +1,6 @@
-import 'package:im_legends/core/error/types/error_handler.dart';
-import 'package:im_legends/core/models/user_data.dart';
-import 'package:im_legends/core/networking/supabase_service.dart';
+import '../error/types/error_handler.dart';
+import '../models/user_data.dart';
+import 'supabase_service.dart';
 
 class UserRemoteDS {
   final SupabaseService supabaseService;

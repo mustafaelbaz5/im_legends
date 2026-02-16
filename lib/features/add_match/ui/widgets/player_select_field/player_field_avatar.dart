@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:im_legends/core/utils/extensions/context_extensions.dart';
-import 'package:im_legends/core/utils/spacing.dart';
+import '../../../../../core/utils/extensions/context_extensions.dart';
+import '../../../../../core/utils/spacing.dart';
 
 class PlayerFieldAvatar extends StatelessWidget {
   final bool isSelected;

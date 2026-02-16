@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:im_legends/core/error/models/app_error.dart';
+import '../../../../core/error/models/app_error.dart';
 import 'package:meta/meta.dart';
 
 import '../../data/models/match_history_card_model.dart';

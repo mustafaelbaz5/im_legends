@@ -1,7 +1,7 @@
-import 'package:im_legends/features/champion/data/model/champion_player_model.dart';
-import 'package:im_legends/features/champion/data/model/champion_stat_calculator.dart';
-import 'package:im_legends/features/champion/data/remote/champion_remote_ds.dart';
-import 'package:im_legends/features/champion/data/repo/champion_repo.dart';
+import '../model/champion_player_model.dart';
+import '../model/champion_stat_calculator.dart';
+import '../remote/champion_remote_ds.dart';
+import 'champion_repo.dart';
 
 class ChampionRepoImpl implements ChampionRepo {
   final ChampionRemoteDs championRemoteDs;

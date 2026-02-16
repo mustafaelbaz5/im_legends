@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:im_legends/core/utils/extensions/context_extensions.dart';
-import 'package:im_legends/core/utils/spacing.dart';
+import '../../../../core/utils/extensions/context_extensions.dart';
+import '../../../../core/utils/spacing.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ProfileShimmerLoading extends StatelessWidget {

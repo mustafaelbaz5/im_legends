@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:im_legends/core/models/user_data.dart';
-import 'package:im_legends/features/profile/data/model/profile_model.dart';
+import '../../../../core/models/user_data.dart';
+import '../model/profile_model.dart';
 
 abstract class ProfileRepo {
   /// Fetch current user data

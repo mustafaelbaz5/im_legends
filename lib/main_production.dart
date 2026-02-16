@@ -2,10 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:im_legends/core/config/app_config.dart';
-import 'package:im_legends/core/config/app_constants.dart';
-import 'package:im_legends/core/router/app_router.dart';
-import 'package:im_legends/core/widgets/error_screen.dart';
+import 'core/config/app_config.dart';
+import 'core/config/app_constants.dart';
+import 'core/router/app_router.dart';
+import 'core/widgets/error_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'core/config/firebase_options.dart';

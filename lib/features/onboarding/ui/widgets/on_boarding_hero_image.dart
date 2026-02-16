@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:im_legends/core/utils/app_assets.dart';
-import 'package:im_legends/core/utils/spacing.dart';
+import '../../../../core/utils/app_assets.dart';
+import '../../../../core/utils/spacing.dart';
 
 class OnBoardingHeroImage extends StatelessWidget {
   const OnBoardingHeroImage({super.key});

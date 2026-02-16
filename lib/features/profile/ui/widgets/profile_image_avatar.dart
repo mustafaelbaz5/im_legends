@@ -3,11 +3,11 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:im_legends/core/themes/app_colors.dart';
-import 'package:im_legends/core/utils/extensions/context_extensions.dart';
-import 'package:im_legends/core/utils/functions/image_picker.dart';
-import 'package:im_legends/core/utils/spacing.dart';
-import 'package:im_legends/features/profile/logic/cubit/profile_cubit.dart';
+import '../../../../core/themes/app_colors.dart';
+import '../../../../core/utils/extensions/context_extensions.dart';
+import '../../../../core/utils/functions/image_picker.dart';
+import '../../../../core/utils/spacing.dart';
+import '../../logic/cubit/profile_cubit.dart';
 
 class ProfileImageAvatar extends StatefulWidget {
   const ProfileImageAvatar({

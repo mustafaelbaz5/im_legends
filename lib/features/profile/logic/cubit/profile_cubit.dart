@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
-import 'package:im_legends/core/error/models/app_error.dart';
-import 'package:im_legends/core/error/types/error_type.dart';
-import 'package:im_legends/features/profile/data/model/profile_model.dart';
+import '../../../../core/error/models/app_error.dart';
+import '../../../../core/error/types/error_type.dart';
+import '../../data/model/profile_model.dart';
 import 'package:meta/meta.dart';
 
 import '../../data/repo/profile_repo.dart';

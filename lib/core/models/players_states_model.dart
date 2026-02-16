@@ -1,4 +1,4 @@
-import 'package:im_legends/core/models/match_model.dart';
+import 'match_model.dart';
 
 class PlayerStatsModel {
   final String playerId;

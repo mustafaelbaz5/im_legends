@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:im_legends/features/auth/ui/login_screen.dart';
-import 'package:im_legends/features/auth/ui/sign_up_screen.dart';
-import 'package:im_legends/features/notification/ui/notifications_screen.dart';
+import '../../features/auth/ui/login_screen.dart';
+import '../../features/auth/ui/sign_up_screen.dart';
+import '../../features/notification/ui/notifications_screen.dart';
 
 import 'routes.dart';
 

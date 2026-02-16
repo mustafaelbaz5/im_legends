@@ -1,10 +1,10 @@
 import 'dart:io';
 
-import 'package:im_legends/core/models/players_states_model.dart';
-import 'package:im_legends/core/models/user_data.dart';
-import 'package:im_legends/features/profile/data/model/profile_model.dart';
-import 'package:im_legends/features/profile/data/remote/profile_remote_ds.dart';
-import 'package:im_legends/features/profile/data/repo/profile_repo.dart';
+import '../../../../core/models/players_states_model.dart';
+import '../../../../core/models/user_data.dart';
+import '../model/profile_model.dart';
+import '../remote/profile_remote_ds.dart';
+import 'profile_repo.dart';
 
 class ProfileRepoImpl implements ProfileRepo {
   final ProfileRemoteDs profileRemoteDs;

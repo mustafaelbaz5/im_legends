@@ -1,6 +1,6 @@
-import 'package:im_legends/core/models/players_states_model.dart';
-import 'package:im_legends/features/home/data/remote/home_remote_ds.dart';
-import 'package:im_legends/features/home/data/repo/home_repo.dart';
+import '../../../../core/models/players_states_model.dart';
+import '../remote/home_remote_ds.dart';
+import 'home_repo.dart';
 
 class HomeRepoImpl implements HomeRepo {
   final HomeRemoteDs remoteDs;

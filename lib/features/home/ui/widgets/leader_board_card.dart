@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:im_legends/core/utils/extensions/context_extensions.dart';
-import 'package:im_legends/features/home/ui/widgets/rank_and_avatar.dart';
+import '../../../../core/utils/extensions/context_extensions.dart';
+import 'rank_and_avatar.dart';
 
 import '../../../../core/models/players_states_model.dart';
 import '../../../../core/themes/app_colors.dart';

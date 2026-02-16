@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:im_legends/core/themes/app_texts_style.dart';
+import '../../../../core/themes/app_texts_style.dart';
 import 'leader_board_shimmer_loading.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 

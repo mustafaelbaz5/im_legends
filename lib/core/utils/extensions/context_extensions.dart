@@ -72,11 +72,7 @@ extension NavigationExt on BuildContext {
     return Navigator.of(
       this,
       rootNavigator: rootNavigator,
-    ).pushNamedAndRemoveUntil(
-      routeName,
-      (_) => false,
-      arguments: arguments,
-    );
+    ).pushNamedAndRemoveUntil(routeName, (_) => false, arguments: arguments);
   }
 }
 

@@ -1,10 +1,10 @@
 import 'dart:io';
 
-import 'package:im_legends/core/config/app_constants.dart';
-import 'package:im_legends/core/error/types/error_handler.dart';
-import 'package:im_legends/core/models/user_data.dart';
-import 'package:im_legends/core/networking/supabase_service.dart';
-import 'package:im_legends/core/service/secure_storage.dart';
+import '../../../../core/config/app_constants.dart';
+import '../../../../core/error/types/error_handler.dart';
+import '../../../../core/models/user_data.dart';
+import '../../../../core/networking/supabase_service.dart';
+import '../../../../core/service/secure_storage.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../../core/networking/storage_remote_ds.dart';

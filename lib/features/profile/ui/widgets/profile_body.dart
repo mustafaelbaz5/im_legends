@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:im_legends/core/utils/spacing.dart';
-import 'package:im_legends/features/profile/logic/cubit/profile_cubit.dart';
-import 'package:im_legends/features/profile/ui/widgets/profile_shimmer_loading.dart';
+import '../../../../core/utils/spacing.dart';
+import '../../logic/cubit/profile_cubit.dart';
+import 'profile_shimmer_loading.dart';
 
 import 'profile_header.dart';
 import 'profile_info_section.dart';

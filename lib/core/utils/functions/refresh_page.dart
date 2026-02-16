@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:im_legends/features/history/logic/cubit/match_history_cubit.dart';
+import '../../../features/history/logic/cubit/match_history_cubit.dart';
 
 import '../../../features/champion/logic/cubit/champion_cubit.dart';
 import '../../../features/home/logic/cubit/home_cubit.dart';

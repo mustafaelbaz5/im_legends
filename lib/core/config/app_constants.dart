@@ -9,6 +9,7 @@ class AppConstants {
   static const String userIdKey = 'user_id';
   static const String tokenKey = 'token';
 }
+
 bool isLoggedInUser = false;
 Future<void> setupHydratedStorage() async {
   HydratedBloc.storage = await HydratedStorage.build(

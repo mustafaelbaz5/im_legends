@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
-import 'package:im_legends/core/di/dependency_injection.dart';
-import 'package:im_legends/core/networking/supabase_service.dart';
-import 'package:im_legends/features/auth/data/repo/auth_repo.dart';
+import '../../../../core/di/dependency_injection.dart';
+import '../../../../core/networking/supabase_service.dart';
+import '../../data/repo/auth_repo.dart';
 import 'package:meta/meta.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 

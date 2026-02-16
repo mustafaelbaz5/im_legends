@@ -1,4 +1,5 @@
 part of 'add_match_cubit.dart';
+
 @immutable
 class AddMatchState {
   final int winnerScore;
@@ -69,7 +70,6 @@ class AddMatchInitial extends AddMatchState {
 class AddMatchLoading extends AddMatchState {}
 
 class AddMatchInsertSuccess extends AddMatchState {}
-
 
 class AddMatchFailure extends AddMatchState {
   final AppError error;

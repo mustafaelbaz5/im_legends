@@ -1,4 +1,4 @@
-import 'package:im_legends/features/champion/data/model/champion_player_model.dart';
+import 'champion_player_model.dart';
 
 class ChampionStatCalculator {
   List<ChampionPlayerModel> compute({

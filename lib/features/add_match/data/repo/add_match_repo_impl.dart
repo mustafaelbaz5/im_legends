@@ -1,6 +1,6 @@
-import 'package:im_legends/core/models/match_model.dart';
-import 'package:im_legends/features/add_match/data/remote/add_match_remote_ds.dart';
-import 'package:im_legends/features/add_match/data/repo/add_match_repo.dart';
+import '../../../../core/models/match_model.dart';
+import '../remote/add_match_remote_ds.dart';
+import 'add_match_repo.dart';
 
 class AddMatchRepoImpl implements AddMatchRepo {
   final AddMatchRemoteDs addMatchService;

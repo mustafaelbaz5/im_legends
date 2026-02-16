@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:im_legends/core/themes/app_texts_style.dart';
-import 'package:im_legends/core/utils/extensions/context_extensions.dart';
+import '../../themes/app_texts_style.dart';
+import '../../utils/extensions/context_extensions.dart';
 
 import '../../utils/spacing.dart';
 import '../../widgets/custom_text_button.dart';

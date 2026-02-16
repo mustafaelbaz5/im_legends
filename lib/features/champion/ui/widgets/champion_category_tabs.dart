@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:im_legends/core/themes/app_colors.dart';
-import 'package:im_legends/core/themes/app_texts_style.dart';
-import 'package:im_legends/core/utils/extensions/context_extensions.dart';
-import 'package:im_legends/core/utils/spacing.dart';
-import 'package:im_legends/features/champion/data/model/champion_player_model.dart';
+import '../../../../core/themes/app_colors.dart';
+import '../../../../core/themes/app_texts_style.dart';
+import '../../../../core/utils/extensions/context_extensions.dart';
+import '../../../../core/utils/spacing.dart';
+import '../../data/model/champion_player_model.dart';
 
 class ChampionCategoryTabs extends StatelessWidget {
   final StatCategory selected;

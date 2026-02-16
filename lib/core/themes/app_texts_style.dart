@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:im_legends/core/themes/app_font_weight.dart';
-import 'package:im_legends/core/utils/spacing.dart';
+import 'app_font_weight.dart';
+import '../utils/spacing.dart';
 
 class AppTextStyles {
   const AppTextStyles._();

@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:im_legends/core/models/user_data.dart';
+import '../../../../core/models/user_data.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract class AuthRepo {

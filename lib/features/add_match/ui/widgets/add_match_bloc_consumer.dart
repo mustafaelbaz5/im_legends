@@ -1,12 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:im_legends/core/models/match_model.dart';
-import 'package:im_legends/core/ui/dialogs/app_dialogs.dart';
-import 'package:im_legends/core/ui/loaders/overlay_loader.dart';
-import 'package:im_legends/core/utils/spacing.dart';
-import 'package:im_legends/core/widgets/custom_text_button.dart';
-import 'package:im_legends/features/add_match/logic/cubit/add_match_cubit.dart';
+import '../../../../core/models/match_model.dart';
+import '../../../../core/ui/dialogs/app_dialogs.dart';
+import '../../../../core/ui/loaders/overlay_loader.dart';
+import '../../../../core/utils/spacing.dart';
+import '../../../../core/widgets/custom_text_button.dart';
+import '../../logic/cubit/add_match_cubit.dart';
 
 class AddMatchBlocConsumer extends StatelessWidget {
   const AddMatchBlocConsumer({super.key});

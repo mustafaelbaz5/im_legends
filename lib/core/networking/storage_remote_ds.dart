@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:im_legends/core/error/types/error_handler.dart';
-import 'package:im_legends/core/networking/supabase_service.dart';
+import '../error/types/error_handler.dart';
+import 'supabase_service.dart';
 
 class StorageRemoteDs {
   final SupabaseService supabaseService;

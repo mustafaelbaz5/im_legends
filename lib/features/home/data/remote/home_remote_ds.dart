@@ -1,5 +1,5 @@
-import 'package:im_legends/core/error/types/error_handler.dart';
-import 'package:im_legends/core/networking/supabase_service.dart';
+import '../../../../core/error/types/error_handler.dart';
+import '../../../../core/networking/supabase_service.dart';
 
 class HomeRemoteDs {
   final SupabaseService supabaseService;

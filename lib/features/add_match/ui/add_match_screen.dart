@@ -1,13 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:im_legends/core/themes/app_colors.dart';
-import 'package:im_legends/core/utils/extensions/context_extensions.dart';
-import 'package:im_legends/core/widgets/custom_app_bar.dart';
-import 'package:im_legends/features/add_match/logic/cubit/add_match_cubit.dart';
-import 'package:im_legends/features/add_match/ui/widgets/add_match_bloc_consumer.dart';
-import 'package:im_legends/features/add_match/ui/widgets/player_select_field/player_select_field.dart';
-import 'package:im_legends/features/add_match/ui/widgets/score_input_field.dart';
+import '../../../core/themes/app_colors.dart';
+import '../../../core/utils/extensions/context_extensions.dart';
+import '../../../core/widgets/custom_app_bar.dart';
+import '../logic/cubit/add_match_cubit.dart';
+import 'widgets/add_match_bloc_consumer.dart';
+import 'widgets/player_select_field/player_select_field.dart';
+import 'widgets/score_input_field.dart';
 
 import '../../../core/utils/spacing.dart';
 

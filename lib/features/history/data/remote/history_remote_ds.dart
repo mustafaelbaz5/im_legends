@@ -1,5 +1,5 @@
-import 'package:im_legends/core/error/types/error_handler.dart';
-import 'package:im_legends/features/history/data/models/match_history_card_model.dart';
+import '../../../../core/error/types/error_handler.dart';
+import '../models/match_history_card_model.dart';
 
 import '../../../../core/networking/supabase_service.dart';
 

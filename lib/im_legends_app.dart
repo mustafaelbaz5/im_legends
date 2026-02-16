@@ -2,14 +2,14 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:im_legends/core/di/dependency_injection.dart';
-import 'package:im_legends/core/router/app_router.dart';
-import 'package:im_legends/core/themes/cubit/theme_cubit.dart';
-import 'package:im_legends/core/themes/theme_data/theme_data_dark.dart';
-import 'package:im_legends/core/themes/theme_data/theme_data_light.dart';
-import 'package:im_legends/features/auth/logic/cubit/auth_cubit.dart';
-import 'package:im_legends/features/main_navigation/ui/main_scaffold.dart';
-import 'package:im_legends/features/onboarding/ui/on_boarding_screen.dart';
+import 'core/di/dependency_injection.dart';
+import 'core/router/app_router.dart';
+import 'core/themes/cubit/theme_cubit.dart';
+import 'core/themes/theme_data/theme_data_dark.dart';
+import 'core/themes/theme_data/theme_data_light.dart';
+import 'features/auth/logic/cubit/auth_cubit.dart';
+import 'features/main_navigation/ui/main_scaffold.dart';
+import 'features/onboarding/ui/on_boarding_screen.dart';
 
 class IMLegendsApp extends StatelessWidget {
   const IMLegendsApp({super.key, required this.appRouter});
@@ -63,4 +63,5 @@ class IMLegendsApp extends StatelessWidget {
     }
   }
 }
+
 // test123@gmail.com

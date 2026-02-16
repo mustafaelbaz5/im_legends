@@ -1,9 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:im_legends/core/utils/validators.dart';
-import 'package:im_legends/core/widgets/custom_text_form_.dart';
-import 'package:im_legends/features/auth/logic/cubit/auth_cubit.dart';
+import '../../../../core/utils/validators.dart';
+import '../../../../core/widgets/custom_text_form_.dart';
+import '../../logic/cubit/auth_cubit.dart';
 
 import '../../../../core/utils/spacing.dart';
 import '../../../../core/widgets/custom_text_button.dart';

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:im_legends/core/themes/app_texts_style.dart';
-import 'package:im_legends/core/utils/extensions/context_extensions.dart';
-import 'package:im_legends/core/utils/spacing.dart';
-import 'package:im_legends/features/add_match/logic/cubit/add_match_cubit.dart';
+import '../../../../core/themes/app_texts_style.dart';
+import '../../../../core/utils/extensions/context_extensions.dart';
+import '../../../../core/utils/spacing.dart';
+import '../../logic/cubit/add_match_cubit.dart';
 
 class ScoreInputField extends StatelessWidget {
   final Color accentColor;
