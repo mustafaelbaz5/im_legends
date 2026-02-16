@@ -9,12 +9,8 @@ class ProfileShimmerLoading extends StatelessWidget {
   @override
   Widget build(final BuildContext context) {
     return Shimmer.fromColors(
-      baseColor: context.isDarkMode
-          ? Colors.grey.shade800
-          : Colors.grey.shade300,
-      highlightColor: context.isDarkMode
-          ? Colors.grey.shade700
-          : Colors.grey.shade100,
+      baseColor: context.customColors.textPrimary.withAlpha(50),
+      highlightColor: context.customColors.textSecondary,
       period: const Duration(milliseconds: 1200),
       child: CustomScrollView(
         slivers: [

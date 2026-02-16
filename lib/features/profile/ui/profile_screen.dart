@@ -9,7 +9,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(final BuildContext context) {
     return RefreshIndicator(
-      onRefresh: () => context.read<ProfileCubit>().refreshProfile(),
+      onRefresh: () => context.read<ProfileCubit>().fetchProfile(),
       child: const ProfileBody(),
     );
   }

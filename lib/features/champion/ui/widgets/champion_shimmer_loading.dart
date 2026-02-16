@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:im_legends/core/utils/extensions/context_extensions.dart';
+import 'package:im_legends/core/utils/spacing.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ChampionShimmer extends StatelessWidget {
@@ -7,31 +9,20 @@ class ChampionShimmer extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
-    final baseColor = isDark ? Colors.grey.shade800 : Colors.grey.shade300;
-    final highlightColor = isDark ? Colors.grey.shade600 : Colors.grey.shade100;
-
     return Shimmer.fromColors(
-      baseColor: baseColor,
-      highlightColor: highlightColor,
+      baseColor: context.customColors.textPrimary.withAlpha(50),
+      highlightColor: context.customColors.textSecondary,
       child: SingleChildScrollView(
         physics: const NeverScrollableScrollPhysics(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 24.h),
-
-            // ── Podium shimmer (2nd | 1st | 3rd) ──
+            verticalSpacing(24),
             _PodiumShimmer(),
-
-            SizedBox(height: 16.h),
-
+            verticalSpacing(16),
             const Divider(),
+            verticalSpacing(8),
 
-            SizedBox(height: 8.h),
-
-            // ── Leaderboard rows shimmer ──
             _LeaderboardShimmer(),
           ],
         ),
@@ -44,25 +35,31 @@ class _PodiumShimmer extends StatelessWidget {
   @override
   Widget build(final BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      padding: EdgeInsets.symmetric(horizontal: responsiveWidth(16)),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           // 2nd place
           Expanded(
-            child: _PodiumSlotShimmer(podiumHeight: 70.h, avatarRadius: 30.r),
+            child: _PodiumSlotShimmer(
+              podiumHeight: responsiveHeight(70),
+              avatarRadius: responsiveRadius(30),
+            ),
           ),
           // 1st place
           Expanded(
             child: _PodiumSlotShimmer(
-              podiumHeight: 100.h,
-              avatarRadius: 38.r,
+              podiumHeight: responsiveHeight(100),
+              avatarRadius: responsiveRadius(38),
               showCrown: true,
             ),
           ),
           // 3rd place
           Expanded(
-            child: _PodiumSlotShimmer(podiumHeight: 50.h, avatarRadius: 26.r),
+            child: _PodiumSlotShimmer(
+              podiumHeight: responsiveHeight(50),
+              avatarRadius: responsiveRadius(26),
+            ),
           ),
         ],
       ),
@@ -88,50 +85,52 @@ class _PodiumSlotShimmer extends StatelessWidget {
       children: [
         // Crown placeholder
         Container(
-          height: 28.h,
-          width: 28.w,
+          height: responsiveHeight(28),
+          width: responsiveWidth(28),
           decoration: showCrown
               ? const BoxDecoration(color: Colors.white, shape: BoxShape.circle)
               : null,
         ),
 
-        SizedBox(height: 6.h),
+        verticalSpacing(6),
 
         // Avatar
         CircleAvatar(radius: avatarRadius, backgroundColor: Colors.white),
 
-        SizedBox(height: 8.h),
+        verticalSpacing(8),
 
         // Name
         Container(
-          height: 10.h,
-          width: 60.w,
+          height: responsiveHeight(10),
+          width: responsiveWidth(60),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(4.r),
           ),
         ),
 
-        SizedBox(height: 6.h),
+        verticalSpacing(6),
 
         // Stat
         Container(
-          height: 8.h,
-          width: 44.w,
+          height: responsiveHeight(8),
+          width: responsiveWidth(44),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(4.r),
+            borderRadius: BorderRadius.circular(responsiveRadius(4)),
           ),
         ),
 
-        SizedBox(height: 8.h),
+        verticalSpacing(8),
 
         // Podium block
         Container(
           height: podiumHeight,
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.vertical(top: Radius.circular(8.r)),
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(responsiveRadius(8)),
+            ),
           ),
         ),
       ],
@@ -162,47 +161,53 @@ class _LeaderboardRowShimmer extends StatelessWidget {
 
     return Container(
       color: isEven ? colors.surfaceContainerLowest : colors.surface,
-      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+      padding: EdgeInsets.symmetric(
+        horizontal: responsiveWidth(16),
+        vertical: responsiveHeight(10),
+      ),
       child: Row(
         children: [
           // Rank number
           Container(
-            height: 14.h,
-            width: 20.w,
+            height: responsiveHeight(14),
+            width: responsiveWidth(20),
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(4.r),
+              borderRadius: BorderRadius.circular(responsiveRadius(4)),
             ),
           ),
 
-          SizedBox(width: 16.w),
+          horizontalSpacing(16),
 
           // Avatar
-          CircleAvatar(radius: 16.r, backgroundColor: Colors.white),
+          CircleAvatar(
+            radius: responsiveRadius(16),
+            backgroundColor: Colors.white,
+          ),
 
-          SizedBox(width: 10.w),
+          horizontalSpacing(10),
 
           // Name
           Expanded(
             child: Container(
-              height: 12.h,
+              height: responsiveHeight(12),
               width: double.infinity,
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(4.r),
+                borderRadius: BorderRadius.circular(responsiveRadius(4)),
               ),
             ),
           ),
 
-          SizedBox(width: 16.w),
+          horizontalSpacing(16),
 
           // Stat value
           Container(
-            height: 14.h,
-            width: 30.w,
+            height: responsiveHeight(14),
+            width: responsiveWidth(30),
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(4.r),
+              borderRadius: BorderRadius.circular(responsiveRadius(4)),
             ),
           ),
         ],

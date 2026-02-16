@@ -48,7 +48,7 @@ class ProfileCubit extends Cubit<ProfileState> {
       final newImageUrl = await profileRepo.uploadAndSetProfileImage(imageFile);
 
       if (newImageUrl != null) {
-        await refreshProfile();
+        await fetchProfile();
       } else {
         emit(
           ProfileFailure(
@@ -58,21 +58,6 @@ class ProfileCubit extends Cubit<ProfileState> {
             ),
           ),
         );
-      }
-    } catch (error) {
-      emit(
-        ProfileFailure(error: error is AppError ? error : AppError.unknown()),
-      );
-    }
-  }
-
-  /// Refresh profile data
-  Future<void> refreshProfile() async {
-    try {
-      final profile = await profileRepo.getProfileWithStats();
-
-      if (profile != null) {
-        emit(ProfileSuccess(profile: profile));
       }
     } catch (error) {
       emit(
