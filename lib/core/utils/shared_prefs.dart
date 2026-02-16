@@ -1,5 +1,5 @@
-
 import 'package:shared_preferences/shared_preferences.dart';
+
 class SharedPrefStorage {
   SharedPrefStorage._();
   static final SharedPrefStorage instance = SharedPrefStorage._();
@@ -25,52 +25,52 @@ class SharedPrefStorage {
   /// ---------------------------
   /// Basic getters/setters
   /// ---------------------------
-  Future<bool> setString(String key, String value) async {
+  Future<bool> setString(final String key, final String value) async {
     _checkInit();
     return _prefs.setString(key, value);
   }
 
-  String? getString(String key) {
+  String? getString(final String key) {
     _checkInit();
     return _prefs.getString(key);
   }
 
-  Future<bool> setBool(String key, bool value) async {
+  Future<bool> setBool(final String key, final bool value) async {
     _checkInit();
     return _prefs.setBool(key, value);
   }
 
-  bool? getBool(String key) {
+  bool? getBool(final String key) {
     _checkInit();
     return _prefs.getBool(key);
   }
 
-  Future<bool> setInt(String key, int value) async {
+  Future<bool> setInt(final String key, final int value) async {
     _checkInit();
     return _prefs.setInt(key, value);
   }
 
-  int? getInt(String key) {
+  int? getInt(final String key) {
     _checkInit();
     return _prefs.getInt(key);
   }
 
-  Future<bool> setDouble(String key, double value) async {
+  Future<bool> setDouble(final String key, final double value) async {
     _checkInit();
     return _prefs.setDouble(key, value);
   }
 
-  double? getDouble(String key) {
+  double? getDouble(final String key) {
     _checkInit();
     return _prefs.getDouble(key);
   }
 
-  Future<bool> setStringList(String key, List<String> value) async {
+  Future<bool> setStringList(final String key, final List<String> value) async {
     _checkInit();
     return _prefs.setStringList(key, value);
   }
 
-  List<String>? getStringList(String key) {
+  List<String>? getStringList(final String key) {
     _checkInit();
     return _prefs.getStringList(key);
   }
@@ -114,7 +114,7 @@ class SharedPrefStorage {
   /// ---------------------------
   /// General helpers
   /// ---------------------------
-  Future<bool> remove(String key) async {
+  Future<bool> remove(final String key) async {
     _checkInit();
     return _prefs.remove(key);
   }
@@ -124,7 +124,7 @@ class SharedPrefStorage {
     return _prefs.clear();
   }
 
-  bool containsKey(String key) {
+  bool containsKey(final String key) {
     _checkInit();
     return _prefs.containsKey(key);
   }

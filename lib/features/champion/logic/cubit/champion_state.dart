@@ -1,20 +1,27 @@
 part of 'champion_cubit.dart';
 
-@immutable
-sealed class ChampionState {}
-
-final class ChampionInitial extends ChampionState {}
-
-final class ChampionLoading extends ChampionState {}
-
-final class ChampionSuccess extends ChampionState {
-  final List<ChampionPlayerModel> players;
-
-  ChampionSuccess(this.players);
+sealed class ChampionState {
+  const ChampionState();
 }
 
-final class ChampionFailure extends ChampionState {
-  final String errorMessage;
+class ChampionInitial extends ChampionState {
+  const ChampionInitial();
+}
 
-  ChampionFailure(this.errorMessage);
+class ChampionLoading extends ChampionState {
+  const ChampionLoading();
+}
+
+class ChampionSuccess extends ChampionState {
+  final List<ChampionPlayerModel> players;
+  const ChampionSuccess(this.players);
+}
+
+class ChampionEmpty extends ChampionState {
+  const ChampionEmpty();
+}
+
+class ChampionFailure extends ChampionState {
+  final AppError error;
+  const ChampionFailure({required this.error});
 }

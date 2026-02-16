@@ -12,7 +12,7 @@ final class MatchHistorySuccess extends MatchHistoryState {
   MatchHistorySuccess({required this.matches});
 }
 
-final class MatchHistoryError extends MatchHistoryState {
-  final String errorMessage;
-  MatchHistoryError({required this.errorMessage});
+final class MatchHistoryFailed extends MatchHistoryState {
+  final AppError error;
+  MatchHistoryFailed({required this.error});
 }

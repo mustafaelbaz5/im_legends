@@ -1,116 +1,216 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../core/utils/extensions/context_extensions.dart';
+import '../../../../core/utils/spacing.dart';
 import 'package:shimmer/shimmer.dart';
-
-import '../../../../core/themes/app_colors.dart';
 
 class ChampionShimmer extends StatelessWidget {
   const ChampionShimmer({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Shimmer.fromColors(
-      baseColor: Colors.grey.shade800,
-      highlightColor: Colors.grey.shade500,
+      baseColor: context.customColors.textPrimary.withAlpha(50),
+      highlightColor: context.customColors.textSecondary,
       child: SingleChildScrollView(
         physics: const NeverScrollableScrollPhysics(),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Header shimmer
-            Container(
-              height: 280.h,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: AppColors.darkRedColor.withAlpha((0.5 * 255).toInt()),
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(16.r),
-                  bottomRight: Radius.circular(16.r),
-                ),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const CircleAvatar(
-                    radius: 50,
-                    backgroundColor: Colors.white12,
-                  ),
-                  const SizedBox(height: 16),
-                  Container(),
-                ],
-              ),
-            ),
-            SizedBox(height: 20.h),
-            // Stats shimmer
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 12.w),
-              padding: EdgeInsets.all(16.w),
-              decoration: BoxDecoration(
-                color: Colors.black.withAlpha((0.6 * 255).toInt()),
-                borderRadius: BorderRadius.circular(16.r),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: List.generate(
-                  4,
-                  (index) => Column(
-                    children: [
-                      Container(
-                        height: 24.h,
-                        width: 24.h,
-                        decoration: const BoxDecoration(
-                          color: Colors.white12,
-                          shape: BoxShape.circle,
-                        ),
-                      ),
-                      SizedBox(height: 8.h),
-                      Container(
-                        height: 12.h,
-                        width: 40.w,
-                        color: Colors.white24,
-                      ),
-                      SizedBox(height: 4.h),
-                      Container(
-                        height: 8.h,
-                        width: 30.w,
-                        color: Colors.white10,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: 24.h),
-            // Top 3 shimmer
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 12.w),
-              padding: EdgeInsets.symmetric(vertical: 16.h),
-              decoration: BoxDecoration(
-                color: Colors.black.withAlpha((0.6 * 255).toInt()),
-                borderRadius: BorderRadius.circular(16.r),
-              ),
-              child: Column(
-                children: [
-                  Container(height: 20.h, width: 80.w, color: Colors.white24),
-                  SizedBox(height: 32.h),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: List.generate(
-                      3,
-                      (index) => Container(
-                        height: index == 1 ? 140.h : 120.h,
-                        width: 100.w,
-                        decoration: BoxDecoration(
-                          color: Colors.white10,
-                          borderRadius: BorderRadius.circular(16.r),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            verticalSpacing(24),
+            _PodiumShimmer(),
+            verticalSpacing(16),
+            const Divider(),
+            verticalSpacing(8),
+
+            _LeaderboardShimmer(),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _PodiumShimmer extends StatelessWidget {
+  @override
+  Widget build(final BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: responsiveWidth(16)),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          // 2nd place
+          Expanded(
+            child: _PodiumSlotShimmer(
+              podiumHeight: responsiveHeight(70),
+              avatarRadius: responsiveRadius(30),
+            ),
+          ),
+          // 1st place
+          Expanded(
+            child: _PodiumSlotShimmer(
+              podiumHeight: responsiveHeight(100),
+              avatarRadius: responsiveRadius(38),
+              showCrown: true,
+            ),
+          ),
+          // 3rd place
+          Expanded(
+            child: _PodiumSlotShimmer(
+              podiumHeight: responsiveHeight(50),
+              avatarRadius: responsiveRadius(26),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _PodiumSlotShimmer extends StatelessWidget {
+  final double podiumHeight;
+  final double avatarRadius;
+  final bool showCrown;
+
+  const _PodiumSlotShimmer({
+    required this.podiumHeight,
+    required this.avatarRadius,
+    this.showCrown = false,
+  });
+
+  @override
+  Widget build(final BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        // Crown placeholder
+        Container(
+          height: responsiveHeight(28),
+          width: responsiveWidth(28),
+          decoration: showCrown
+              ? const BoxDecoration(color: Colors.white, shape: BoxShape.circle)
+              : null,
+        ),
+
+        verticalSpacing(6),
+
+        // Avatar
+        CircleAvatar(radius: avatarRadius, backgroundColor: Colors.white),
+
+        verticalSpacing(8),
+
+        // Name
+        Container(
+          height: responsiveHeight(10),
+          width: responsiveWidth(60),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(4.r),
+          ),
+        ),
+
+        verticalSpacing(6),
+
+        // Stat
+        Container(
+          height: responsiveHeight(8),
+          width: responsiveWidth(44),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(responsiveRadius(4)),
+          ),
+        ),
+
+        verticalSpacing(8),
+
+        // Podium block
+        Container(
+          height: podiumHeight,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(responsiveRadius(8)),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _LeaderboardShimmer extends StatelessWidget {
+  @override
+  Widget build(final BuildContext context) {
+    return Column(
+      children: List.generate(
+        6,
+        (final i) => _LeaderboardRowShimmer(isEven: i.isEven),
+      ),
+    );
+  }
+}
+
+class _LeaderboardRowShimmer extends StatelessWidget {
+  final bool isEven;
+
+  const _LeaderboardRowShimmer({required this.isEven});
+
+  @override
+  Widget build(final BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+
+    return Container(
+      color: isEven ? colors.surfaceContainerLowest : colors.surface,
+      padding: EdgeInsets.symmetric(
+        horizontal: responsiveWidth(16),
+        vertical: responsiveHeight(10),
+      ),
+      child: Row(
+        children: [
+          // Rank number
+          Container(
+            height: responsiveHeight(14),
+            width: responsiveWidth(20),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(responsiveRadius(4)),
+            ),
+          ),
+
+          horizontalSpacing(16),
+
+          // Avatar
+          CircleAvatar(
+            radius: responsiveRadius(16),
+            backgroundColor: Colors.white,
+          ),
+
+          horizontalSpacing(10),
+
+          // Name
+          Expanded(
+            child: Container(
+              height: responsiveHeight(12),
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(responsiveRadius(4)),
+              ),
+            ),
+          ),
+
+          horizontalSpacing(16),
+
+          // Stat value
+          Container(
+            height: responsiveHeight(14),
+            width: responsiveWidth(30),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(responsiveRadius(4)),
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -1,0 +1,51 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import '../../../../core/router/routes.dart';
+import '../../../../core/themes/app_colors.dart';
+import '../../../../core/themes/app_texts_style.dart';
+import '../../../../core/utils/app_assets.dart';
+import '../../../../core/utils/spacing.dart';
+
+import '../../../../core/utils/extensions/context_extensions.dart';
+
+class ProfileTopBar extends StatelessWidget {
+  const ProfileTopBar({super.key});
+
+  @override
+  Widget build(final BuildContext context) {
+    return Container(
+      color: AppColors.primary300,
+      height: responsiveHeight(220),
+      child: Padding(
+        padding: EdgeInsets.only(
+          left: responsiveWidth(24),
+          right: responsiveWidth(24),
+          top: responsiveHeight(56),
+          bottom: responsiveHeight(24),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'profile.profile'.tr(),
+              style: AppTextStyles.font20Bold.copyWith(color: AppColors.grey0),
+              textAlign: TextAlign.center,
+            ),
+            const Spacer(),
+            GestureDetector(
+              onTap: () => context.pushNamed(Routes.notificationsScreen),
+              child: SvgPicture.asset(
+                AppAssets.notificationIconSvg,
+                colorFilter: const ColorFilter.mode(
+                  AppColors.grey0,
+                  BlendMode.srcIn,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

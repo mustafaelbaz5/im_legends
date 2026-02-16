@@ -1,7 +1,12 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../core/themes/app_colors.dart';
+import '../../../../core/themes/app_texts_style.dart';
+import '../../../../core/utils/extensions/context_extensions.dart';
+import '../../../../core/widgets/custom_icon_bottom.dart';
 
 import '../../../../core/utils/functions/image_picker.dart';
 import '../../../../core/utils/spacing.dart';
@@ -41,45 +46,45 @@ class _UploadImageFieldState extends State<UploadImageField> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Column(
       children: [
         GestureDetector(
           onTap: _pickImage,
           child: Semantics(
-            label: 'Upload profile image',
             child: Stack(
               alignment: Alignment.bottomRight,
               children: [
                 CircleAvatar(
-                  radius: 48.r,
-                  backgroundColor: Theme.of(context).colorScheme.surface,
+                  radius: responsiveRadius(60),
+                  backgroundColor: context.customColors.border.withValues(
+                    alpha: 0.3,
+                  ),
                   backgroundImage: _profileImage != null
                       ? FileImage(_profileImage!)
                       : null,
                   child: _profileImage == null
                       ? Icon(
                           Icons.person,
-                          size: 48.r,
-                          color: Theme.of(context).colorScheme.onSurface
-                              .withAlpha((0.4 * 255).toInt()),
+                          size: responsiveRadius(60),
+                          color: context.customColors.accentBlue,
                         )
                       : null,
                 ),
                 Container(
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primary,
+                    color: context.customColors.textPrimary,
                     shape: BoxShape.circle,
                     border: Border.all(
-                      color: Theme.of(context).colorScheme.surface,
+                      color: context.customColors.background,
                       width: 2.w,
                     ),
                   ),
-                  padding: EdgeInsets.all(6.r),
+                  padding: EdgeInsets.all(responsiveRadius(6)),
                   child: Icon(
                     Icons.edit,
-                    color: Theme.of(context).colorScheme.onPrimary,
-                    size: 16.r,
+                    color: context.customColors.background,
+                    size: responsiveRadius(16),
                   ),
                 ),
               ],
@@ -89,20 +94,14 @@ class _UploadImageFieldState extends State<UploadImageField> {
         verticalSpacing(12),
 
         // Subtle secondary button
-        TextButton.icon(
+        CustomIconBottom(
+          icon: Icons.upload,
           onPressed: _pickImage,
-          style: TextButton.styleFrom(
-            foregroundColor: Colors.blueAccent,
-            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20.r),
-            ),
+          label: 'image_picker.upload_image'.tr(),
+          labelStyle: AppTextStyles.font12Regular.copyWith(
+            color: AppColors.primary300,
           ),
-          icon: const Icon(Icons.upload, size: 18),
-          label: const Text(
-            'Upload Profile Image',
-            style: TextStyle(fontWeight: FontWeight.w500),
-          ),
+          iconColor: AppColors.primary300,
         ),
       ],
     );

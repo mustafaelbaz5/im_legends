@@ -1,0 +1,149 @@
+{
+  "app_title": "IM Legends",
+  "welcome": "Welcome",
+  "errors": {
+    "error_screen_title": "Oops! Something went wrong",
+    "error_screen_desc": "We encountered an unexpected error.Don't worry, we're working on it.",
+    "error_screen_button": "Try Again ",
+    "no_internet": "You're offline. Check your WiFi or mobile data.",
+    "timeout": "Taking too long to respond. Please try again.",
+    "connection_error": "Can't connect right now. Check your internet.",
+    "bad_request": "Something's wrong with your request. Please try again.",
+    "unauthorized": "Please log in to continue.",
+    "forbidden": "You don't have access to this.",
+    "not_found": "We couldn't find what you're looking for.",
+    "conflict": "This already exists. Try something different.",
+    "server_error": "Something went wrong on our end. Try again in a moment.",
+    "invalid_credentials": "Email or password is incorrect.",
+    "user_not_found": "No account with this email exists.",
+    "email_already_exists": "This email is already registered.",
+    "weak_password": "Password is too weak. Use at least 8 characters with letters and numbers.",
+    "invalid_email": "Please enter a valid email address.",
+    "session_expired": "Your session expired. Please log in again.",
+    "email_not_verified": "Please verify your email to continue.",
+    "validation": "Please check your information and try again.",
+    "cancelled": "You cancelled this action.",
+    "unknown": "Something unexpected happened. Please try again.",
+    "too_many_requests": "Too many attempts. Wait a few minutes and try again.",
+    "permission_denied": "You don't have permission to do this.",
+    "service_unavailable": "We're having technical issues. Please try again soon.",
+    "file_too_large": "This file is too big. Try a smaller one.",
+    "user_disabled": "This account is disabled. Contact support for help.",
+    "operation_not_allowed": "You can't do this action right now."
+  },
+  "app_dialogs": {
+    "error": "Error",
+    "confirm": "Confirm",
+    "success": "Success",
+    "warning": "Warning",
+    "info": "Info",
+    "cancel": "Cancel",
+    "ok": "OK",
+    "close": "Close",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "image_picker": {
+    "upload_image": "Upload Image",
+    "profile_image_selected": "Profile Image Selected",
+    "profile_image_not_selected": "Profile Image Not Selected",
+    "take_photo": "Take Photo",
+    "choose_from_gallery": "Choose From Gallery"
+  },
+  "onboarding": {
+    "subtitle": "Challenge your friends, track your stats, and become the ultimate football legend in your crew",
+    "button": "Get Started"
+  },
+  "auth": {
+    "login_title": "Welcome Back",
+    "login_desc": "We're excited to have you back, can't wait to see what you've been up to since you last logged in.",
+    "sign_up_title": "Create Account",
+    "sign_up_desc": "Sign up now and start exploring all that our app has to offer. We're excited to welcome you to our community!",
+    "name": "Name",
+    "age": "Age",
+    "phone": "Phone Number",
+    "email": "Email",
+    "password": "Password",
+    "confirm_password": "Confirm Password",
+    "login": "Login",
+    "sign_up": "Sign Up",
+    "forgot_password": "Forgot Password?",
+    "remember_me": "Remember Me",
+    "dont_have_account": "Don't have an account?",
+    "already_have_account": "Already have an account?",
+    "validation": {
+      "required": "This field is required.",
+      "name": "Invalid name Format",
+      "age": "Invalid age Format",
+      "phone": "Invalid phone Format",
+      "email": "Invalid email address.",
+      "password_mismatch": "Passwords do not match.",
+      "password_validation_1": " at least one lowercase letter",
+      "password_validation_2": "at least one uppercase letter",
+      "password_validation_3": " at least one number",
+      "password_validation_4": "at one special character",
+      "password_validation_5": "at least 8 characters long"
+    }
+  },
+  "home": {
+    "welcome_message": "Welcome",
+    "welcome_description": "Are you ready to compete?",
+    "leaderboard": "Leaderboard"
+  },
+  "history": {
+    "history": "History"
+  },
+  "add_match": {
+    "add_match": "Add Match",
+    "add_match_desc": "Add a new match to the leaderboard",
+    "select_winner": "Select Winner",
+    "select_loser": "Select Loser",
+    "score": "Score",
+    "add": "Add",
+    "choose_player": "Choose Player",
+    "players": "Players",
+    "add_match_success": "Match added successfully",
+    "add_match_error": "Failed to add match"
+  },
+  "championship": {
+    "champions": "Champions",
+    "top_scores": "Top Scores",
+    "top_wins": "Top Wins",
+    "best_defense": "Best Defense"
+  },
+  "profile": {
+    "profile": "Profile",
+    "stats": {
+      "title": "Statistics",
+      "rank": "Rank",
+      "matches_played": "Matches Played",
+      "wins": "Wins",
+      "losses": "Losses",
+      "win_rate": "Win Rate",
+      "goals_scored": "Goals Scored",
+      "goals_received": "Goals Received",
+      "goal_difference": "Goal Difference",
+      "points": "Points"
+    },
+    "info": {
+      "title": "Profile Information",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone Number",
+      "age": "Age"
+    },
+    "settings": {
+      "title": "Settings",
+      "language": "Language",
+      "theme": "Theme",
+      "select_language": "Select Language",
+      "select_theme": "Select Theme",
+      "light": "Light",
+      "dark": "Dark",
+      "english": "English",
+      "arabic": "Arabic",
+      "logout": "Logout",
+      "logout_message": "Are you sure you want to logout?"
+    }
+  }
+}

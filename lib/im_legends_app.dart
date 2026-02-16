@@ -1,29 +1,67 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
-import 'core/utils/app_assets.dart';
+import 'core/di/dependency_injection.dart';
+import 'core/router/app_router.dart';
+import 'core/themes/cubit/theme_cubit.dart';
+import 'core/themes/theme_data/theme_data_dark.dart';
+import 'core/themes/theme_data/theme_data_light.dart';
+import 'features/auth/logic/cubit/auth_cubit.dart';
+import 'features/main_navigation/ui/main_scaffold.dart';
+import 'features/onboarding/ui/on_boarding_screen.dart';
 
 class IMLegendsApp extends StatelessWidget {
-  const IMLegendsApp({super.key, required this.router});
-
-  final GoRouter router;
+  const IMLegendsApp({super.key, required this.appRouter});
+  final AppRouter appRouter;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(393, 852),
       minTextAdapt: true,
-      builder: (context, child) {
-        return MaterialApp.router(
-          debugShowCheckedModeBanner: false,
-          title: 'IM Legends App',
-          theme: ThemeData(
-            scaffoldBackgroundColor: const Color(0xFF000000),
-            fontFamily: AppAssets.fontRoboto,
+      splitScreenMode: true,
+      builder: (final context, final child) {
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (_) => getIt<AuthCubit>()..checkAuthStatus()),
+            BlocProvider(create: (_) => ThemeCubit()),
+          ],
+          child: BlocBuilder<ThemeCubit, ThemeMode>(
+            builder: (final context, final mode) {
+              return BlocBuilder<AuthCubit, AuthState>(
+                builder: (final context, final authState) {
+                  return MaterialApp(
+                    key: ValueKey(authState is AuthAuthenticated),
+                    localizationsDelegates: context.localizationDelegates,
+                    supportedLocales: context.supportedLocales,
+                    locale: context.locale,
+                    debugShowCheckedModeBanner: false,
+                    title: 'ImLegends',
+                    onGenerateRoute: appRouter.generateRoute,
+                    home: _buildHome(authState),
+                    theme: getLightTheme(context: context),
+                    darkTheme: getDarkTheme(context: context),
+                    themeMode: mode,
+                  );
+                },
+              );
+            },
           ),
-          routerConfig: router, // Use GoRouter here
         );
       },
     );
   }
+
+  Widget _buildHome(final AuthState state) {
+    if (state is AuthInitial || state is AuthLoading) {
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    } else if (state is AuthAuthenticated) {
+      return const MainScaffold();
+    } else {
+      return const OnBoardingScreen();
+    }
+  }
 }
+
+// test123@gmail.com

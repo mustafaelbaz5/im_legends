@@ -1,20 +1,27 @@
 import 'package:bloc/bloc.dart';
+import '../../../../core/error/models/app_error.dart';
+import 'package:meta/meta.dart';
+
 import '../../data/models/match_history_card_model.dart';
 import '../../data/repo/history_repo.dart';
-import 'package:meta/meta.dart';
 
 part 'match_history_state.dart';
 
 class MatchHistoryCubit extends Cubit<MatchHistoryState> {
-  MatchHistoryCubit() : super(MatchHistoryInitial());
+  final HistoryRepo historyRepo;
 
-  Future<void> getMatchHistory() async {
+  MatchHistoryCubit({required this.historyRepo}) : super(MatchHistoryInitial());
+  Future<void> fetchMatches() async {
     emit(MatchHistoryLoading());
     try {
-      final matches = await HistoryRepo().fetchMatches();
+      final matches = await historyRepo.fetchMatches();
       emit(MatchHistorySuccess(matches: matches));
-    } catch (e) {
-      emit(MatchHistoryError(errorMessage: e.toString()));
+    } catch (error) {
+      emit(
+        MatchHistoryFailed(
+          error: error is AppError ? error : AppError.unknown(),
+        ),
+      );
     }
   }
 }

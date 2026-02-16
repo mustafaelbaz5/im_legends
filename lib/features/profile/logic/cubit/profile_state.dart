@@ -1,20 +1,22 @@
 part of 'profile_cubit.dart';
 
 @immutable
-abstract class ProfileState {}
+sealed class ProfileState {}
 
-class ProfileInitial extends ProfileState {}
+final class ProfileInitial extends ProfileState {}
 
-class ProfileLoading extends ProfileState {}
+final class ProfileLoading extends ProfileState {}
 
-class ProfileSuccess extends ProfileState {
-  final UserProfileModel player;
-  ProfileSuccess({required this.player});
+final class ProfileSuccess extends ProfileState {
+  final UserProfileModel profile;
+
+  ProfileSuccess({required this.profile});
 }
 
-class ProfileFailure extends ProfileState {
-  final String message;
-  ProfileFailure(this.message);
+final class ProfileFailure extends ProfileState {
+  final AppError error;
+
+  ProfileFailure({required this.error});
 }
 
-class ProfileLoggedOut extends ProfileState {} // 🔥 new state
+final class ProfileLoggedOut extends ProfileState {}

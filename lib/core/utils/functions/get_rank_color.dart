@@ -1,7 +1,6 @@
-
 import 'package:flutter/material.dart';
 
-Color getRankColor(int rank) {
+Color getRankColor(final int rank) {
   switch (rank) {
     case 1:
       return Colors.amber.shade600; // Gold for Rank 1

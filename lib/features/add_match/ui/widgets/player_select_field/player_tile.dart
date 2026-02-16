@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../../core/themes/app_colors.dart';
+import '../../../../../core/utils/extensions/context_extensions.dart';
+import '../../../../../core/utils/spacing.dart';
 
 import '../../../../../core/themes/app_texts_style.dart';
 
@@ -11,7 +13,6 @@ class PlayerTile extends StatelessWidget {
   final bool isSelected;
   final int index;
 
-  /// Updated: callback returns full player info (id, name, image)
   final void Function(String id, String name, String imageUrl) onSelect;
 
   const PlayerTile({
@@ -25,48 +26,43 @@ class PlayerTile extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
-      margin: EdgeInsets.symmetric(vertical: 6.h),
-      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+      margin: EdgeInsets.symmetric(vertical: responsiveHeight(4)),
+      padding: EdgeInsets.symmetric(
+        horizontal: responsiveWidth(12),
+        vertical: responsiveHeight(10),
+      ),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16.r),
-        gradient: isSelected
-            ? const LinearGradient(
-                colors: [Color(0xFF2A4A6B), Color(0xFF1E3A5F)],
-              )
-            : null,
-        color: isSelected ? null : Colors.white.withAlpha((0.03 * 255).toInt()),
+        borderRadius: BorderRadius.circular(responsiveRadius(16)),
+        color: isSelected
+            ? context.customColors.background
+            : context.customColors.background.withValues(alpha: 0.5),
         border: isSelected
-            ? Border.all(color: const Color(0xFF4A90E2), width: 2)
-            : Border.all(
-                color: Colors.white.withAlpha((0.08 * 255).toInt()),
-                width: 1,
-              ),
+            ? Border.all(color: AppColors.primary300, width: 1.5)
+            : null,
       ),
       child: InkWell(
-        borderRadius: BorderRadius.circular(16.r),
-        onTap: () =>
-            onSelect(playerId, playerName, playerImage),
+        borderRadius: BorderRadius.circular(responsiveRadius(16)),
+        onTap: () => onSelect(playerId, playerName, playerImage),
         child: Row(
           children: [
             _buildAvatar(),
-            SizedBox(width: 16.w),
+            horizontalSpacing(16),
             Expanded(
               child: Text(
                 playerName,
-                style: BebasTextStyles.whiteBold20.copyWith(
-                  fontSize: 16.sp,
-                  color: isSelected
-                      ? Colors.white
-                      : Colors.white.withAlpha((0.95 * 255).toInt()),
-                  fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                ),
+                style: isSelected
+                    ? AppTextStyles.font14Bold
+                    : AppTextStyles.font14Regular,
               ),
             ),
             if (isSelected)
-              Icon(Icons.check_circle_rounded, color: Colors.blue, size: 24.sp),
+              const Icon(
+                Icons.check_circle_rounded,
+                color: AppColors.primary300,
+              ),
           ],
         ),
       ),
@@ -77,8 +73,8 @@ class PlayerTile extends StatelessWidget {
     final hasImage = playerImage.isNotEmpty;
 
     return Container(
-      width: 40.w,
-      height: 40.h,
+      width: responsiveWidth(40),
+      height: responsiveHeight(40),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         gradient: LinearGradient(
@@ -98,18 +94,23 @@ class PlayerTile extends StatelessWidget {
                 child: CachedNetworkImage(
                   imageUrl: playerImage,
                   fit: BoxFit.cover,
-                  width: 40.w,
-                  height: 40.h,
-                  placeholder: (context, url) => const SizedBox(
-                    width: 20,
-                    height: 20,
-                    child: CircularProgressIndicator(strokeWidth: 2),
+                  width: responsiveWidth(40),
+                  height: responsiveHeight(40),
+                  placeholder: (final context, final url) => SizedBox(
+                    width: responsiveWidth(20),
+                    height: responsiveHeight(20),
+                    child: Icon(
+                      Icons.person,
+                      color: context.customColors.textPrimary,
+                    ),
                   ),
-                  errorWidget: (context, url, error) =>
-                      const Icon(Icons.person, color: Colors.white),
+                  errorWidget: (final context, final url, final error) => Icon(
+                    Icons.person,
+                    color: context.customColors.textPrimary,
+                  ),
                 ),
               )
-            : const Icon(Icons.person, color: Colors.white),
+            : const SizedBox.shrink(),
       ),
     );
   }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../../core/utils/extensions/context_extensions.dart';
 
-import '../../../../../core/themes/app_colors.dart';
 import '../../../../../core/themes/app_texts_style.dart';
 
 class PlayerFieldInfo extends StatelessWidget {
@@ -11,39 +10,23 @@ class PlayerFieldInfo extends StatelessWidget {
   const PlayerFieldInfo({super.key, this.selectedPlayer, required this.hint});
 
   @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          AnimatedDefaultTextStyle(
-            duration: const Duration(milliseconds: 300),
-            style: BebasTextStyles.whiteBold20.copyWith(
-              color: selectedPlayer == null ? Colors.white54 : Colors.white,
-              fontSize: selectedPlayer != null ? 20.sp : 16.sp,
-              fontWeight: selectedPlayer != null
-                  ? FontWeight.bold
-                  : FontWeight.normal,
-            ),
-            child: Text(
-              selectedPlayer ?? hint,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
+  Widget build(final BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        AnimatedDefaultTextStyle(
+          duration: const Duration(milliseconds: 300),
+          style: AppTextStyles.font14Regular.copyWith(
+            color: context.customColors.textPrimary,
           ),
-          if (selectedPlayer != null) SizedBox(height: 4.h),
-          if (selectedPlayer != null)
-            Text(
-              'Player Selected',
-              style: TextStyle(
-                color: AppColors.greyColor,
-                fontSize: 10.sp,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-        ],
-      ),
+          child: Text(
+            selectedPlayer ?? hint,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+      ],
     );
   }
 }

@@ -1,49 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../core/utils/extensions/context_extensions.dart';
+import '../../../../core/utils/spacing.dart';
 import 'package:shimmer/shimmer.dart';
 
 class HistoryShimmerLoading extends StatelessWidget {
   const HistoryShimmerLoading({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return ListView.builder(
-      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
       itemCount: 5,
-      itemBuilder: (context, index) {
+      itemBuilder: (final context, final index) {
         return Container(
-          margin: EdgeInsets.only(bottom: 16.h),
+          margin: EdgeInsets.only(bottom: responsiveHeight(16)),
           padding: EdgeInsets.all(16.w),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16.r),
-            gradient: const LinearGradient(
-              colors: [Color(0xFF1E1E1E), Color(0xFF2C2C2C)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withAlpha((0.5 * 255).toInt()),
-                blurRadius: 8.r,
-                offset: Offset(0, 4.h),
-              ),
-            ],
+            borderRadius: BorderRadius.circular(responsiveRadius(16)),
+            color: context.customColors.background.withValues(alpha: 0.1),
+            border: Border.all(color: context.customColors.border, width: 1),
           ),
           child: Shimmer.fromColors(
-            baseColor: Colors.grey[800]!,
-            highlightColor: Colors.grey[600]!,
+            baseColor: context.customColors.textPrimary.withAlpha(50),
+            highlightColor: context.customColors.textSecondary,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  width: 120.w,
-                  height: 16.h,
+                  width: responsiveWidth(100),
+                  height: responsiveHeight(20),
                   decoration: BoxDecoration(
-                    color: Colors.grey[700],
-                    borderRadius: BorderRadius.circular(8.r),
+                    color: context.customColors.textSecondary,
+                    borderRadius: BorderRadius.circular(responsiveRadius(8)),
                   ),
                 ),
-                SizedBox(height: 16.h),
+                verticalSpacing(16),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -51,45 +43,45 @@ class HistoryShimmerLoading extends StatelessWidget {
                     Column(
                       children: [
                         Container(
-                          width: 50.w,
-                          height: 50.w,
+                          width: responsiveWidth(50),
+                          height: responsiveHeight(50),
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: Colors.grey[700],
+                            color: context.customColors.textSecondary,
                           ),
                         ),
-                        SizedBox(height: 8.h),
+                        verticalSpacing(8),
                         Container(
-                          width: 60.w,
-                          height: 10.h,
-                          color: Colors.grey[700],
+                          width: responsiveWidth(60),
+                          height: responsiveHeight(10),
+                          color: context.customColors.textSecondary,
                         ),
                       ],
                     ),
 
                     // Score
                     Container(
-                      width: 50.w,
-                      height: 20.h,
-                      color: Colors.grey[700],
+                      width: responsiveWidth(60),
+                      height: responsiveHeight(10),
+                      color: context.customColors.textSecondary,
                     ),
 
                     // Player Right
                     Column(
                       children: [
                         Container(
-                          width: 50.w,
-                          height: 50.w,
+                          width: responsiveWidth(60),
+                          height: responsiveHeight(50),
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: Colors.grey[700],
+                            color: context.customColors.textSecondary,
                           ),
                         ),
-                        SizedBox(height: 8.h),
+                        verticalSpacing(8),
                         Container(
-                          width: 60.w,
-                          height: 10.h,
-                          color: Colors.grey[700],
+                          width: responsiveWidth(60),
+                          height: responsiveHeight(10),
+                          color: context.customColors.textSecondary,
                         ),
                       ],
                     ),

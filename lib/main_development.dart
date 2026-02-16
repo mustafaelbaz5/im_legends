@@ -1,54 +1,41 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import 'core/config/app_config.dart';
+import 'core/config/app_constants.dart';
+import 'core/config/firebase_options.dart';
 import 'core/di/dependency_injection.dart';
 import 'core/router/app_router.dart';
-import 'core/utils/shared_prefs.dart';
-import 'features/notification/data/service/local_notifications.dart';
-import 'features/notification/data/service/firebase_notifications_service.dart';
-import 'firebase_options.dart';
+import 'core/widgets/error_screen.dart';
 import 'im_legends_app.dart';
 
-/// === Initialize core services ===
-Future<void> _initServices() async {
-  // Firebase
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
-  // Local notifications
-  await LocalNotificationService().initialize();
-
-  // Supabase
-  await Supabase.initialize(
-    url: 'https://flutiryhpfdlpizyxqix.supabase.co',
-    anonKey:
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZsdXRpcnlocGZkbHBpenl4cWl4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTYxNTQ3NzIsImV4cCI6MjA3MTczMDc3Mn0.UhojXOtOrnvbwDKvyBVZn3Cl1gdUkr-NYuGBLQXIRi0',
-  );
-
-  // Dependency Injection
-  setupGetIt();
-}
-
-/// === Main entry point ===
-Future<void> main() async {
-  debugProfileBuildsEnabled = true;
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  ErrorWidget.builder = (final details) => const ErrorScreen();
 
-  // Ensure screen util sizing
+  await Future.wait([
+    EasyLocalization.ensureInitialized(),
+    setupHydratedStorage(),
+    setUpDependencies(),
+  ]);
+  await Supabase.initialize(
+    url: AppConfig.supabaseUrl,
+    anonKey: AppConfig.supabaseAnonKey,
+  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await ScreenUtil.ensureScreenSize();
-
-  // Shared Preferences
-  await SharedPrefStorage.instance.init();
-
-  // Register background handler BEFORE runApp
-  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
-
-  // Init services
-  await _initServices();
-
-  // Run app
-  runApp(IMLegendsApp(router: router));
-  // flutter run --release --flavor development --target lib/main_development.dart
+  // await LocalNotificationService().initialize();
+  // FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+  runApp(
+    EasyLocalization(
+      supportedLocales: const [Locale('en'), Locale('ar')],
+      path: 'assets/translations',
+      startLocale: const Locale('en'),
+      fallbackLocale: const Locale('en'),
+      child: IMLegendsApp(appRouter: AppRouter()),
+    ),
+  );
 }

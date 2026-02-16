@@ -1,16 +1,15 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/utils/validators.dart';
+import '../../../../core/widgets/custom_text_form_.dart';
+import '../../logic/cubit/auth_cubit.dart';
 
-import '../../../../core/utils/regex.dart';
 import '../../../../core/utils/spacing.dart';
 import '../../../../core/widgets/custom_text_button.dart';
-import 'app_text_form_field.dart';
 
 class LoginForm extends StatefulWidget {
-  final void Function(String email, String password) onLogin;
-  final bool isLoading;
-
-  const LoginForm({super.key, required this.onLogin, this.isLoading = false});
+  const LoginForm({super.key});
 
   @override
   State<LoginForm> createState() => _LoginFormState();
@@ -32,73 +31,49 @@ class _LoginFormState extends State<LoginForm> {
 
   void _submit() {
     if (_formKey.currentState?.validate() ?? false) {
-      widget.onLogin(
-        _emailController.text.trim(),
-        _passwordController.text.trim(),
+      context.read<AuthCubit>().login(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
       );
     }
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Form(
       key: _formKey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           /// --- Email Field ---
-          AppTextFormField(
+          CustomTextFormField(
             controller: _emailController,
-            hintText: 'Email',
+            hintText: 'auth.email'.tr(),
             keyboardType: TextInputType.emailAddress,
-            validator: (value) {
-              if (value == null || value.trim().isEmpty) {
-                return 'Email is required';
-              }
-              if (!AppRegex.isEmailValid(value.trim())) {
-                return 'Enter a valid email';
-              }
-              return null;
-            },
+            validator: Validators.email,
           ),
-
-          verticalSpacing(16.h),
+          verticalSpacing(24),
 
           /// --- Password Field ---
-          AppTextFormField(
+          CustomTextFormField(
             controller: _passwordController,
-            hintText: 'Password',
+            hintText: 'auth.password'.tr(),
             keyboardType: TextInputType.visiblePassword,
-            isObscureText: !_isPasswordVisible,
-            validator: (value) {
-              if (value == null || value.trim().isEmpty) {
-                return 'Password is required';
-              }
-              if (value.length < 6) {
-                return 'Password must be at least 6 characters';
-              }
-              return null;
-            },
+            isPassword: !_isPasswordVisible,
+            validator: Validators.password,
             suffixIcon: IconButton(
               icon: Icon(
                 _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
                 color: _isPasswordVisible ? Colors.red : Colors.grey,
               ),
-              onPressed: () {
-                setState(() => _isPasswordVisible = !_isPasswordVisible);
-              },
+              onPressed: () =>
+                  setState(() => _isPasswordVisible = !_isPasswordVisible),
             ),
           ),
-
-          verticalSpacing(24.h),
+          verticalSpacing(60),
 
           /// --- Login Button ---
-          CustomTextButton(
-            borderRadius: 12.r,
-            buttonText: 'Login',
-            onPressed: widget.isLoading ? null : _submit,
-            isLoading: widget.isLoading,
-          ),
+          CustomTextButton(text: 'auth.login'.tr(), onPressed: _submit),
         ],
       ),
     );

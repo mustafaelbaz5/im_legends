@@ -1,25 +1,77 @@
 part of 'add_match_cubit.dart';
 
 @immutable
-sealed class AddMatchState {}
+class AddMatchState {
+  final int winnerScore;
+  final int loserScore;
+  final List players;
 
-final class AddMatchInitial extends AddMatchState {}
+  final String? winnerId;
+  final String? winnerName;
+  final String? winnerImage;
+  final String? loserId;
+  final String? loserName;
+  final String? loserImage;
 
-final class AddMatchLoading extends AddMatchState {}
+  final bool isLoading;
+  final bool isSuccess;
+  final AppError? error;
 
-// For players list
-final class AddMatchPlayersSuccess extends AddMatchState {
-  final List<Map<String, dynamic>> players;
-  AddMatchPlayersSuccess(this.players);
+  const AddMatchState({
+    this.players = const [],
+    this.winnerScore = 0,
+    this.loserScore = 0,
+    this.winnerId,
+    this.winnerName,
+    this.winnerImage,
+    this.loserId,
+    this.loserName,
+    this.loserImage,
+    this.isLoading = false,
+    this.isSuccess = false,
+    this.error,
+  });
+
+  AddMatchState copyWith({
+    final int? winnerScore,
+    final int? loserScore,
+    final List? players,
+    final String? winnerId,
+    final String? winnerName,
+    final String? winnerImage,
+    final String? loserId,
+    final String? loserName,
+    final String? loserImage,
+    final bool? isLoading,
+    final bool? isSuccess,
+    final AppError? error,
+  }) {
+    return AddMatchState(
+      winnerScore: winnerScore ?? this.winnerScore,
+      loserScore: loserScore ?? this.loserScore,
+      players: players ?? this.players,
+      winnerId: winnerId ?? this.winnerId,
+      winnerName: winnerName ?? this.winnerName,
+      winnerImage: winnerImage ?? this.winnerImage,
+      loserId: loserId ?? this.loserId,
+      loserName: loserName ?? this.loserName,
+      loserImage: loserImage ?? this.loserImage,
+      isLoading: isLoading ?? this.isLoading,
+      isSuccess: isSuccess ?? this.isSuccess,
+      error: error,
+    );
+  }
 }
 
-// For insert match success
-final class AddMatchInsertSuccess extends AddMatchState {
-  final String message;
-  AddMatchInsertSuccess(this.message);
+class AddMatchInitial extends AddMatchState {
+  const AddMatchInitial() : super();
 }
 
-final class AddMatchFailure extends AddMatchState {
-  final String error;
-  AddMatchFailure(this.error);
+class AddMatchLoading extends AddMatchState {}
+
+class AddMatchInsertSuccess extends AddMatchState {}
+
+class AddMatchFailure extends AddMatchState {
+  final AppError error;
+  const AddMatchFailure({required this.error});
 }
