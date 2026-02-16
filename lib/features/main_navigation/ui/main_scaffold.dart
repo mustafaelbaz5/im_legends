@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:im_legends/core/di/dependency_injection.dart';
+import 'package:im_legends/core/themes/app_colors.dart';
 import 'package:im_legends/core/utils/extensions/context_extensions.dart';
-import 'package:im_legends/features/add_match/ui/add_match_screen.dart';
-import 'package:im_legends/features/champion/ui/champion_screen.dart';
-import 'package:im_legends/features/history/ui/history_screen.dart';
+import 'package:im_legends/core/utils/spacing.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
-import '../../../../../core/themes/app_colors.dart';
-import '../../../../../core/utils/spacing.dart';
+import '../../add_match/logic/cubit/add_match_cubit.dart';
+import '../../add_match/ui/add_match_screen.dart';
+import '../../champion/logic/cubit/champion_cubit.dart';
+import '../../champion/ui/champion_screen.dart';
+import '../../history/logic/cubit/match_history_cubit.dart';
+import '../../history/ui/history_screen.dart';
+import '../../home/logic/cubit/home_cubit.dart';
 import '../../home/ui/home_screen.dart';
+import '../../profile/logic/cubit/profile_cubit.dart';
 import '../../profile/ui/profile_screen.dart';
 
 class MainScaffold extends StatefulWidget {
@@ -83,30 +90,39 @@ class _MainScaffoldState extends State<MainScaffold> {
 
   @override
   Widget build(final BuildContext context) {
-    return PersistentTabView(
-      context,
-      controller: _controller,
-      screens: _buildScreens(),
-      items: _navBarItems(context),
-      navBarStyle: NavBarStyle.style16,
-      backgroundColor: context.customColors.background,
-      navBarHeight: responsiveHeight(70),
-      padding: EdgeInsets.symmetric(
-        vertical: responsiveHeight(4),
-        horizontal: responsiveWidth(8),
-      ),
-      decoration: NavBarDecoration(
-        colorBehindNavBar: context.customColors.background,
-        border: Border(
-          top: BorderSide(color: context.customColors.divider, width: 1),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => getIt<HomeCubit>()..loadLeaderboard()),
+        BlocProvider(create: (_) => getIt<MatchHistoryCubit>()..fetchMatches()),
+        BlocProvider(create: (_) => getIt<AddMatchCubit>()..getPlayersList()),
+        BlocProvider(create: (_) => getIt<ProfileCubit>()..fetchProfile()),
+        BlocProvider(create: (_) => getIt<ChampionCubit>()..fetchLeaderboard()),
+      ],
+      child: PersistentTabView(
+        context,
+        controller: _controller,
+        screens: _buildScreens(),
+        items: _navBarItems(context),
+        navBarStyle: NavBarStyle.style15,
+        backgroundColor: context.customColors.background,
+        navBarHeight: responsiveHeight(70),
+        padding: EdgeInsets.symmetric(
+          vertical: responsiveHeight(4),
+          horizontal: responsiveWidth(8),
         ),
+        decoration: NavBarDecoration(
+          colorBehindNavBar: context.customColors.background,
+          border: Border(
+            top: BorderSide(color: context.customColors.divider, width: 1),
+          ),
+        ),
+        confineToSafeArea: true,
+        handleAndroidBackButtonPress: true,
+        resizeToAvoidBottomInset: true,
+        stateManagement: true,
+        hideNavigationBarWhenKeyboardAppears: true,
+        popBehaviorOnSelectedNavBarItemPress: PopBehavior.all,
       ),
-      confineToSafeArea: true,
-      handleAndroidBackButtonPress: true,
-      resizeToAvoidBottomInset: true,
-      stateManagement: true,
-      hideNavigationBarWhenKeyboardAppears: true,
-      popBehaviorOnSelectedNavBarItemPress: PopBehavior.all,
     );
   }
 }
