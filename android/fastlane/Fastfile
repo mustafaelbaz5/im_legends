@@ -1,18 +1,33 @@
+# Fast lane File
 default_platform(:android)
 
 platform :android do
-  desc "Android Firebase App Distribution" 
-  lane :firebase_distribution do
+  desc "Distribute production build to Firebase"
+  lane :release_to_firebase do
     sh "flutter clean"
     sh "flutter build apk --release --flavor production --target lib/main_production.dart --no-tree-shake-icons"
-    firebase_app_distribution( 
+
+    # List of testers
+    testers_list = [
+      "m9stafa05@gmail.com",
+      "melbaz187@gmail.com",
+      "aelbaz0189@gmail.com",
+      "islam.m.fayad@gmail.com",
+      "khalededaoudy@gmail.com",
+      "medogade2005@gmail.com"
+    ]
+
+    # Convert array to comma-separated string
+    testers_string = testers_list.join(", ")
+
+    firebase_app_distribution(
       app: "1:312322499437:android:01b1e54c76c6ecfdf43064",
       firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"],
       android_artifact_type: "APK",
       android_artifact_path: "../build/app/outputs/flutter-apk/app-production-release.apk",
-      testers: "melbaz187@gmail.com,aelbaz0189@gmail.com,islam.m.fayad@gmail.com,khalededaoudy@gmail.com,medogade2005@gmail.com",
-      release_notes: "New version - App Release v.1.0.5, [Mustafa Elbaz]
-      This PR introduces major UI/UX enhancements, performance optimizations, and codebase refactoring across multiple modules to improve the overall stability, readability, and user experience of the application." 
-    ) 
-  end 
+      testers: testers_string,
+      release_notes: "New version - App Release v.1.0.6, [Mustafa Elbaz]
+      Core Refactor Ui And Logic Set Theme modes And Add Arabic language.",
+    )
+  end
 end
