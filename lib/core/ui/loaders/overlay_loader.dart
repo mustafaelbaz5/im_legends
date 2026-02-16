@@ -23,30 +23,28 @@ class OverlayLoader extends StatelessWidget {
       children: [
         child,
         if (isLoading)
-          Center(
-            child: Positioned.fill(
-              child: AbsorbPointer(
-                absorbing: true,
-                child: Container(
-                  color: context.customColors.background.withValues(alpha: 0.8),
-                  child: Center(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const CircularProgressIndicator(
-                          color: AppColors.primary300,
-                        ),
-                        if (message != null) ...[
-                          verticalSpacing(16),
-                          Text(
-                            message!,
-                            style: AppTextStyles.font16Regular.copyWith(
-                              color: context.customColors.textSecondary,
-                            ),
+          Positioned.fill(
+            child: AbsorbPointer(
+              absorbing: true,
+              child: Container(
+                color: context.customColors.background.withValues(alpha: 0.8),
+                child: Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const CircularProgressIndicator(
+                        color: AppColors.primary300,
+                      ),
+                      if (message != null) ...[
+                        verticalSpacing(16),
+                        Text(
+                          message!,
+                          style: AppTextStyles.font16Regular.copyWith(
+                            color: context.customColors.textSecondary,
                           ),
-                        ],
+                        ),
                       ],
-                    ),
+                    ],
                   ),
                 ),
               ),
