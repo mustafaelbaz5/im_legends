@@ -1,10 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+
 import '../../../../core/themes/app_texts_style.dart';
+import '../../../../core/utils/extensions/context_extensions.dart';
 import '../../../../core/utils/spacing.dart';
 import '../../../../core/widgets/notification_icon.dart';
-
-import '../../../../core/utils/extensions/context_extensions.dart';
 
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({super.key, required this.title});
@@ -23,12 +23,16 @@ class HomeAppBar extends StatelessWidget {
           Column(
             children: [
               Text(
-                "${'home.welcome_message'.tr()} $title",
-                style: AppTextStyles.font18Bold,
+                title,
+                style: AppTextStyles.font14Bold.copyWith(
+                  color: context.customColors.textPrimary,
+                ),
               ),
               Text(
                 'home.welcome_description'.tr(),
-                style: AppTextStyles.font12Regular,
+                style: AppTextStyles.font12Regular.copyWith(
+                  color: context.customColors.textTertiary,
+                ),
               ),
             ],
           ),
