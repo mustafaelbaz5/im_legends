@@ -5,14 +5,15 @@ platform :android do
   desc 'Distribute production build to Firebase'
   lane :release_to_firebase do
     sh 'flutter clean'
-    sh "flutter build apk --release --flavor production --target lib/main_production.dart --no-tree-shake-icons --split-per-abi", error_callback: proc { |result| }
+    sh 'flutter build apk --release --flavor production --target lib/main_production.dart --no-tree-shake-icons --split-per-abi', error_callback: proc { |result|
+    }
 
     # List of testers
     testers_list = [
       'm9stafa05@gmail.com',
       'melbaz187@gmail.com',
       'aelbaz0189@gmail.com',
-      'islam.m.fayad@gmail.com',
+      'islam.m.fayad@gmail.com'
     ]
 
     # Convert array to comma-separated string
@@ -24,7 +25,7 @@ platform :android do
       android_artifact_path: '../build/app/outputs/flutter-apk/app-arm64-v8a-production-release.apk',
       testers: testers_string,
       release_notes: "New version - App Release v.1.0.7, [Mustafa Elbaz]
-  Core Refactor Ui And Logic Set Theme modes And Add Arabic language.  Fix Some Problems.",
+  Core Refactor Ui And Logic Set Theme modes And Add Arabic language. &_ Fix Some Problems.",
       upload_timeout: 600
     )
   end
