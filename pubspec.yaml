@@ -1,10 +1,8 @@
 name: im_legends
-description: "A new Flutter project."
-# The following line prevents the package from being accidentally published to
-# pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: "none" # Remove this line if you wish to publish to pub.dev
+description: "IM Legends - A new Flutter project."
+publish_to: "none"
 
-version: 1.0.6+1
+version: 1.0.7+1
 
 environment:
   sdk: ^3.8.1
@@ -14,17 +12,13 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.8
-  #
   flutter_screenutil: ^5.9.3
   flutter_svg: ^2.2.0
   get_it: ^8.2.0
   flutter_native_splash: ^2.4.6
-  # State management BoC
   flutter_bloc: ^9.1.1
   bloc: ^9.0.0
-  # Firebase
   firebase_core: ^4.0.0
-  # Supabase
   supabase_flutter: ^2.9.1
   meta: ^1.16.0
   image_picker: ^1.2.0
@@ -43,10 +37,10 @@ dependencies:
   persistent_bottom_nav_bar: ^6.2.1
   carousel_slider: ^5.1.2
 
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_lints: ^5.0.0
   flutter_launcher_icons: ^0.14.4
 
 flutter_launcher_icons:
@@ -54,58 +48,32 @@ flutter_launcher_icons:
   ios: true
   image_path: "assets/images/ImLogo.png"
   adaptive_icon_foreground: "assets/images/ImLogo.png"
+  adaptive_icon_background: "#121212"
   remove_alpha_ios: true
-
-  flutter_lints: ^5.0.0
+  min_sdk_android: 21
 
 flutter:
   uses-material-design: true
 
-  # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
     - assets/svgs/
     - assets/translations/
-    # - .env
 
-  # Fonts (example template, uncomment and edit if needed)
   fonts:
     - family: Inter
       fonts:
-        - asset: assets/fonts/inter/Inter_18pt-ExtraLight.ttf
-          weight: 200
-
-        - asset: assets/fonts/inter/Inter_18pt-Light.ttf
-          weight: 300
-
         - asset: assets/fonts/inter/Inter_18pt-Regular.ttf
           weight: 400
-
         - asset: assets/fonts/inter/Inter_18pt-Medium.ttf
           weight: 500
-
-        - asset: assets/fonts/inter/Inter_18pt-SemiBold.ttf
-          weight: 600
-
         - asset: assets/fonts/inter/Inter_18pt-Bold.ttf
           weight: 700
-
-        - asset: assets/fonts/inter/Inter_18pt-ExtraBold.ttf
-          weight: 800
-
     - family: Tajawal
       fonts:
-        - asset: assets/fonts/tajawal/Tajawal-Black.ttf
-          weight: 900
-        - asset: assets/fonts/tajawal/Tajawal-ExtraBold.ttf
-          weight: 800
-        - asset: assets/fonts/tajawal/Tajawal-Bold.ttf
-          weight: 700
-        - asset: assets/fonts/tajawal/Tajawal-Medium.ttf
-          weight: 500
         - asset: assets/fonts/tajawal/Tajawal-Regular.ttf
           weight: 400
-        - asset: assets/fonts/tajawal/Tajawal-Light.ttf
-          weight: 300
-        - asset: assets/fonts/tajawal/Tajawal-ExtraLight.ttf
-          weight: 200
+        - asset: assets/fonts/tajawal/Tajawal-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/tajawal/Tajawal-Bold.ttf
+          weight: 700

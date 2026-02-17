@@ -86,7 +86,7 @@
     }
   },
   "home": {
-    "welcome_message": "Welcome",
+    "welcome_message": "Hi",
     "welcome_description": "Are you ready to compete?",
     "leaderboard": "Leaderboard"
   },
