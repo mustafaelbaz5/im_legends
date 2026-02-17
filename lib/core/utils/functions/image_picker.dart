@@ -2,10 +2,11 @@ import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+
 import '../../themes/app_texts_style.dart';
 import '../extensions/context_extensions.dart';
 import '../spacing.dart';
-import 'package:image_picker/image_picker.dart';
 
 class ImagePickerHelper {
   static Future<File?> showImageSourceActionSheet(
@@ -38,10 +39,12 @@ class ImagePickerHelper {
                     style: AppTextStyles.font16Regular,
                   ),
                   onTap: () async {
-                    Navigator.pop(
-                      context,
-                      await _pickImageFromSource(ImageSource.gallery),
+                    final result = await _pickImageFromSource(
+                      ImageSource.gallery,
                     );
+                    if (context.mounted) {
+                      Navigator.pop(context, result);
+                    }
                   },
                 ),
                 verticalSpacing(12),
@@ -55,10 +58,12 @@ class ImagePickerHelper {
                     style: AppTextStyles.font16Regular,
                   ),
                   onTap: () async {
-                    Navigator.pop(
-                      context,
-                      await _pickImageFromSource(ImageSource.camera),
+                    final result = await _pickImageFromSource(
+                      ImageSource.camera,
                     );
+                    if (context.mounted) {
+                      Navigator.pop(context, result);
+                    }
                   },
                 ),
                 verticalSpacing(12),

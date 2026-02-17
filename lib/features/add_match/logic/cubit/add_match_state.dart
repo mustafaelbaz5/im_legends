@@ -72,6 +72,8 @@ class AddMatchLoading extends AddMatchState {}
 class AddMatchInsertSuccess extends AddMatchState {}
 
 class AddMatchFailure extends AddMatchState {
+  @override
+  // ignore: overridden_fields
   final AppError error;
   const AddMatchFailure({required this.error});
 }
