@@ -10,6 +10,7 @@ platform :android do
     # List of testers
     testers_list = [
       'm9stafa05@gmail.com',
+      'melbaz187@gmail.com',
       'aelbaz0189@gmail.com',
       'islam.m.fayad@gmail.com',
     ]
@@ -22,8 +23,8 @@ platform :android do
       android_artifact_type: 'APK',
       android_artifact_path: '../build/app/outputs/flutter-apk/app-arm64-v8a-production-release.apk',
       testers: testers_string,
-      release_notes: "New version - App Release v.1.0.6, [Mustafa Elbaz]
-  Core Refactor Ui And Logic Set Theme modes And Add Arabic language.",
+      release_notes: "New version - App Release v.1.0.7, [Mustafa Elbaz]
+  Core Refactor Ui And Logic Set Theme modes And Add Arabic language.  Fix Some Problems.",
       upload_timeout: 600
     )
   end
