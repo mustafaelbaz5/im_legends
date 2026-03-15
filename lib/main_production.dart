@@ -21,6 +21,12 @@ Future<void> main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+    ),
+  );
   ErrorWidget.builder = (final details) => const ErrorScreen();
   await EasyLocalization.ensureInitialized();
   await ScreenUtil.ensureScreenSize();
