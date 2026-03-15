@@ -1,41 +1,49 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:im_legends/core/config/app_config.dart';
+import 'package:im_legends/core/config/firebase_options.dart';
+import 'package:im_legends/core/di/dependency_injection.dart';
+import 'package:im_legends/core/localization/localization_manager.dart';
+import 'package:im_legends/core/widgets/error_screen.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import 'core/config/app_config.dart';
-import 'core/config/app_constants.dart';
-import 'core/config/firebase_options.dart';
-import 'core/di/dependency_injection.dart';
-import 'core/router/app_router.dart';
-import 'core/widgets/error_screen.dart';
 import 'im_legends_app.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  ErrorWidget.builder = (final details) => const ErrorScreen();
-
-  await Future.wait([
-    EasyLocalization.ensureInitialized(),
-    setupHydratedStorage(),
-    setUpDependencies(),
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
   ]);
+  ErrorWidget.builder = (final details) => const ErrorScreen();
+  await EasyLocalization.ensureInitialized();
+  await ScreenUtil.ensureScreenSize();
+  HydratedBloc.storage = await HydratedStorage.build(
+    storageDirectory: kIsWeb
+        ? HydratedStorageDirectory.web
+        : HydratedStorageDirectory((await getTemporaryDirectory()).path),
+  );
+
   await Supabase.initialize(
     url: AppConfig.supabaseUrl,
     anonKey: AppConfig.supabaseAnonKey,
   );
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await ScreenUtil.ensureScreenSize();
-  // await LocalNotificationService().initialize();
-  // FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+  await setUpDependencies();
+
   runApp(
     EasyLocalization(
-      supportedLocales: const [Locale('en'), Locale('ar')],
-      path: 'assets/translations',
-      startLocale: const Locale('en'),
-      fallbackLocale: const Locale('en'),
-      child: IMLegendsApp(appRouter: AppRouter()),
+      supportedLocales: LocalizationManager.supportedLocales,
+      path: LocalizationManager.translationsPath,
+      fallbackLocale: LocalizationManager.fallbackLocale,
+      startLocale: LocalizationManager.fallbackLocale,
+      child: const IMLegendsApp(),
     ),
   );
 }

@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import '../../../../core/config/app_constants.dart';
+import '../../../../core/utils/app_constants.dart';
 import '../../../../core/error/types/error_handler.dart';
 import '../../../../core/models/user_data.dart';
 import '../../../../core/networking/supabase_service.dart';
