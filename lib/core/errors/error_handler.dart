@@ -1,7 +1,7 @@
 import 'package:im_legends/core/errors/failure.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import 'exceptions.dart' hide NotFoundException;
+import 'exceptions.dart';
 import 'handlers/supabase_handler.dart';
 
 class ErrorHandler {
@@ -23,6 +23,7 @@ class ErrorHandler {
 
   /// Call this in your repositories — converts exception to Failure
   static Failure handleFailure(final dynamic error) {
+    if (error is Failure) return error;
     final exception = error is AppException ? error : _toException(error);
     return _toFailure(exception);
   }
@@ -41,20 +42,17 @@ class ErrorHandler {
       return UnauthorizedFailure(message: e.message);
     }
     if (e is ForbiddenException) return ForbiddenFailure(message: e.message);
-    if (e is NotFoundException) return NotFoundException(message: e.message);
-    if (e is ValidationException) {
+    if (e is NotFoundException) return NotFoundFailure(message: e.message);
+    if (e is ValidationException)
       return ValidationFailure(message: e.message, errors: e.errors);
-    }
     if (e is ConflictException) return ConflictFailure(message: e.message);
     if (e is NetworkException) return NetworkFailure(message: e.message);
-    if (e is TimeoutException) return TimeoutFailure(message: e.message);
-    if (e is TooManyRequestsException) {
+    if (e is RequestTimeoutException) return TimeoutFailure(message: e.message);
+    if (e is TooManyRequestsException)
       return TooManyRequestsFailure(message: e.message);
-    }
     if (e is CacheException) return CacheFailure(message: e.message);
-    if (e is ServerException) {
+    if (e is ServerException)
       return ServerFailure(message: e.message, code: e.statusCode);
-    }
     return const UnknownFailure();
   }
 }

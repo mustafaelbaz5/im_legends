@@ -38,8 +38,9 @@ class ForbiddenFailure extends Failure {
   });
 }
 
-class NotFoundException extends Failure {
-  const NotFoundException({
+class NotFoundFailure extends Failure {
+  // renamed from NotFoundException
+  const NotFoundFailure({
     super.message = 'Resource not found.',
     super.code = 404,
   });
@@ -65,9 +66,7 @@ class ConflictFailure extends Failure {
 }
 
 class TimeoutFailure extends Failure {
-  const TimeoutFailure({
-    super.message = 'Request timeout. Please try again.',
-  });
+  const TimeoutFailure({super.message = 'Request timeout. Please try again.'});
 }
 
 class TooManyRequestsFailure extends Failure {

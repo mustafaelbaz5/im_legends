@@ -44,10 +44,11 @@ class NotFoundException extends AppException {
   });
 }
 
-class TimeoutException extends AppException {
-  TimeoutException({super.message = 'Request timeout. Please try again.'});
+class RequestTimeoutException extends AppException {
+  RequestTimeoutException({
+    super.message = 'Request timeout. Please try again.',
+  });
 }
-
 class ValidationException extends AppException {
   final Map<String, dynamic>? errors;
   ValidationException({
