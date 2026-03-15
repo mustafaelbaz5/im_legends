@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+
 import '../themes/app_colors.dart';
 import '../themes/app_texts_style.dart';
 import '../utils/extensions/context_extensions.dart';
-
 import '../utils/spacing.dart';
 
 class CustomTextButton extends StatelessWidget {
@@ -98,10 +98,10 @@ class CustomTextButton extends StatelessWidget {
     );
 
     final double iconSize = size == CustomButtonSize.small
-        ? responsiveRadius(18)
+        ? rr(18)
         : size == CustomButtonSize.medium
-        ? responsiveRadius(20)
-        : responsiveRadius(22);
+        ? rr(20)
+        : rr(22);
 
     return ElevatedButton(
       onPressed: _enabled ? onPressed : null,
@@ -117,22 +117,20 @@ class CustomTextButton extends StatelessWidget {
             contentPadding ??
             EdgeInsets.symmetric(
               horizontal: size == CustomButtonSize.small
-                  ? responsiveWidth(24)
+                  ? rw(24)
                   : size == CustomButtonSize.medium
-                  ? responsiveWidth(28)
-                  : responsiveWidth(32),
+                  ? rw(28)
+                  : rw(32),
               vertical: size == CustomButtonSize.small
-                  ? responsiveHeight(12)
+                  ? rh(12)
                   : size == CustomButtonSize.medium
-                  ? responsiveHeight(14)
-                  : responsiveHeight(16),
+                  ? rh(14)
+                  : rh(16),
             ),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(
-            borderRadius ?? responsiveRadius(12),
-          ),
+          borderRadius: BorderRadius.circular(borderRadius ?? rr(12)),
           side: style == CustomButtonStyle.outlined
-              ? BorderSide(color: resolvedBorder, width: responsiveWidth(1.5))
+              ? BorderSide(color: resolvedBorder, width: rw(1.5))
               : BorderSide.none,
         ),
       ),
@@ -143,8 +141,8 @@ class CustomTextButton extends StatelessWidget {
   Widget _buildChild(final TextStyle textStyle, final double iconSize) {
     if (isLoading) {
       return SizedBox(
-        width: responsiveHeight(16),
-        height: responsiveHeight(16),
+        width: rh(16),
+        height: rh(16),
         child: const CircularProgressIndicator(
           strokeWidth: 2.5,
           valueColor: AlwaysStoppedAnimation<Color>(AppColors.grey0),

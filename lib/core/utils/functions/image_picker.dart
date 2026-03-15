@@ -15,17 +15,12 @@ class ImagePickerHelper {
     return showModalBottomSheet<File?>(
       context: context,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(responsiveRadius(24)),
-        ),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(rr(24))),
       ),
       builder: (_) {
         return SafeArea(
           child: Padding(
-            padding: EdgeInsets.symmetric(
-              vertical: responsiveHeight(24),
-              horizontal: responsiveWidth(20),
-            ),
+            padding: EdgeInsets.symmetric(vertical: rh(24), horizontal: rw(20)),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [

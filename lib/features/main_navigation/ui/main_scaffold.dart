@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
+
 import '../../../core/di/dependency_injection.dart';
 import '../../../core/themes/app_colors.dart';
 import '../../../core/utils/extensions/context_extensions.dart';
 import '../../../core/utils/spacing.dart';
-import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
-
 import '../../add_match/logic/cubit/add_match_cubit.dart';
 import '../../add_match/ui/add_match_screen.dart';
 import '../../champion/logic/cubit/champion_cubit.dart';
@@ -73,12 +73,12 @@ class _MainScaffoldState extends State<MainScaffold> {
     return PersistentBottomNavBarItem(
       icon: Icon(
         activeIcon,
-        size: responsiveRadius(26),
+        size: rr(26),
         color: isCenterButton ? AppColors.grey0 : AppColors.primary400,
       ),
       inactiveIcon: Icon(
         inactiveIcon,
-        size: responsiveRadius(26),
+        size: rr(26),
         color: isCenterButton
             ? AppColors.grey0
             : context.customColors.textPrimary,
@@ -105,11 +105,8 @@ class _MainScaffoldState extends State<MainScaffold> {
         items: _navBarItems(context),
         navBarStyle: NavBarStyle.style15,
         backgroundColor: context.customColors.background,
-        navBarHeight: responsiveHeight(70),
-        padding: EdgeInsets.symmetric(
-          vertical: responsiveHeight(4),
-          horizontal: responsiveWidth(8),
-        ),
+        navBarHeight: rh(70),
+        padding: EdgeInsets.symmetric(vertical: rh(4), horizontal: rw(8)),
         decoration: NavBarDecoration(
           colorBehindNavBar: context.customColors.background,
           border: Border(

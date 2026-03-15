@@ -14,28 +14,28 @@ class ProfileHeader extends StatelessWidget {
   @override
   Widget build(final BuildContext context) {
     return SizedBox(
-      height: responsiveHeight(320),
+      height: rh(320),
       child: Stack(
         clipBehavior: Clip.none,
         children: [
           const ProfileTopBar(),
           Positioned(
-            top: responsiveHeight(190),
+            top: rh(190),
             left: 0,
             right: 0,
             child: Container(
               decoration: BoxDecoration(
                 color: context.customColors.background,
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(responsiveRadius(24)),
-                  topRight: Radius.circular(responsiveRadius(24)),
+                  topLeft: Radius.circular(rr(24)),
+                  topRight: Radius.circular(rr(24)),
                 ),
               ),
               child: Padding(
                 padding: EdgeInsets.only(
-                  top: responsiveHeight(90),
-                  left: responsiveWidth(24),
-                  right: responsiveWidth(24),
+                  top: rh(90),
+                  left: rw(24),
+                  right: rw(24),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -55,7 +55,7 @@ class ProfileHeader extends StatelessWidget {
 
           /// Floating Avatar
           Positioned(
-            top: responsiveHeight(140),
+            top: rh(140),
             left: 0,
             right: 0,
             child: Center(

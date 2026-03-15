@@ -81,7 +81,7 @@ class _SignUpFormState extends State<SignUpForm> {
                 UploadImageField(onImageSelected: _setProfileImage),
                 if (_profileImage != null)
                   Padding(
-                    padding: EdgeInsets.only(top: responsiveHeight(8)),
+                    padding: EdgeInsets.only(top: rh(8)),
                     child: Text(
                       'image_picker.upload_image'.tr(),
                       style: AppTextStyles.font16Regular,

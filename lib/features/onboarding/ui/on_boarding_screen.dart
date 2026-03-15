@@ -19,10 +19,7 @@ class OnBoardingScreen extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
-          padding: EdgeInsets.symmetric(
-            horizontal: responsiveWidth(20),
-            vertical: responsiveHeight(16),
-          ),
+          padding: EdgeInsets.symmetric(horizontal: rw(20), vertical: rh(16)),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -37,7 +34,7 @@ class OnBoardingScreen extends StatelessWidget {
                   Text(
                     'IM LEGENDS',
                     style: AppTextStyles.fontBold.copyWith(
-                      fontSize: responsiveFontSize(32),
+                      fontSize: rf(32),
                       color: AppColors.primary300,
                     ),
                   ),
@@ -45,9 +42,7 @@ class OnBoardingScreen extends StatelessWidget {
 
                   // Subtitle
                   Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: responsiveWidth(12),
-                    ),
+                    padding: EdgeInsets.symmetric(horizontal: rw(12)),
                     child: Text(
                       'onboarding.subtitle'.tr(),
                       style: AppTextStyles.font14Regular.copyWith(
@@ -65,7 +60,7 @@ class OnBoardingScreen extends StatelessWidget {
 
                   // CTA Button
                   SizedBox(
-                    width: responsiveWidth(300),
+                    width: rw(300),
                     child: CustomTextButton(
                       text: 'onboarding.button'.tr(),
                       onPressed: () => context.pushNamed(Routes.loginScreen),

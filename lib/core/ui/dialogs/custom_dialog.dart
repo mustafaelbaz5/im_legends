@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+
 import '../../themes/app_texts_style.dart';
 import '../../utils/extensions/context_extensions.dart';
-
 import '../../utils/spacing.dart';
 import '../../widgets/custom_text_button.dart';
 
@@ -30,21 +30,18 @@ class CustomDialog extends StatelessWidget {
   @override
   Widget build(final BuildContext context) {
     return Dialog(
-      insetPadding: EdgeInsets.symmetric(horizontal: responsiveWidth(32)),
+      insetPadding: EdgeInsets.symmetric(horizontal: rw(32)),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(responsiveRadius(16)),
+        borderRadius: BorderRadius.circular(rr(16)),
       ),
       child: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: responsiveWidth(24),
-          vertical: responsiveHeight(16),
-        ),
+        padding: EdgeInsets.symmetric(horizontal: rw(24), vertical: rh(16)),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             if (icon != null) ...[
               Container(
-                padding: EdgeInsets.all(responsiveRadius(24)),
+                padding: EdgeInsets.all(rr(24)),
                 decoration: BoxDecoration(
                   color: (iconColor ?? context.customColors.surfaceVariant)
                       .withValues(alpha: 0.1),
@@ -52,7 +49,7 @@ class CustomDialog extends StatelessWidget {
                 ),
                 child: Icon(
                   icon,
-                  size: responsiveFontSize(32),
+                  size: rf(32),
                   color: iconColor ?? context.customColors.surfaceVariant,
                 ),
               ),
@@ -63,7 +60,7 @@ class CustomDialog extends StatelessWidget {
                 title!,
                 textAlign: TextAlign.center,
                 style: AppTextStyles.fontBold.copyWith(
-                  fontSize: responsiveFontSize(20),
+                  fontSize: rf(20),
                   color: context.customColors.textPrimary,
                 ),
               ),

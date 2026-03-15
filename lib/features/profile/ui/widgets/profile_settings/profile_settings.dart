@@ -33,8 +33,8 @@ class ProfileSettings extends StatelessWidget {
         ),
         Divider(
           height: 1,
-          indent: responsiveWidth(60),
-          endIndent: responsiveWidth(20),
+          indent: rw(60),
+          endIndent: rw(20),
           color: context.customColors.border,
         ),
         ProfileMenuItem(
@@ -47,8 +47,8 @@ class ProfileSettings extends StatelessWidget {
         ),
         Divider(
           height: 1,
-          indent: responsiveWidth(60),
-          endIndent: responsiveWidth(20),
+          indent: rw(60),
+          endIndent: rw(20),
           color: context.customColors.border,
         ),
         verticalSpacing(8),
@@ -64,10 +64,7 @@ class ProfileSettings extends StatelessWidget {
             );
           },
           child: Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: responsiveWidth(16),
-              vertical: responsiveHeight(12),
-            ),
+            padding: EdgeInsets.symmetric(horizontal: rw(16), vertical: rh(12)),
             child: Row(
               children: [
                 const Icon(Icons.logout, color: AppColors.red100),
@@ -82,7 +79,7 @@ class ProfileSettings extends StatelessWidget {
                 Icon(
                   Icons.arrow_forward_ios,
                   color: context.customColors.textSecondary.withAlpha(100),
-                  size: responsiveWidth(16),
+                  size: rw(16),
                 ),
               ],
             ),
@@ -100,7 +97,7 @@ class ProfileSettings extends StatelessWidget {
           borderRadius: BorderRadius.circular(20.r),
         ),
         child: Padding(
-          padding: EdgeInsets.all(responsiveWidth(24)),
+          padding: EdgeInsets.all(rw(24)),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -147,7 +144,7 @@ class ProfileSettings extends StatelessWidget {
           borderRadius: BorderRadius.circular(20.r),
         ),
         child: Padding(
-          padding: EdgeInsets.all(responsiveWidth(24)),
+          padding: EdgeInsets.all(rw(24)),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

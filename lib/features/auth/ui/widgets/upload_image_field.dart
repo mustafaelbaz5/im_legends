@@ -56,7 +56,7 @@ class _UploadImageFieldState extends State<UploadImageField> {
               alignment: Alignment.bottomRight,
               children: [
                 CircleAvatar(
-                  radius: responsiveRadius(60),
+                  radius: rr(60),
                   backgroundColor: context.customColors.border.withValues(
                     alpha: 0.3,
                   ),
@@ -66,7 +66,7 @@ class _UploadImageFieldState extends State<UploadImageField> {
                   child: _profileImage == null
                       ? Icon(
                           Icons.person,
-                          size: responsiveRadius(60),
+                          size: rr(60),
                           color: context.customColors.accentBlue,
                         )
                       : null,
@@ -80,11 +80,11 @@ class _UploadImageFieldState extends State<UploadImageField> {
                       width: 2.w,
                     ),
                   ),
-                  padding: EdgeInsets.all(responsiveRadius(6)),
+                  padding: EdgeInsets.all(rr(6)),
                   child: Icon(
                     Icons.edit,
                     color: context.customColors.background,
-                    size: responsiveRadius(16),
+                    size: rr(16),
                   ),
                 ),
               ],

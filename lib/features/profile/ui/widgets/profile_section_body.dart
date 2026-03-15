@@ -17,7 +17,7 @@ class ProfileSectionBody extends StatelessWidget {
   @override
   Widget build(final BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: responsiveWidth(16)),
+      margin: EdgeInsets.symmetric(horizontal: rw(16)),
 
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

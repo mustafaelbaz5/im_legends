@@ -26,8 +26,8 @@ class ProfileInfoSection extends StatelessWidget {
         ),
         Divider(
           height: 1,
-          indent: responsiveWidth(60),
-          endIndent: responsiveWidth(20),
+          indent: rw(60),
+          endIndent: rw(20),
           color: context.customColors.border,
         ),
         ProfileMenuItem(
@@ -39,8 +39,8 @@ class ProfileInfoSection extends StatelessWidget {
         ),
         Divider(
           height: 1,
-          indent: responsiveWidth(60),
-          endIndent: responsiveWidth(20),
+          indent: rw(60),
+          endIndent: rw(20),
           color: context.customColors.border,
         ),
         ProfileMenuItem(
@@ -52,8 +52,8 @@ class ProfileInfoSection extends StatelessWidget {
         ),
         Divider(
           height: 1,
-          indent: responsiveWidth(60),
-          endIndent: responsiveWidth(20),
+          indent: rw(60),
+          endIndent: rw(20),
           color: context.customColors.border,
         ),
         ProfileMenuItem(

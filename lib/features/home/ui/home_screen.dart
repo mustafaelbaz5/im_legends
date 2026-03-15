@@ -36,16 +36,14 @@ class HomeScreen extends StatelessWidget {
               child: SingleChildScrollView(
                 physics: const AlwaysScrollableScrollPhysics(),
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: responsiveWidth(8)),
+                  padding: EdgeInsets.symmetric(horizontal: rw(8)),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const HomeHeaderContainer(),
                       verticalSpacing(16),
                       Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: responsiveWidth(8),
-                        ),
+                        padding: EdgeInsets.symmetric(horizontal: rw(8)),
                         child: Text(
                           'home.leaderboard'.tr(),
                           style: AppTextStyles.font20Bold,

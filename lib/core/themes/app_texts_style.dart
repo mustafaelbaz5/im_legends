@@ -15,67 +15,67 @@ class AppTextStyles {
 
   // Font Size 20
   static TextStyle font20Bold = TextStyle(
-    fontSize: responsiveFontSize(20),
+    fontSize: rf(20),
     fontWeight: AppFontWeight.bold,
   );
   static TextStyle font20SemiBold = TextStyle(
-    fontSize: responsiveFontSize(20),
+    fontSize: rf(20),
     fontWeight: AppFontWeight.semiBold,
   );
   static TextStyle font20Regular = TextStyle(
-    fontSize: responsiveFontSize(20),
+    fontSize: rf(20),
     fontWeight: AppFontWeight.regular,
   );
 
   // Font Size 18
   static TextStyle font18Bold = TextStyle(
-    fontSize: responsiveFontSize(18),
+    fontSize: rf(18),
     fontWeight: AppFontWeight.bold,
   );
   static TextStyle font18SemiBold = TextStyle(
-    fontSize: responsiveFontSize(18),
+    fontSize: rf(18),
     fontWeight: AppFontWeight.semiBold,
   );
   static TextStyle font18Regular = TextStyle(
-    fontSize: responsiveFontSize(18),
+    fontSize: rf(18),
     fontWeight: AppFontWeight.regular,
   );
 
   // Font Size 16
   static TextStyle font16Bold = TextStyle(
-    fontSize: responsiveFontSize(16),
+    fontSize: rf(16),
     fontWeight: AppFontWeight.bold,
   );
   static TextStyle font16SemiBold = TextStyle(
-    fontSize: responsiveFontSize(16),
+    fontSize: rf(16),
     fontWeight: AppFontWeight.semiBold,
   );
   static TextStyle font16Regular = TextStyle(
-    fontSize: responsiveFontSize(16),
+    fontSize: rf(16),
     fontWeight: AppFontWeight.regular,
   );
 
   // Font Size 14
   static TextStyle font14Bold = TextStyle(
-    fontSize: responsiveFontSize(14),
+    fontSize: rf(14),
     fontWeight: AppFontWeight.bold,
   );
   static TextStyle font14SemiBold = TextStyle(
-    fontSize: responsiveFontSize(14),
+    fontSize: rf(14),
     fontWeight: AppFontWeight.semiBold,
   );
   static TextStyle font14Regular = TextStyle(
-    fontSize: responsiveFontSize(14),
+    fontSize: rf(14),
     fontWeight: AppFontWeight.regular,
   );
 
   // Font Size 12
   static TextStyle font12Regular = TextStyle(
-    fontSize: responsiveFontSize(12),
+    fontSize: rf(12),
     fontWeight: AppFontWeight.regular,
   );
   static TextStyle font12SemiBold = TextStyle(
-    fontSize: responsiveFontSize(12),
+    fontSize: rf(12),
     fontWeight: AppFontWeight.semiBold,
   );
 }

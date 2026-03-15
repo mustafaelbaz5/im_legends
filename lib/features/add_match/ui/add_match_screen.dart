@@ -33,7 +33,7 @@ class AddMatchScreen extends StatelessWidget {
               color: context.customColors.textPrimary,
               child: SingleChildScrollView(
                 physics: const AlwaysScrollableScrollPhysics(),
-                padding: EdgeInsets.symmetric(horizontal: responsiveWidth(16)),
+                padding: EdgeInsets.symmetric(horizontal: rw(16)),
                 child: BlocBuilder<AddMatchCubit, AddMatchState>(
                   builder: (final context, final state) {
                     return Column(

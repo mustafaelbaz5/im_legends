@@ -16,8 +16,8 @@ class PlayerFieldAvatar extends StatelessWidget {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 250),
       curve: Curves.easeOut,
-      width: responsiveWidth(44),
-      height: responsiveHeight(44),
+      width: rw(44),
+      height: rh(44),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: context.customColors.surface,
@@ -47,8 +47,8 @@ class PlayerFieldAvatar extends StatelessWidget {
                 fit: BoxFit.cover,
                 placeholder: (_, _) => Center(
                   child: SizedBox(
-                    width: responsiveWidth(16),
-                    height: responsiveHeight(16),
+                    width: rw(16),
+                    height: rh(16),
                     child: const CircularProgressIndicator(strokeWidth: 2),
                   ),
                 ),

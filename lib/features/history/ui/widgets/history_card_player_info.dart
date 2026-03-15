@@ -26,7 +26,7 @@ class HistoryCardPlayerInfo extends StatelessWidget {
         Container(
           decoration: const BoxDecoration(shape: BoxShape.circle),
           child: CircleAvatar(
-            radius: responsiveRadius(35),
+            radius: rr(35),
             backgroundColor: context.customColors.successContainer.withValues(
               alpha: 0.3,
             ),
@@ -40,7 +40,7 @@ class HistoryCardPlayerInfo extends StatelessWidget {
         ),
         verticalSpacing(10),
         SizedBox(
-          width: responsiveWidth(100),
+          width: rw(100),
           child: Text(
             playerName,
             style: AppTextStyles.font12Regular,

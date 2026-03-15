@@ -21,10 +21,7 @@ class ChampionCategoryTabs extends StatelessWidget {
   Widget build(final BuildContext context) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
-      padding: EdgeInsets.symmetric(
-        horizontal: responsiveWidth(16),
-        vertical: responsiveHeight(8),
-      ),
+      padding: EdgeInsets.symmetric(horizontal: rw(16), vertical: rh(8)),
       child: Row(
         children: _tabs.map((final tab) {
           final isSelected = tab == selected;
@@ -37,8 +34,8 @@ class ChampionCategoryTabs extends StatelessWidget {
                 onTap: () => onSelected(tab),
                 child: Container(
                   padding: EdgeInsets.symmetric(
-                    horizontal: responsiveWidth(16),
-                    vertical: responsiveHeight(8),
+                    horizontal: rw(16),
+                    vertical: rh(8),
                   ),
                   decoration: BoxDecoration(
                     color: isSelected

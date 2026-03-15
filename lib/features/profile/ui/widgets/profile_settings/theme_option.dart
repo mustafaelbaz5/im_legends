@@ -21,17 +21,14 @@ class ThemeOption extends StatelessWidget {
   Widget build(final BuildContext context) {
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(responsiveRadius(12)),
+      borderRadius: BorderRadius.circular(rr(12)),
       child: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: responsiveWidth(16),
-          vertical: responsiveHeight(18),
-        ),
+        padding: EdgeInsets.symmetric(horizontal: rw(16), vertical: rh(18)),
         decoration: BoxDecoration(
           color: isSelected
               ? context.customColors.scaffoldBackground
               : Colors.transparent,
-          borderRadius: BorderRadius.circular(responsiveRadius(12)),
+          borderRadius: BorderRadius.circular(rr(12)),
           border: Border.all(
             color: isSelected
                 ? context.customColors.accentBlue
@@ -46,7 +43,7 @@ class ThemeOption extends StatelessWidget {
               color: isSelected
                   ? context.customColors.accentBlue
                   : context.customColors.border,
-              size: responsiveFontSize(20),
+              size: rf(20),
             ),
             horizontalSpacing(12),
             Text(
@@ -62,7 +59,7 @@ class ThemeOption extends StatelessWidget {
               Icon(
                 Icons.check_circle,
                 color: context.customColors.accentBlue,
-                size: responsiveFontSize(20),
+                size: rf(20),
               ),
           ],
         ),

@@ -21,11 +21,9 @@ class RankAndAvatar extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
-    final avatarSize = isCurrentUser
-        ? responsiveWidth(55)
-        : responsiveWidth(50);
+    final avatarSize = isCurrentUser ? rw(55) : rw(50);
     return SizedBox(
-      width: isCurrentUser ? responsiveWidth(70) : responsiveWidth(60),
+      width: isCurrentUser ? rw(70) : rw(60),
       child: Stack(
         clipBehavior: Clip.none,
         children: [

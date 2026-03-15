@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../core/themes/app_colors.dart';
 import '../../../../core/utils/extensions/context_extensions.dart';
 import '../../../../core/utils/functions/image_picker.dart';
@@ -65,9 +66,9 @@ class _ProfileImageAvatarState extends State<ProfileImageAvatar> {
       children: [
         /// Avatar
         Container(
-          padding: EdgeInsets.all(responsiveWidth(4)),
-          width: responsiveWidth(140),
-          height: responsiveWidth(140),
+          padding: EdgeInsets.all(rw(4)),
+          width: rw(140),
+          height: rw(140),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             border: Border.all(
@@ -92,7 +93,7 @@ class _ProfileImageAvatarState extends State<ProfileImageAvatar> {
                         Icon(
                           Icons.person,
                           color: context.customColors.textPrimary,
-                          size: responsiveFontSize(60),
+                          size: rf(60),
                         ),
                   ),
           ),
@@ -105,14 +106,14 @@ class _ProfileImageAvatarState extends State<ProfileImageAvatar> {
           child: GestureDetector(
             onTap: _pickImage,
             child: Container(
-              padding: EdgeInsets.all(responsiveWidth(6)),
+              padding: EdgeInsets.all(rw(6)),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: context.customColors.scaffoldBackground,
               ),
               child: Icon(
                 Icons.edit,
-                size: responsiveFontSize(16),
+                size: rf(16),
                 color: AppColors.primary300,
               ),
             ),

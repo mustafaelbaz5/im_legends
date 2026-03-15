@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+
 import '../../../../../core/models/players_states_model.dart';
 import '../../../../../core/themes/app_colors.dart';
 import '../../../../../core/themes/app_texts_style.dart';
@@ -15,26 +16,23 @@ class WinRateCard extends StatelessWidget {
         ? (stats.wins / stats.matchesPlayed) * 100
         : 0;
     return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: responsiveWidth(16),
-        vertical: responsiveHeight(24),
-      ),
+      padding: EdgeInsets.symmetric(horizontal: rw(16), vertical: rh(24)),
       decoration: BoxDecoration(
         color: context.customColors.accentBlue.withAlpha((0.1 * 255).toInt()),
-        borderRadius: BorderRadius.circular(responsiveRadius(12)),
+        borderRadius: BorderRadius.circular(rr(12)),
       ),
       child: Row(
         children: [
           // Win Rate Circle
           SizedBox(
-            width: responsiveWidth(70),
-            height: responsiveWidth(70),
+            width: rw(70),
+            height: rw(70),
             child: Stack(
               alignment: Alignment.center,
               children: [
                 SizedBox(
-                  width: responsiveWidth(70),
-                  height: responsiveWidth(70),
+                  width: rw(70),
+                  height: rw(70),
                   child: CircularProgressIndicator(
                     value: winRate / 100,
                     strokeWidth: 6,
@@ -114,13 +112,10 @@ class WinRateCard extends StatelessWidget {
     final Color color,
   ) {
     return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: responsiveWidth(8),
-        vertical: responsiveHeight(4),
-      ),
+      padding: EdgeInsets.symmetric(horizontal: rw(8), vertical: rh(4)),
       decoration: BoxDecoration(
         color: color.withAlpha((0.1 * 255).toInt()),
-        borderRadius: BorderRadius.circular(responsiveRadius(6)),
+        borderRadius: BorderRadius.circular(rr(6)),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,

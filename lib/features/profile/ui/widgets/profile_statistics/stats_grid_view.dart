@@ -12,12 +12,12 @@ class StatsGridView extends StatelessWidget {
   @override
   Widget build(final BuildContext context) {
     return GridView.count(
-      padding: EdgeInsets.symmetric(vertical: responsiveHeight(20)),
+      padding: EdgeInsets.symmetric(vertical: rh(20)),
       crossAxisCount: 2,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      mainAxisSpacing: responsiveHeight(12),
-      crossAxisSpacing: responsiveWidth(12),
+      mainAxisSpacing: rh(12),
+      crossAxisSpacing: rw(12),
       childAspectRatio: 1.5,
       children: [
         _buildStatCard(
@@ -60,10 +60,10 @@ class StatsGridView extends StatelessWidget {
     required final Color color,
   }) {
     return Container(
-      padding: EdgeInsets.all(responsiveWidth(12)),
+      padding: EdgeInsets.all(rw(12)),
       decoration: BoxDecoration(
         color: color.withAlpha((0.1 * 255).toInt()),
-        borderRadius: BorderRadius.circular(responsiveRadius(12)),
+        borderRadius: BorderRadius.circular(rr(12)),
         border: Border.all(
           color: color.withAlpha((0.3 * 255).toInt()),
           width: 1,
@@ -73,7 +73,7 @@ class StatsGridView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Icon(icon, size: responsiveWidth(24), color: color),
+          Icon(icon, size: rw(24), color: color),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

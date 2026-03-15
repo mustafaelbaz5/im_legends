@@ -91,9 +91,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   }) {
     return OutlineInputBorder(
       borderSide: BorderSide(color: color, width: width),
-      borderRadius: BorderRadius.circular(
-        widget.borderRadius ?? responsiveRadius(16),
-      ),
+      borderRadius: BorderRadius.circular(widget.borderRadius ?? rr(16)),
     );
   }
 
@@ -155,10 +153,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         hintStyle: effectiveHintStyle,
         contentPadding:
             widget.contentPadding ??
-            EdgeInsets.symmetric(
-              horizontal: responsiveWidth(20),
-              vertical: responsiveHeight(18),
-            ),
+            EdgeInsets.symmetric(horizontal: rw(20), vertical: rh(18)),
         prefixIcon: widget.prefixIcon,
         suffixIcon: widget.isPassword
             ? IconButton(
@@ -167,30 +162,21 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                   color: _obscureText
                       ? colors.textSecondary
                       : colors.textPrimary,
-                  size: responsiveRadius(22),
+                  size: rr(22),
                 ),
                 onPressed: _toggleObscure,
               )
             : widget.suffixIcon,
         enabledBorder: widget.style == CustomTextFieldStyle.outlined
-            ? _buildBorder(defaultBorderColor, width: responsiveRadius(1.2))
+            ? _buildBorder(defaultBorderColor, width: rr(1.2))
             : _buildBorder(
                 defaultBorderColor.withValues(alpha: 0.6),
-                width: responsiveRadius(0.8),
+                width: rr(0.8),
               ),
-        focusedBorder: _buildBorder(
-          focusedBorderColor,
-          width: responsiveRadius(1.5),
-        ),
+        focusedBorder: _buildBorder(focusedBorderColor, width: rr(1.5)),
         disabledBorder: _buildBorder(colors.border.withValues(alpha: 0.3)),
-        errorBorder: _buildBorder(
-          AppColors.red100,
-          width: responsiveRadius(1.4),
-        ),
-        focusedErrorBorder: _buildBorder(
-          AppColors.red100,
-          width: responsiveRadius(1.6),
-        ),
+        errorBorder: _buildBorder(AppColors.red100, width: rr(1.4)),
+        focusedErrorBorder: _buildBorder(AppColors.red100, width: rr(1.6)),
         border: widget.style == CustomTextFieldStyle.outlined
             ? _buildBorder(defaultBorderColor)
             : null,

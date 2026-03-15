@@ -25,10 +25,7 @@ class ChampionLeaderboard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: responsiveWidth(16),
-            vertical: responsiveHeight(8),
-          ),
+          padding: EdgeInsets.symmetric(horizontal: rw(16), vertical: rh(8)),
           child: Row(
             children: [
               horizontalSpacing(8),
@@ -79,10 +76,7 @@ class _LeaderboardRow extends StatelessWidget {
       color: isEven
           ? context.customColors.scaffoldBackground
           : context.customColors.background,
-      padding: EdgeInsets.symmetric(
-        horizontal: responsiveWidth(16),
-        vertical: responsiveHeight(10),
-      ),
+      padding: EdgeInsets.symmetric(horizontal: rw(16), vertical: rh(10)),
       child: Row(
         children: [
           Expanded(
@@ -99,7 +93,7 @@ class _LeaderboardRow extends StatelessWidget {
             child: Row(
               children: [
                 CircleAvatar(
-                  radius: responsiveRadius(16),
+                  radius: rr(16),
                   backgroundColor: context.customColors.infoContainerDark,
                   backgroundImage: player.profileImageUrl != null
                       ? NetworkImage(player.profileImageUrl!)

@@ -49,17 +49,14 @@ class PlayerSelectField extends StatelessWidget {
       onTap: () => _showPlayerDialog(context),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
-        margin: EdgeInsets.symmetric(vertical: responsiveHeight(8)),
-        padding: EdgeInsets.symmetric(
-          horizontal: responsiveWidth(16),
-          vertical: responsiveHeight(10),
-        ),
-        height: responsiveHeight(64),
+        margin: EdgeInsets.symmetric(vertical: rh(8)),
+        padding: EdgeInsets.symmetric(horizontal: rw(16), vertical: rh(10)),
+        height: rh(64),
         decoration: BoxDecoration(
           color: isSelected
               ? context.customColors.background.withAlpha(20)
               : context.customColors.background,
-          borderRadius: BorderRadius.circular(responsiveRadius(16)),
+          borderRadius: BorderRadius.circular(rr(16)),
           border: Border.all(
             color: isSelected
                 ? accentColor ?? context.customColors.textPrimary
@@ -90,7 +87,7 @@ class PlayerSelectField extends StatelessWidget {
                 color: isSelected
                     ? context.customColors.textPrimary
                     : context.customColors.textSecondary,
-                size: responsiveFontSize(24),
+                size: rf(24),
               ),
             ),
           ],

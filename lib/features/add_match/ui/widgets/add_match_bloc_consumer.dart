@@ -30,7 +30,7 @@ class AddMatchBlocConsumer extends StatelessWidget {
         return OverlayLoader(
           isLoading: state.isLoading,
           child: SizedBox(
-            width: responsiveWidth(280),
+            width: rw(280),
             child: CustomTextButton(
               size: CustomButtonSize.large,
               isDisabled: !isEnabled,

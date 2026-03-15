@@ -16,13 +16,13 @@ class ProfileTopBar extends StatelessWidget {
   Widget build(final BuildContext context) {
     return Container(
       color: AppColors.primary300,
-      height: responsiveHeight(220),
+      height: rh(220),
       child: Padding(
         padding: EdgeInsets.only(
-          left: responsiveWidth(24),
-          right: responsiveWidth(24),
-          top: responsiveHeight(56),
-          bottom: responsiveHeight(24),
+          left: rw(24),
+          right: rw(24),
+          top: rh(56),
+          bottom: rh(24),
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,

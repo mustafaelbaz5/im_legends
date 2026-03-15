@@ -29,8 +29,8 @@ class LoginScreen extends StatelessWidget {
               isLoading: state is AuthLoading,
               child: Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: responsiveWidth(16),
-                  vertical: responsiveHeight(8),
+                  horizontal: rw(16),
+                  vertical: rh(8),
                 ),
                 child: SingleChildScrollView(
                   child: Column(
