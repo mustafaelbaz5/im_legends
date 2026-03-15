@@ -39,7 +39,7 @@ class HistoryScreen extends StatelessWidget {
                 } else if (state is MatchHistoryFailed) {
                   return Center(
                     child: Text(
-                      state.error.messageKey,
+                      state.error.message,
                       style: AppTextStyles.font16Bold,
                     ),
                   );
