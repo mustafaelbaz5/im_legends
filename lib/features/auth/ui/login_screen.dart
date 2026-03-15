@@ -21,7 +21,7 @@ class LoginScreen extends StatelessWidget {
         child: BlocConsumer<AuthCubit, AuthState>(
           listener: (final context, final state) {
             if (state is AuthError) {
-              AppDialogs.showError(context, message: state.error.messageKey);
+              AppDialogs.showError(context, message: state.error.message);
             }
           },
           builder: (final context, final state) {
