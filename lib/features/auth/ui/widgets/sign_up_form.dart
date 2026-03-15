@@ -4,13 +4,13 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:im_legends/core/utils/extensions/context_ext.dart';
+import 'package:im_legends/core/widgets/custom_text_form_.dart';
 
 import '../../../../core/models/user_data.dart';
 import '../../../../core/themes/app_texts_style.dart';
 import '../../../../core/utils/spacing.dart';
 import '../../../../core/utils/validators.dart';
 import '../../../../core/widgets/custom_text_button.dart';
-import '../../../../core/widgets/custom_text_form_.dart';
 import '../../logic/cubit/auth_cubit.dart';
 import 'upload_image_field.dart';
 
@@ -96,7 +96,7 @@ class _SignUpFormState extends State<SignUpForm> {
           verticalSpacing(16),
 
           // Name Field
-          CustomTextFormField(
+          CustomTextForm(
             controller: _nameController,
             hintText: 'auth.name'.tr(),
             validator: (final v) =>
@@ -105,7 +105,7 @@ class _SignUpFormState extends State<SignUpForm> {
           ),
           verticalSpacing(16),
           // Age Field
-          CustomTextFormField(
+          CustomTextForm(
             controller: _ageController,
             hintText: 'auth.age'.tr(),
             validator: (final v) {
@@ -118,7 +118,7 @@ class _SignUpFormState extends State<SignUpForm> {
           ),
           verticalSpacing(16),
           // Phone Field
-          CustomTextFormField(
+          CustomTextForm(
             controller: _phoneController,
             hintText: 'auth.phone'.tr(),
             validator: (final v) => (v == null || v.trim().isEmpty)
@@ -129,7 +129,7 @@ class _SignUpFormState extends State<SignUpForm> {
 
           // Email Field
           verticalSpacing(16),
-          CustomTextFormField(
+          CustomTextForm(
             controller: _emailController,
             hintText: 'auth.email'.tr(),
             validator: Validators.email,
@@ -139,7 +139,7 @@ class _SignUpFormState extends State<SignUpForm> {
           verticalSpacing(16),
 
           // Password Field
-          CustomTextFormField(
+          CustomTextForm(
             controller: _passwordController,
             hintText: 'auth.password'.tr(),
             isPassword: !_isPasswordVisible,
@@ -160,7 +160,7 @@ class _SignUpFormState extends State<SignUpForm> {
           verticalSpacing(16),
 
           // Confirm Password Field
-          CustomTextFormField(
+          CustomTextForm(
             controller: _confirmPasswordController,
             hintText: 'auth.confirm_password'.tr(),
             isPassword: !_isConfirmPasswordVisible,

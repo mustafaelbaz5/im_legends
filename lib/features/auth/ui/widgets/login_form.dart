@@ -1,12 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/utils/validators.dart';
-import '../../../../core/widgets/custom_text_form_.dart';
-import '../../logic/cubit/auth_cubit.dart';
 
 import '../../../../core/utils/spacing.dart';
+import '../../../../core/utils/validators.dart';
 import '../../../../core/widgets/custom_text_button.dart';
+import '../../../../core/widgets/custom_text_form_.dart';
+import '../../logic/cubit/auth_cubit.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -46,7 +46,7 @@ class _LoginFormState extends State<LoginForm> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           /// --- Email Field ---
-          CustomTextFormField(
+          CustomTextForm(
             controller: _emailController,
             hintText: 'auth.email'.tr(),
             keyboardType: TextInputType.emailAddress,
@@ -55,7 +55,7 @@ class _LoginFormState extends State<LoginForm> {
           verticalSpacing(24),
 
           /// --- Password Field ---
-          CustomTextFormField(
+          CustomTextForm(
             controller: _passwordController,
             hintText: 'auth.password'.tr(),
             keyboardType: TextInputType.visiblePassword,
