@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../utils/extensions/context_extensions.dart';
-import 'notification_icon.dart';
+import 'package:im_legends/core/utils/extensions/context_ext.dart';
 
 import '../themes/app_texts_style.dart';
 import '../utils/spacing.dart';
+import 'notification_icon.dart';
 
 class CustomAppBar extends StatelessWidget {
   final String title;

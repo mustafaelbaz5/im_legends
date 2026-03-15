@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:im_legends/core/utils/extensions/context_ext.dart';
 
-import '../extensions/context_extensions.dart';
 import '../../themes/cubit/theme_cubit.dart';
 
 /// Switch Language between Arabic and English

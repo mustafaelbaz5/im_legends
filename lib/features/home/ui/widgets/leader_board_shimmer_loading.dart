@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../../../core/utils/extensions/context_extensions.dart';
-import '../../../../core/utils/spacing.dart';
+import 'package:im_legends/core/utils/extensions/context_ext.dart';
 import 'package:shimmer/shimmer.dart';
+
+import '../../../../core/utils/spacing.dart';
 
 class LeaderBoardShimmerLoading extends StatelessWidget {
   const LeaderBoardShimmerLoading({super.key});

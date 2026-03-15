@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:im_legends/core/utils/extensions/context_ext.dart';
 
-import '../../../../../core/utils/extensions/context_extensions.dart';
 import '../../../../../core/utils/spacing.dart';
 import 'player_field_avatar.dart';
 import 'player_field_info.dart';

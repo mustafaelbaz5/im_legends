@@ -1,13 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:im_legends/core/utils/extensions/context_ext.dart';
+
 import '../../../../core/router/routes.dart';
 import '../../../../core/themes/app_colors.dart';
 import '../../../../core/themes/app_texts_style.dart';
 import '../../../../core/utils/app_assets.dart';
 import '../../../../core/utils/spacing.dart';
-
-import '../../../../core/utils/extensions/context_extensions.dart';
 
 class ProfileTopBar extends StatelessWidget {
   const ProfileTopBar({super.key});

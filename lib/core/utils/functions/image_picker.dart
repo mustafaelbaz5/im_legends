@@ -2,10 +2,10 @@ import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:im_legends/core/utils/extensions/context_ext.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../themes/app_texts_style.dart';
-import '../extensions/context_extensions.dart';
 import '../spacing.dart';
 
 class ImagePickerHelper {

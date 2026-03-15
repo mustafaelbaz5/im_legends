@@ -1,15 +1,15 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../core/ui/dialogs/app_dialogs.dart';
-import '../../../core/ui/loaders/overlay_loader.dart';
-import '../../../core/utils/extensions/context_extensions.dart';
-import '../logic/cubit/auth_cubit.dart';
-import 'widgets/sign_up_form.dart';
+import 'package:im_legends/core/utils/extensions/context_ext.dart';
 
 import '../../../core/router/routes.dart';
 import '../../../core/themes/app_texts_style.dart';
+import '../../../core/ui/dialogs/app_dialogs.dart';
+import '../../../core/ui/loaders/overlay_loader.dart';
 import '../../../core/utils/spacing.dart';
+import '../logic/cubit/auth_cubit.dart';
+import 'widgets/sign_up_form.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});

@@ -1,11 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../core/utils/extensions/context_extensions.dart';
-import '../../../../core/utils/spacing.dart';
+import 'package:im_legends/core/utils/extensions/context_ext.dart';
 
 import '../../../../core/utils/app_assets.dart';
 import '../../../../core/utils/functions/get_rank_color.dart';
+import '../../../../core/utils/spacing.dart';
 
 class RankAndAvatar extends StatelessWidget {
   const RankAndAvatar({

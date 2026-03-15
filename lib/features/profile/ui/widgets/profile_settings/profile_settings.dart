@@ -2,16 +2,16 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:im_legends/core/utils/extensions/context_ext.dart';
+
 import '../../../../../core/themes/app_colors.dart';
 import '../../../../../core/themes/app_texts_style.dart';
 import '../../../../../core/ui/dialogs/app_dialogs.dart';
-import '../../../../../core/utils/extensions/context_extensions.dart';
 import '../../../../../core/utils/functions/app_setting_method.dart';
 import '../../../../../core/utils/spacing.dart';
 import '../../../../auth/logic/cubit/auth_cubit.dart';
 import '../profile_menu_item.dart';
 import '../profile_section_body.dart';
-
 import 'language_option.dart';
 import 'theme_option.dart';
 

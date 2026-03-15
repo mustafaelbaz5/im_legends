@@ -3,15 +3,15 @@ import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/utils/extensions/context_extensions.dart';
-import '../../../../core/utils/validators.dart';
-import '../../../../core/widgets/custom_text_button.dart';
-import '../../../../core/widgets/custom_text_form_.dart';
-import '../../logic/cubit/auth_cubit.dart';
+import 'package:im_legends/core/utils/extensions/context_ext.dart';
 
 import '../../../../core/models/user_data.dart';
 import '../../../../core/themes/app_texts_style.dart';
 import '../../../../core/utils/spacing.dart';
+import '../../../../core/utils/validators.dart';
+import '../../../../core/widgets/custom_text_button.dart';
+import '../../../../core/widgets/custom_text_form_.dart';
+import '../../logic/cubit/auth_cubit.dart';
 import 'upload_image_field.dart';
 
 class SignUpForm extends StatefulWidget {
