@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'core/di/dependency_injection.dart';
 import 'core/router/app_router.dart';
 import 'core/themes/cubit/theme_cubit.dart';
@@ -12,8 +13,7 @@ import 'features/main_navigation/ui/main_scaffold.dart';
 import 'features/onboarding/ui/on_boarding_screen.dart';
 
 class IMLegendsApp extends StatelessWidget {
-  const IMLegendsApp({super.key, required this.appRouter});
-  final AppRouter appRouter;
+  const IMLegendsApp({super.key});
 
   @override
   Widget build(final BuildContext context) {
@@ -38,7 +38,7 @@ class IMLegendsApp extends StatelessWidget {
                     locale: context.locale,
                     debugShowCheckedModeBanner: false,
                     title: 'ImLegends',
-                    onGenerateRoute: appRouter.generateRoute,
+                    onGenerateRoute: AppRouter.generateRoute,
                     home: _buildHome(authState),
                     theme: getLightTheme(context: context),
                     darkTheme: getDarkTheme(context: context),
