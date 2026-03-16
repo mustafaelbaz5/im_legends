@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 /// Network Information Interface
@@ -17,7 +18,10 @@ class NetworkInfoImpl implements NetworkInfo {
   NetworkInfoImpl(this.connectionChecker);
 
   @override
-  Future<bool> get isConnected => connectionChecker.hasConnection;
+  Future<bool> get isConnected async {
+    if (kDebugMode) return true; // TODO: remove before release
+    return connectionChecker.hasConnection;
+  }
 
   @override
   Stream<InternetConnectionStatus> get onStatusChange =>

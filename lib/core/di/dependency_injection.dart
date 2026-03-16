@@ -47,7 +47,10 @@ Future<void> setUpDependencies() async {
   }
   // Core
   getIt.registerLazySingleton<InternetConnectionChecker>(
-    () => InternetConnectionChecker.createInstance(),
+    () => InternetConnectionChecker.createInstance(
+      checkTimeout: const Duration(seconds: 5),
+      checkInterval: const Duration(seconds: 3),
+    ),
   );
   getIt.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(getIt()));
   getIt.registerLazySingleton<SupabaseService>(() => SupabaseService());
