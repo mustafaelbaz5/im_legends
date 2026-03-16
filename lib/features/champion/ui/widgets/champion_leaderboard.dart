@@ -30,7 +30,7 @@ class ChampionLeaderboard extends StatelessWidget {
           child: Row(
             children: [
               horizontalSpacing(8),
-              Text('Player', style: AppTextStyles.font14SemiBold),
+              const Text('Player', style: AppTextStyles.font14SemiBold),
               const Spacer(),
               Text(category.statLabel),
             ],

@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:im_legends/core/errors/error_handler.dart';
-import 'package:im_legends/core/errors/exceptions.dart';
+import "../../../../core/errors/error_handler.dart";
+import '../../../../core/errors/exceptions.dart';
 
 import '../../../../core/models/players_states_model.dart';
 import '../../../../core/models/user_data.dart';

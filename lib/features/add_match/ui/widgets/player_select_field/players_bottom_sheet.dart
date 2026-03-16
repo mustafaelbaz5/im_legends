@@ -133,7 +133,7 @@ class PlayerBottomSheet extends StatelessWidget {
           size: rf(48),
         ),
         verticalSpacing(16),
-        Text('No players available', style: AppTextStyles.font16Bold),
+        const Text('No players available', style: AppTextStyles.font16Bold),
       ],
     ),
   );
