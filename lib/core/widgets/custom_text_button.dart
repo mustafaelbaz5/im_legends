@@ -4,23 +4,6 @@ import 'package:im_legends/core/themes/app_texts_style.dart';
 import '../themes/app_colors.dart';
 import '../utils/spacing.dart';
 
-/// AppButton — reusable button widget
-/// ─────────────────────────────────────
-/// Usage:
-///   AppButton(text: 'Submit', onPressed: () {})
-///   AppButton.outlined(text: 'Cancel', onPressed: () {})
-///   AppButton.text(text: 'Skip', onPressed: () {})
-///
-/// Customize:
-///   AppButton(
-///     text: 'Login',
-///     onPressed: () {},
-///     size: AppButtonSize.large,
-///     isFullWidth: false,
-///     prefixIcon: Icon(Icons.login),
-///     isLoading: _loading,
-///   )
-
 class CustomTextButton extends StatelessWidget {
   const CustomTextButton({
     super.key,
@@ -114,7 +97,7 @@ class CustomTextButton extends StatelessWidget {
   Color _resolveBackground(final BuildContext context) {
     if (!_isEnabled) return AppColors.grey100;
     return switch (style) {
-      CustomButtonStyle.filled => backgroundColor ?? AppColors.primary200,
+      CustomButtonStyle.filled => backgroundColor ?? AppColors.primary400,
       CustomButtonStyle.outlined => Colors.transparent,
       CustomButtonStyle.textOnly => Colors.transparent,
     };
@@ -124,8 +107,8 @@ class CustomTextButton extends StatelessWidget {
     if (!_isEnabled) return AppColors.grey400;
     return switch (style) {
       CustomButtonStyle.filled => foregroundColor ?? AppColors.grey0,
-      CustomButtonStyle.outlined => foregroundColor ?? AppColors.primary200,
-      CustomButtonStyle.textOnly => foregroundColor ?? AppColors.primary200,
+      CustomButtonStyle.outlined => foregroundColor ?? AppColors.primary400,
+      CustomButtonStyle.textOnly => foregroundColor ?? AppColors.primary400,
     };
   }
 

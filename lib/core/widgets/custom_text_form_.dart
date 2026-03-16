@@ -95,12 +95,11 @@ class _CustomTextFormState extends State<CustomTextForm> {
 
     final TextStyle effectiveHintStyle =
         widget.hintStyle ??
-        AppTextStyles.font16Regular.copyWith(color: colors.textSecondary);
+        AppTextStyles.font14Regular.copyWith(color: colors.textSecondary);
 
     final Color defaultBorder = widget.borderColor ?? colors.border;
-    final Color focusedBorder =
-        widget.focusedBorderColor ?? AppColors.primary50;
-    final Color fillColor = widget.backgroundColor ?? colors.surface;
+    final Color focusedBorder = widget.focusedBorderColor ?? AppColors.grey200;
+    final Color fillColor = widget.backgroundColor ?? colors.scaffoldBackground;
 
     return TextFormField(
       controller: widget.controller,
