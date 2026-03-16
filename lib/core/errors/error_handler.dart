@@ -43,16 +43,19 @@ class ErrorHandler {
     }
     if (e is ForbiddenException) return ForbiddenFailure(message: e.message);
     if (e is NotFoundException) return NotFoundFailure(message: e.message);
-    if (e is ValidationException)
+    if (e is ValidationException) {
       return ValidationFailure(message: e.message, errors: e.errors);
+    }
     if (e is ConflictException) return ConflictFailure(message: e.message);
     if (e is NetworkException) return NetworkFailure(message: e.message);
     if (e is RequestTimeoutException) return TimeoutFailure(message: e.message);
-    if (e is TooManyRequestsException)
+    if (e is TooManyRequestsException) {
       return TooManyRequestsFailure(message: e.message);
+    }
     if (e is CacheException) return CacheFailure(message: e.message);
-    if (e is ServerException)
+    if (e is ServerException) {
       return ServerFailure(message: e.message, code: e.statusCode);
+    }
     return const UnknownFailure();
   }
 }
